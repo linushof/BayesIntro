@@ -1,0 +1,1 @@
+The code and analyses for the title picture are inspired by chapter 4 of Richard McElreath's book [Statistical Rethinking](https://xcelab.net/rm/statistical-rethinking/).
