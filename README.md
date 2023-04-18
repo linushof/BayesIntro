@@ -13,8 +13,6 @@ to Bayesian Data Analysis” at the TUM School of Management.
 More information can be found in the
 [syllabus](https://github.com/linushof/BayesIntro/blob/main/syllabus/syllabus.md).
 
-*Check regularly for updates!*
-
 <table style="width:99%;">
 <colgroup>
 <col style="width: 16%" />

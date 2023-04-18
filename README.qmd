@@ -14,8 +14,6 @@ This is the accompanying GitHub repository for the course "Introduction to Bayes
 
 More information can be found in the [syllabus](https://github.com/linushof/BayesIntro/blob/main/syllabus/syllabus.md).
 
-*Check regularly for updates!*
-
 +-----------+----------------------------------------------------------+
 | ### Date  | ### Topic                                                |
 +-----------+----------------------------------------------------------+
