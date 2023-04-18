@@ -2,13 +2,17 @@
 format: md
 ---
 
-This is the accompanying GitHub repository for the course "Introduction to Bayesian Data Analysis" at the TUM School of Management.
+# Introduction to Bayesian Data Analysis
+
+Welcome! 
+
+This is the accompanying GitHub repository for the course "Introduction to Bayesian Data Analysis" at the TUM School of Management. 
 
 # Schedule
 
 *Check regularly for updates!*
 
-More information can be found in the course [syllabus](https://github.com/linushof/BayesIntro/blob/main/syllabus/syllabus.md).
+More information can be found in the [syllabus](https://github.com/linushof/BayesIntro/blob/main/syllabus/syllabus.md).
 
 +-----------+----------------------------------------------------------+
 | ### Date  | ### Topic                                                |
