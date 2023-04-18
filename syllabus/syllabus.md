@@ -130,13 +130,13 @@ data-cites="navarroDevilDeepBlue2019">Navarro (2019)</span></li>
 </tr>
 <tr class="odd">
 <td>05 July</td>
-<td>Advanced topics</td>
+<td>tba</td>
 <td></td>
 <td></td>
 </tr>
 <tr class="even">
 <td>12 July</td>
-<td>Advanced topics</td>
+<td>tba</td>
 <td></td>
 <td></td>
 </tr>
@@ -218,7 +218,7 @@ learning takes time and requires to overcome challenge by challenge.
 Take this course as an opportunity to stay persistent and to learn in a
 structured and collaborative manner.
 
-### References
+### Schedule
 
 <div id="refs" class="references csl-bib-body hanging-indent">
 
