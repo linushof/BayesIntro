@@ -1,0 +1,116 @@
+---
+title: "Introduction to Bayesian Data Analysis"
+subtitle: "Syllabus"
+format: html
+execute: 
+  keep-md: true
+  
+bibliography: literature.bib
+---
+
+
+
+*Last update*: 2023-04-18
+
+# General Information
+
+*Class hours*: Wednesdays, 9:45 am - 1 pm ([Room 0514](https://portal.mytum.de/campus/roomfinder/roomfinder_viewmap?mapid=193&roomid=0514@0505))
+
+*Office hours*: Tuesdays, 2 pm - 3 pm ([Room 2531](https://portal.mytum.de/campus/roomfinder/roomfinder_viewmap?mapid=196&roomid=2531@0505))
+
+*E-Mail*: [linus.hof\@tum.de](mailto:linus.hof@tum.de)
+
+*General announcements*: Will be made [here](https://www.moodle.tum.de/mod/forum/view.php?id=2429843).
+(*Make sure to turn on the Moodle notifications.*)
+
+*Materials*: Can be found [here](https://github.com/linushof/BayesIntro).
+
+*Communication*: In class and written communication, just call me Linus.
+For data protection reasons, please use your TUM E-Mail when writing me.
+Questions of general interest can be posted and discussed in the Moodle forums [*Contents*](https://www.moodle.tum.de/mod/forum/view.php?id=2569419) and [*Organization*](https://www.moodle.tum.de/mod/forum/view.php?id=2569420).
+
+# Schedule
+
+*Check regularly for updates!*
+
++-----------+----------------------------------------------------------+------------------------------------------------------+--------------------+
+| ### Date  | ### Topic                                                | ### Homework[^1]                                     | ### Assignment[^2] |
+|           |                                                          |                                                      |                    |
+|           |                                                          | ###                                                  |                    |
++-----------+----------------------------------------------------------+------------------------------------------------------+--------------------+
+| 19 April  | Intro                                                    |                                                      |                    |
++-----------+----------------------------------------------------------+------------------------------------------------------+--------------------+
+| 26 April  | Scientific data analysis as amateur software development | -   Read @bryanExcuseMeYou2018                       |                    |
+|           |                                                          |                                                      |                    |
+|           |                                                          | -   Install `R`, `RStudio`, `Git`                    |                    |
+|           |                                                          |                                                      |                    |
+|           |                                                          | -   Create `GitHub` account                          |                    |
++-----------+----------------------------------------------------------+------------------------------------------------------+--------------------+
+| 03 May    | Scientific inference and Bayesian updating               |                                                      | Assignment 1       |
++-----------+----------------------------------------------------------+------------------------------------------------------+--------------------+
+| 10 May    | Workflow for Bayesian parameter estimation               |                                                      |                    |
++-----------+----------------------------------------------------------+------------------------------------------------------+--------------------+
+| 17 May    | Linear models                                            |                                                      | Assignment 2       |
++-----------+----------------------------------------------------------+------------------------------------------------------+--------------------+
+| 24 May    | Linear models                                            |                                                      |                    |
++-----------+----------------------------------------------------------+------------------------------------------------------+--------------------+
+| 31 May    | Markov Chain Monte Carlo Methods                         | -   Read @vanravenzwaaijSimpleIntroductionMarkov2018 | Assignment 3       |
++-----------+----------------------------------------------------------+------------------------------------------------------+--------------------+
+| 07 June   | Multilevel modeling                                      |                                                      |                    |
++-----------+----------------------------------------------------------+------------------------------------------------------+--------------------+
+| 14 June   | Multilevel modeling                                      |                                                      | Assignment 4       |
++-----------+----------------------------------------------------------+------------------------------------------------------+--------------------+
+| 21 June   | Model comparison                                         | -   Read @navarroDevilDeepBlue2019                   | Assignment 5       |
++-----------+----------------------------------------------------------+------------------------------------------------------+--------------------+
+| 28 June   | Probably no session                                      |                                                      |                    |
++-----------+----------------------------------------------------------+------------------------------------------------------+--------------------+
+| 05 July   | Advanced topics                                          |                                                      |                    |
++-----------+----------------------------------------------------------+------------------------------------------------------+--------------------+
+| 12 July   | Advanced topics                                          |                                                      |                    |
++-----------+----------------------------------------------------------+------------------------------------------------------+--------------------+
+| 19 July   | Outro and Evaluation                                     |                                                      |                    |
++-----------+----------------------------------------------------------+------------------------------------------------------+--------------------+
+
+[^1]: Homework should be completed by the start of the respective session.
+
+[^2]: Assignments start at the end of the respective session and should be completed by the start of the subsequent session (9:45 am).
+
+# Homework, Assignments and Other Hassles
+
+### Homework
+
+I'm a fan of homework because it helps you learn.
+Learning comes from *repetition* and *exercise*.
+Chances are high that you forget at least some of the things we cover and practice in class if you don't review and practice them.
+Since we'll continuously be progressing, forgetting is undesirable at this point.
+One purpose of the homework is therefore repetition by exercise.
+Actively engaging in the exercises also allows you to track and celebrate the progress you made so far and to uncover remaining problems.
+Not everything will be clear right away - use the problems during exercise to figure out where you should take a step back and reiterate.
+
+Another purpose of homework is *preparation*.
+Learning is most effective when done without distractions.
+Distractions like missing software keep you busy while causing you to lose focus on what you are here for in the first place - the analysis part.
+Therefore, you'll occasionally be asked to set up your software environment in advance to be prepared for the next analysis steps.
+Lastly, when learning something completely new, it can sometimes be a lot at once.
+To reduce the bulk of new information that comes at a time, you'll sometimes be asked to read a short paper that teases some new ideas we'll cover in the upcoming session(s).
+This gives you some edge and the opportunity to form an expectation that helps you navigate more easily through the sessions.
+
+### Assignments and Grade
+
+I'm not a big fan of graded assignments because they suggest that a learning process is finished and can be captured in just a number.
+This is almost never the case.
+However, grades can be informative and rewarding to some extent.
+Here, assignments will be naturally integrated in the course as small milestones down the road.
+They will look a lot like the homework in that they take the form of little coding and analysis exercises.
+Specifically, assignments consists of a Multiple Choice questionnaire alongside a submitted analysis script (e.g., `script.R`) that produced the answers.
+We will have $5$ assignments, where each grade $g$ is weighted equally to obtain the overall course grade, $G = 1/5\sum_i^5 g_i$.
+
+### Attendance
+
+You won't be forced to attend the classes - ultimately, it's your decision to be here.
+Also, life can be difficult at times and there is a chance that you won't manage to attend all sessions for good reasons.
+Don't worry about that: You can check the slides, examine the code, talk to the other students, ask questions, and be certain that core ideas will be reiterated in the next session.
+That said, I strongly recommend to come to the class whenever you can.
+The slides and scripts won't be comprehensive summaries of the sessions and the hands-on exercises are considered an integral part of this course.
+In the end, sustainable learning takes time and requires to overcome challenge by challenge.
+Take this course as an opportunity to stay persistent and to learn in a structured and collaborative manner.
