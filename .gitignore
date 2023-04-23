@@ -1,0 +1,11 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+*.html
+*.pptx
+*.png
+notes/
+memes/
+housekeeping/
+syllabus/syllabus_files/
