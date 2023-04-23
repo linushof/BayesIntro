@@ -34,7 +34,7 @@ ggplot(probs, aes(x=N, y=p)) +
        y = "Probability") +
   theme_minimal()
 
-ggsave("plots/session1_bin_theta.png", width = 6, height = 4)
+ggsave("plots/session_1_bin_theta.png", width = 6, height = 4)
 
 
 # R 1.2. likelihoods associated with theta
@@ -53,5 +53,5 @@ ggplot(likelihoods, aes(x=theta, y=like)) +
        y = "Likelihood") +
   theme_minimal()
 
-ggsave("plots/session1_likelihood_theta.png", width = 6, height = 4)
+ggsave("plots/session_1_likelihood_theta.png", width = 6, height = 4)
 
