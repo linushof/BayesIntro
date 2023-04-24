@@ -55,6 +55,141 @@ You will learn about these features and how to use them throughout this course.
 The important take away for now is just that everything that can be done by only using the console can be done in RStudio too, but better.
 Therefore, from now we only access the console and write code in RStudio. 
 
+## Basics in R
+
+Now that we've set up `R` and `RStudio`, we want to learn the basics of programming in `R`. 
+Many of the commands, functions, and concepts we need throughout this course will be learned on the fly once we need them. 
+Here, we only look at the most essential points, which are outlined in chapter 2 of the open access book [Hands-On Programming with R](https://rstudio-education.github.io/hopr/).
+
+### Arithmetic Expressions 
+
+Arithmetic expressions or operations are mathematical operations performed on numerical data such as addition (`+`), subtraction (`-`) , multiplication (`*`) or division (`/`).   
+You write these expressions as on paper using the above symbols. 
+
+```{r}
+1+1 # addition
+2-2 # subtraction
+3*3 # multiplication
+4/4 # division
+```
+### Objects
+
+`R` is am object oriented language because it allows to create and manipulate objects using arithmetic expressions and all sorts of function that you will learn about.
+Objects can be thought of as data storage, which we can assign names to.
+Specifically, objects entail data that is structured in some way. 
+We distinguish between different object types depending on what the data looks like and how it is structured.
+However, irrespective of the object type, we can name it however we want. 
+We now look at object types we will frequently encounter: 
+
+#### Scalars 
+
+Scalars are single values such as a number, a character (letter), a character string (word), or logical values (TRUE or FALSE).
+We assign names to scalars and objects in general using the operator `<-` (Shortcuts: `Alt` + `-`on Windows; `Option` + `-` on Mac).
+
+```{r}
+scalar_1 <- 1 # numeric
+
+scalar_2 <- "a" # character
+
+scalar_3 <- "word" # word
+
+scalar_4 <- TRUE # logical/Boolean
+```
+
+We can access (look into) the object by simply typing its name.
+
+```{r}
+scalar_1
+```
+
+Having created the object, we can manipulate it just as it was a value: 
+
+```{r}
+scalar_1 + 1 # addition
+scalar_1 * 10 # multiplication
+```
+We can also create new objects from existing objects either by copying the existing object into an object of a different name or by manipulating the existing object and assigning the output of the operation a name.
+
+```{r}
+scalar_5 <- scalar_1 # copying
+scalar_5
+scalar_6 <- scalar_1 * 10 # new object
+scalar_6
+```
+
+Occasionally, we will ask R to execute code that is actually not a valid operation.
+E.g., we can only multiple numerical values, but not letters. 
+In these cases, R will return an error message. 
+
+```{r}
+scalar_2
+```
+
+```{r eval=FALSE}
+scalar_2 * 4
+```
+
+<span style="color:red;">Error in scalar_2 * 4 : non-numeric argument to binary operator</span>
+
+The command `scalar_2 * 4` returns an error. 
+This is because the object `scalar_2` is the character `a` which cannot be multiplied. 
+
+#### Vectors
+
+Vectors are among the most common objects data structures we will encounter in R.
+Vectors are ordered collection of values of the same data type. 
+We can create a vector object using the familiar `<-` and the `c()` command. 
+
+```{r}
+x <- c(1, 2, 3, 4) 
+x
+```
+One of the prime features of R is that it is a "vectorized" language. 
+This means that you can perform the same operation on an entire vector of values at once.
+As with scalars, you can store the output of vectorized operations in a new object. 
+
+```{r}
+y <- x*2
+y
+```
+One powerful feature we have to take care of when working with vectors is that computations consider the position of elements (values) in a vector.
+That is, operations between vectors are performed such that the operation applies to elements at the same position in the vectors.
+Consider the output of multiplication of the two vectors `x = `r x`` and `y = `r y``. 
+Here, the first element of `x` is multiplied with the first element of `y` and so on. 
+
+```{r}
+x*y
+```
+Importantly, if the vectors have unequal lengths, the shorter vector is first repeated until it is as long as the longer vector, and then the operations are performed element wise.
+In the following, the vector `z` is repeated once such that it has the same length as `x`.
+
+```{r}
+z <- c(1,2) 
+x*z
+```
+If we think of scalars as vectors of length 1, we can now better understand the previous operation `x*2`. 
+I.e., `2` is repeated 4 times. 
+
+```{r}
+a <- 2 
+x*a
+```
+Above, we only considered numerical vectors. 
+However, as scalars, vectors can be of different type
+
+```{r}
+vector_1 <- c(1,2,3) # numeric
+vector_1
+vector_2 <- c("a", "b", "c") # character
+vector_2
+vector_3 <- c(TRUE, FALSE, TRUE) # logical
+vector_3
+```
+#### Data Frames
+
+Being a collection of values, you can think of a vector as either a row or a column in a table or data frame.
+Data frames are the usual data structure that we store our data for analysis in. 
+
 
 # Git Setup
 
