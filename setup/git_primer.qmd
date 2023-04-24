@@ -443,6 +443,33 @@ git merge branch-name
 
 [...]
 
+- Go to the Github Repository you want to commit changes to and create a fork. 
+- Clone the fork to your local machine as if it was a normal remote repository. 
+- Check your current remote repositories
+
+``` bash
+git remote -v
+```
+
+- Add the original repository as another remote repository. 
+This repository is usually referred to as `upstream`:
+
+``` bash
+git remote upstream url-of-original-repository.
+
+```
+
+- Check the remote repositories again `git remote -v`
+- Create a branch, make changes, commit 
+- push changes to a new remote branch of the fork
+
+``` bash
+git push origin branch-name
+
+```
+
+- Go to GitHub to create a pull request
+
 
 # Resources
 
