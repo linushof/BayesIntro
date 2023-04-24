@@ -10,8 +10,10 @@ format: html
 
 # Prerequisites
 
--   [x] [R](https://cloud.r-project.org) installed
--   [x] [RStudio](https://posit.co/products/open-source/rstudio/) installed
+- [x] [R](https://cloud.r-project.org) installed
+- [x] [RStudio](https://posit.co/products/open-source/rstudio/) installed
+- [x] [Git](https://git-scm.com/downloads) installed
+- [x] [GitHub](https://github.com) account created
 
 # Hello `R`
 
@@ -351,22 +353,26 @@ install.packages("tidyverse")
 library("tidyverse")
 ```
 
+Now that we have learned the basics of `R`, we will continue with learning about Git and GitHub. 
 
+# Hello `Git`
 
-# Git Setup
-
--   Check if `Git` is already installed. In the shell/terminal, type:
+- Check if Git is already installed. 
+- Open a shell/terminal on your machine and type:
 
 ``` bash
-which git
+git --version
 ```
 
--   If the command returns `git: command not found`, `Git` is not installed yet. Install `Git` from the [browser](ttps://git-scm.com/downloads).
--   Introduce yourself to `Git` with a user name and your institutional (TUM) E-mail address.
+- If the command returns something along the lines `git version ...`, you are fine. 
+If the command returns `git: command not found`, Git is not installed yet. 
+Install Git from the [browser](https://git-scm.com/downloads) and repeat the above procedure.
+
+- Introduce yourself to Git with a user name and the E-mail address you (will) use for the GitHub account.
 
 ``` bash
-git config --global user.name 'Jane Doe'
-git config --global user.email 'jane@example.com'
+git config --global user.name 'YOUR USERNAME'
+git config --global user.email 'YOUR EMAIL ADDRESS'
 ```
 
 -   Check if everything works:
@@ -375,39 +381,42 @@ git config --global user.email 'jane@example.com'
 git config --global --list
 ```
 
--   Restart your machine.
+- Somewhere in the output, you should find a line that entails your username and a line that entails the e-mail address. 
+- Restart your machine.
 
 # Hello GitHub
 
--   Go to [GitHub](https://github.com) and create an account with the E-Mail address you introduced to `Git` before.
--   *Optional*: Request a [GitHub Student Developer Pack](https://education.github.com/pack)
+- If not done yet, go to [GitHub](https://github.com) and create an account with the E-Mail address you introduced to Git before.
 
 ## Personal Access Token
 
--   To allow `Git` to communicate with GitHub via the HTTPS protocol, we need to generate and store a [personal access token (PAT)](https://github.com/settings/tokens)
--   Go to the [Developer Settings](https://github.com/settings/tokens) or use the following `R` shortcut that comes with a pre-selected scope.
+- To allow Git to communicate with GitHub via the HTTPS protocol, we need to generate and store a [personal access token (PAT)](https://github.com/settings/tokens)
+- Use the following R shortcut that comes with a pre-selected scope.
 
 ```{r eval = F}
+install.packages("usethis")
 usethis::create_github_token()
 ```
 
--   Give the PAT a clear name (e.g., my-private-machine), "Generate token", copy the PAT to the clipboard and paste it somewhere for short term storage (also, don't close the window yet).
--   Run the following `R` command to store the PAT by pasting it into the console:
+- Give the PAT a clear name (e.g., my-private-machine), "Generate token", copy the PAT to the clipboard and paste it somewhere for short term storage (also, don't close the window yet).
+- Run the following lines of code to store the PAT by pasting it into the console:
 
 ```{r eval = F}
+install.packages("gitcreds")
 gitcreds::gitcreds_set()
 ```
 
 ## Create and Clone a Repository
 
--   Go to GitHub and create a [new repository](https://github.com/new).
--   Add a description and click "Add README file".
--   Create a repository.
--   Clone the repository to your computer via the green "\<\> Code" button. Click "HTTPS" and copy the address.
+- Go to GitHub and create a [new repository](https://github.com/new).
+- Add a description and click "Add README file".
+- Create a repository.
+- Clone the repository to your computer via the green "\<\> Code" button. Click "HTTPS" and copy the address.
+- Go to R and open a new project with version control (Copy the remote address). 
 
-# GitHub Fundamentals
+## GitHub Fundamentals
 
-## Commit, Push, Pull
+### Commit, Push, Pull
 
 -   In the following, you want to exercise some commands fundamental to the work with `Git`: `pull`, `push`, `commit`.
 
@@ -430,11 +439,10 @@ git checkout main
 git merge branch-name
 ```
 
-## Issues
+## Pull requests. 
 
--   can be used as a to do list
+[...]
 
-# Git
 
 # Resources
 
