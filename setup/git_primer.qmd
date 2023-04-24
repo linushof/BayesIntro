@@ -271,7 +271,85 @@ dat$Var_5 <- dat[, 4] * x
 dat
 ```
 
+#### Functions
 
+Simple arithmetic operations are by no means the only possible operations in R. 
+Moreover, multiple operations can be combined to longer or more complicated computation sequence. 
+Irrespective of the exact operation, the more often we rely on it, we should write a function for this operation instead of copy and pasting the code multiple times in order to apply it to different data.
+Because many operations are fairly common and useful to different projects, others might have already written a function for that operation. 
+Some might come with the initial R installation such as `data.frame()` and others are obtained by installing a so-called package that is distributed and freely available online.
+In the following, we briefly explain what a function is and how we work with them and then we install for demonstrative and later purposes a package that has multiple helpful functions for working with data frames and doing data analysis more generally.
+
+
+A function generally consists of three parts: 
+
+1. A function name.
+2. Objects and other arguments that are the inputs to the function.
+3. The code body `{}` that specifies the code and turns inputs into outputs. 
+
+To illustrate, consider the following code for a function `summing` that sums up all values in a vector `x`:
+
+```{r}
+summing <- # function name
+  function(x){ # inputs 
+    
+    # body 
+    total <- 0
+    for (i in 1:length(x)) {
+    total <- total + x[i]
+  }
+  return(total)
+    
+}
+```
+At this point, we don't have to understand the whole code.
+The important take away is that we have now created a function `summing()` that can sum up all values within a numeric vector. 
+Therefore, we just write the name of the function and place the vector in the bracket.
+The main idea is that the function takes the vector and puts it in the place of the `x` in the above code while executing it. 
+
+```{r}
+x <- c(1,2,3)
+summing(x)
+summing(dat$Var_1)
+```
+Of course, summing vectors is fairly common operation and there is already a function in place for it: 
+
+```{r}
+sum(x)
+sum(dat$Var_1)
+```
+Thus, before repeatedly writing endless lines of code or racking your brains, search online whether there is already a function that does what you want.
+In some cases, you are required to install a new package that entails this function. 
+
+One last thing about R code and functions: 
+You can combine multiple functions by placing one into the other. 
+The way it works is by reading R code from the inside to the outside.
+Ultimately, a function returns an output. 
+The output of the inner (or enclosed function) is then used as input of the outer function. To illustrate consider the following code that combines the `sum()` function and the `abs()` function that returns the non-negative absolute value.
+First, we do the operation one by one by saving the output of `sum()` in a new object that is then the input to `abs`.
+Thereafter, we do it all at once. 
+
+```{r}
+x <- c(-1, -2, -3)
+sum_x <- sum(x)
+sum_x
+abs(sum_x)
+abs(sum(x))
+```
+#### Packages
+
+R packages may entail functions, data, and documentation that are not provided with the standard installation of R. 
+R packages are created and maintained by a community of developers and users who share their work with others. 
+These packages can be downloaded from the internet and installed in R using the install.packages() function. Once installed, the functions and data in the package can be loaded into R using the library() function, making them available for use in your code.
+
+There are thousands of R packages available for a wide range of tasks, from data manipulation and visualization to statistical modeling and machine learning. Using packages can save R users a lot of time and effort by providing pre-written code and functions for common tasks, allowing them to focus on their specific research questions or analysis goals.
+
+In the following, we will install the `tidyverse` package, which itself is a collection of other packages. 
+
+```{r eval = FALSE}
+install.packages("tidyverse")
+library("tidyverse")
+```
 
 
 
