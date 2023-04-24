@@ -187,8 +187,92 @@ vector_3
 ```
 #### Data Frames
 
-Being a collection of values, you can think of a vector as either a row or a column in a table or data frame.
-Data frames are the usual data structure that we store our data for analysis in. 
+Being a set of values, vectors are ideally suited to represent variables (columns) in a data frame.
+Data frames are a data structure we will encounter very often.
+According to Hadley Wickham, tidy data frames all look alike and follow this set of rules:
+
+1. Each variable must have its own column.
+2. Each observation must have its own row.
+3. Each value must have its own cell.
+
+To illustrate, consider the following code example, where we use the three vectors (variables) `Var_1`, `Var_2`, and `Var_3` and the function `data.frame()` to build data set. 
+
+```{r}
+ID <- c("A", "B", "C")
+Var_1 <- c(1, 2, 3)
+Var_2 <- c(2, 4, 6)
+Var_3 <- c(4, 8, 12)
+dat <- data.frame(Var_1, Var_2, Var_3)
+dat
+```
+
+Of course, not all data sets outside of this course will look like this from the start, but there is a good reason to bring the data into this format before you start analyzing it.
+One advantage becomes immediately clear: The row number indicates the position within a variable vector (column).
+We can now make perfect use of the vectorized nature of R by applying the same operation on a variable to all rows at once. 
+As data frames are one of the most common data structures, we need to learn a set of commands (functions) that help us to manipulate them and obtain the information we want. 
+In the following, we will briefly go over some basic commands. 
+Later we will introduce a number of functions from the `tidyverse` that make writing code and working with data frames particularly easy, even if the manipulations become more complex.
+
+As with vectors, we can apply the same operation to an entire data frame. 
+
+```{r}
+dat*2
+```
+
+How does it work under the hood?
+R represents all cell entries in a vector, starting from the left and traversing the columns one by one from top to bottom.
+Rarely, this is what we need.
+Usually we only want to apply operation to specific columns or cells in a data frame.
+There are multiple ways to obtain a variable vector out of a data set. 
+
+```{r}
+dat$Var_1 # dollar notation
+dat[, 1] # matrix notation with column number
+dat[, "Var_1"] # matrix notation with column name
+```
+In the matrix notation, values before the comma represent the row and values after the comma represent the column. 
+The matrix notation has the advantage that we can refer to columns by both the column number and the variable name. 
+Another advantage is that we can also obtain multiple columns or specific cell entries.
+
+```{r}
+dat[, c(1,2)] # Variable/column 1 and 2
+dat[1,1] # cell entry in row 1, column 2 
+```
+Knowing how to retrieve certain values from a data frame, we can now apply operations on them as before. 
+The principles of vectorized operations remain the same. 
+
+```{r}
+dat[, 1]
+dat[, 1] * 2
+x <- c(1,2,3)
+dat[, 1] * x 
+dat$Var_1 * x
+```
+
+Importantly, the above code doesn't store the outputs in the data frame: 
+
+```{r}
+dat[,1]
+```
+To do so, we have to use the `<-` operator again and point it to the position in the data frame, we want it to be stored. 
+If we operate on an entire column, we can either override an existing column (usually the one we operated on) or add a new column, depending on what our goal is: 
+
+```{r}
+# overriding
+dat[, 1] <- dat[, 1] * x 
+dat
+dat$Var_2 <- dat$Var_2 * x
+dat
+
+# adding
+dat[, 4] <- dat[, 3] * x 
+dat
+dat$Var_5 <- dat[, 4] * x
+dat
+```
+
+
+
 
 
 # Git Setup
