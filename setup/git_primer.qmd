@@ -1,52 +1,101 @@
 ---
-title: "Git, GitHub & RStudio"
+title: "Git, GitHub & R"
 subtitle: "A Students Primer"
 format: html
 ---
 
+# Preface
+
+...
+
 # Prerequisites
 
-- R and RStudio installed
+-   [x] [R](https://cloud.r-project.org) installed
+-   [x] [RStudio](https://posit.co/products/open-source/rstudio/) installed
 
-# Git Installation and Setup 
+# Hello `R`
 
-- Check if  `Git` is already installed. In the shell/terminal, type:
+## R code
+
+`R` is an interpreted high-level programming language tailored to statistical computing. *High level* means that in order to get `R` going, we users don't really need to know anything about the computer architecture and machine code. `R` code abstracts from machine code, which is the only language your computer understands and executes. Instead, `R` code is much more readable and easier to write because it uses elements of natural language and programming concepts (e.g., loops and functions), data structures (e.g., data frames), and expressions (arithmetic, true/false) that are familiar or easy to learn. Because `R` code is not machine code, an *interpreter* reads your `R` code and translates each code line into machine code, hence an interpreted language. How this translation technically works, must not be your business. The only thing you need to learn is how to write some R code. R code is then essentially a set of written commands, that is read and executed by a command line interpreter. To write `R` code and access the interpreter, we use the `R` *console* as a command line interface:
+
+![](git_primer_files/R-console.PNG){fig-align="center" width="506"}
+
+In the console you can write code (e.g., `1+1`) and executed by pressing `enter`. Below the code, `R` returns the output.
+
+## R Studio
+
+One shortcoming of the console is that it does not save the code after the session ends. This is of course a problem, since we often work on an analysis project for days or even weeks or months and don't want to and can't start from scratch every time. The easy solution here is to write the code into a text file that can be saved and accessed whenever we want to. Text files that (only) entail code are generally referred to as a *script* and we can write such a script with `R` code by using the file extension '.R', rather than, e.g., '.docx' or '.text'.
+
+Another shortcoming of the console is that it looks kind of old and boring and doesn't allow for much more than just writing the code.
+Thus, for our daily use, we will not directly write in the console but rely on RStudio. 
+RStudio is an *integrated development environment* (IDE) that provides a powerful and user-friendly interface for working with R.
+
+![](git_primer_files/RStudio.PNG){fig-align="center" width="506"}
+
+RStudio is designed to improve the efficiency and ease of use of the R programming language, by providing a range of tools and features that streamline the coding and analysis process.
+One of the features is that it offers you more than one panel, through which you can access different types of information. 
+E.g., in the screenshot above, the upper left panel entails a R script, in which we can write our code. 
+Below, you see the familiar R console which remains the processing engine. 
+One big advantage of working with scripts in RStudio is that you can directly execute code from the script in the console by using the key combination `ctrl` + `enter` (Windows) or `cmd` + `enter` (Mac).
+You can store this script as any other file on your computer, ready to be executed at any time you want. 
+Some other advantages of using RStudio over using only the R Console include:
+
+- Enhanced code editing: RStudio provides a range of code editing features such as syntax highlighting, code completion, and error checking that make it easier to write and debug R code.
+
+- Integrated documentation: RStudio provides easy access to R's extensive documentation, making it easier to learn and use the language effectively.
+
+- Workspace management: RStudio provides a range of tools for managing R workspaces, including the ability to view, load, and save data, and to manage R packages.
+
+- Integrated debugging: RStudio provides powerful debugging tools that help to identify and resolve errors in R code, including the ability to step through code line-by-line and to set breakpoints.
+
+- Integration with version control systems: RStudio integrates with popular version control systems such as Git, making it easier to manage and collaborate on R projects.
+
+You will learn about these features and how to use them throughout this course. 
+The important take away for now is just that everything that can be done by only using the console can be done in RStudio too, but better.
+Therefore, from now we only access the console and write code in RStudio. 
+
+
+# Git Setup
+
+-   Check if `Git` is already installed. In the shell/terminal, type:
 
 ``` bash
 which git
 ```
 
-- If the command returns `git: command not found`, `Git` is not installed yet. Install `Git` from the [browser](ttps://git-scm.com/downloads). 
-- Introduce yourself to `Git` with a user name and your institutional (TUM) E-mail address.
+-   If the command returns `git: command not found`, `Git` is not installed yet. Install `Git` from the [browser](ttps://git-scm.com/downloads).
+-   Introduce yourself to `Git` with a user name and your institutional (TUM) E-mail address.
 
 ``` bash
 git config --global user.name 'Jane Doe'
 git config --global user.email 'jane@example.com'
 ```
 
-- Check if everything works: 
+-   Check if everything works:
 
 ``` bash
 git config --global --list
 ```
-- Restart your machine.
 
-# Hello GitHub 
+-   Restart your machine.
 
-- Go to [GitHub](https://github.com) and create an account with the E-Mail address you introduced to `Git` before.
-- Request a [GitHub Student Developer Pack](https://education.github.com/pack) (*optionally*)
+# Hello GitHub
 
-## Personal Access Token 
+-   Go to [GitHub](https://github.com) and create an account with the E-Mail address you introduced to `Git` before.
+-   *Optional*: Request a [GitHub Student Developer Pack](https://education.github.com/pack)
 
-- To allow `Git` to communicate with GitHub via the HTTPS protocol, we need to generate and store a [personal access token (PAT)](https://github.com/settings/tokens)
-- Go to the [Developer Settings](https://github.com/settings/tokens) or use the following `R` shortcut that comes with a pre-selected scope.
+## Personal Access Token
+
+-   To allow `Git` to communicate with GitHub via the HTTPS protocol, we need to generate and store a [personal access token (PAT)](https://github.com/settings/tokens)
+-   Go to the [Developer Settings](https://github.com/settings/tokens) or use the following `R` shortcut that comes with a pre-selected scope.
 
 ```{r eval = F}
 usethis::create_github_token()
 ```
 
-- Give the PAT a clear name (e.g., my-private-machine), "Generate token", copy the PAT to the clipboard and paste it somewhere for short term storage (also, don't close the window yet).
-- Run the following `R` command to store the PAT by pasting it into the console:
+-   Give the PAT a clear name (e.g., my-private-machine), "Generate token", copy the PAT to the clipboard and paste it somewhere for short term storage (also, don't close the window yet).
+-   Run the following `R` command to store the PAT by pasting it into the console:
 
 ```{r eval = F}
 gitcreds::gitcreds_set()
@@ -54,32 +103,30 @@ gitcreds::gitcreds_set()
 
 ## Create and Clone a Repository
 
-- Go to GitHub and create a [new repository](https://github.com/new).
-- Add a description and click "Add README file".
-- Create a repository.
-- Clone the repository to your computer via the green "<> Code" button. Click "HTTPS" and copy the address.
-
+-   Go to GitHub and create a [new repository](https://github.com/new).
+-   Add a description and click "Add README file".
+-   Create a repository.
+-   Clone the repository to your computer via the green "\<\> Code" button. Click "HTTPS" and copy the address.
 
 # GitHub Fundamentals
 
 ## Commit, Push, Pull
 
-- In the following, you want to exercise some commands fundamental to the work with `Git`: `pull`, `push`, `commit`.
+-   In the following, you want to exercise some commands fundamental to the work with `Git`: `pull`, `push`, `commit`.
 
-- `commit` allows you to save the latest changes in your repository (e.g., if you added some new lines of code)
+-   `commit` allows you to save the latest changes in your repository (e.g., if you added some new lines of code)
 
-- `pull` and `push` sync the local repository on your machine and the remote repository on GitHub. 
-With `pull` you sync changes that were first made in the remote repository; with `push`, you snyc changes made in the local repository.
+-   `pull` and `push` sync the local repository on your machine and the remote repository on GitHub. With `pull` you sync changes that were first made in the remote repository; with `push`, you snyc changes made in the local repository.
 
-- It is a good practice to first pull from the remote repository before you push back to GitHub. To practice, do some changes on GitHub, commit, and pull them to the local repository. Then do some changes in the local repository, commit, and push them. Repeat to gain some practice.
+-   It is a good practice to first pull from the remote repository before you push back to GitHub. To practice, do some changes on GitHub, commit, and pull them to the local repository. Then do some changes in the local repository, commit, and push them. Repeat to gain some practice.
 
 ## Branching
 
-- With `Git`, you can create branches besides the main branch. Such feature branches allow you to let the main branch as it is and test new things on them. Later, you can merge changes on the feature branch into the main branch.
+-   With `Git`, you can create branches besides the main branch. Such feature branches allow you to let the main branch as it is and test new things on them. Later, you can merge changes on the feature branch into the main branch.
 
-- You create a branch from the terminal with `bash git branch "branch-name"` and then checkout to the branch with `bash git checkout "branch-name"`.
+-   You create a branch from the terminal with `bash git branch "branch-name"` and then checkout to the branch with `bash git checkout "branch-name"`.
 
-- Once you have done some work on the feature branch and commited it, you can checkout to the main branch again and merge the changes. 
+-   Once you have done some work on the feature branch and commited it, you can checkout to the main branch again and merge the changes.
 
 ``` bash
 git checkout main
@@ -88,16 +135,10 @@ git merge branch-name
 
 ## Issues
 
-- can be used as a to do list
-
-
+-   can be used as a to do list
 
 # Git
 
-
 # Resources
 
-[Happy Git](Happy Git and GitHub for the useR)
-
-
-
+[Happy Git](Happy%20Git%20and%20GitHub%20for%20the%20useR)
