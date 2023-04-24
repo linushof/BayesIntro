@@ -1,0 +1,103 @@
+---
+title: "Git, GitHub & RStudio"
+subtitle: "A Students Primer"
+format: html
+---
+
+# Prerequisites
+
+- R and RStudio installed
+
+# Git Installation and Setup 
+
+- Check if  `Git` is already installed. In the shell/terminal, type:
+
+``` bash
+which git
+```
+
+- If the command returns `git: command not found`, `Git` is not installed yet. Install `Git` from the [browser](ttps://git-scm.com/downloads). 
+- Introduce yourself to `Git` with a user name and your institutional (TUM) E-mail address.
+
+``` bash
+git config --global user.name 'Jane Doe'
+git config --global user.email 'jane@example.com'
+```
+
+- Check if everything works: 
+
+``` bash
+git config --global --list
+```
+- Restart your machine.
+
+# Hello GitHub 
+
+- Go to [GitHub](https://github.com) and create an account with the E-Mail address you introduced to `Git` before.
+- Request a [GitHub Student Developer Pack](https://education.github.com/pack) (*optionally*)
+
+## Personal Access Token 
+
+- To allow `Git` to communicate with GitHub via the HTTPS protocol, we need to generate and store a [personal access token (PAT)](https://github.com/settings/tokens)
+- Go to the [Developer Settings](https://github.com/settings/tokens) or use the following `R` shortcut that comes with a pre-selected scope.
+
+```{r eval = F}
+usethis::create_github_token()
+```
+
+- Give the PAT a clear name (e.g., my-private-machine), "Generate token", copy the PAT to the clipboard and paste it somewhere for short term storage (also, don't close the window yet).
+- Run the following `R` command to store the PAT by pasting it into the console:
+
+```{r eval = F}
+gitcreds::gitcreds_set()
+```
+
+## Create and Clone a Repository
+
+- Go to GitHub and create a [new repository](https://github.com/new).
+- Add a description and click "Add README file".
+- Create a repository.
+- Clone the repository to your computer via the green "<> Code" button. Click "HTTPS" and copy the address.
+
+
+# GitHub Fundamentals
+
+## Commit, Push, Pull
+
+- In the following, you want to exercise some commands fundamental to the work with `Git`: `pull`, `push`, `commit`.
+
+- `commit` allows you to save the latest changes in your repository (e.g., if you added some new lines of code)
+
+- `pull` and `push` sync the local repository on your machine and the remote repository on GitHub. 
+With `pull` you sync changes that were first made in the remote repository; with `push`, you snyc changes made in the local repository.
+
+- It is a good practice to first pull from the remote repository before you push back to GitHub. To practice, do some changes on GitHub, commit, and pull them to the local repository. Then do some changes in the local repository, commit, and push them. Repeat to gain some practice.
+
+## Branching
+
+- With `Git`, you can create branches besides the main branch. Such feature branches allow you to let the main branch as it is and test new things on them. Later, you can merge changes on the feature branch into the main branch.
+
+- You create a branch from the terminal with `bash git branch "branch-name"` and then checkout to the branch with `bash git checkout "branch-name"`.
+
+- Once you have done some work on the feature branch and commited it, you can checkout to the main branch again and merge the changes. 
+
+``` bash
+git checkout main
+git merge branch-name
+```
+
+## Issues
+
+- can be used as a to do list
+
+
+
+# Git
+
+
+# Resources
+
+[Happy Git](Happy Git and GitHub for the useR)
+
+
+
