@@ -7,5 +7,7 @@
 *.png
 notes/
 memes/
+plots/
+slides/
 housekeeping/
-syllabus/syllabus_files/
+*_files/
