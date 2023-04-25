@@ -331,15 +331,28 @@ dat
 
 #### Functions
 
-Simple arithmetic operations are by no means the only possible operations in R. Moreover, multiple operations can be combined to longer or more complicated computation sequence. Irrespective of the exact operation, the more often we rely on it, we should write a function for this operation instead of copy and pasting the code multiple times in order to apply it to different data. Because many operations are fairly common and useful to different projects, others might have already written a function for that operation. Some might come with the initial R installation such as `data.frame()` and others are obtained by installing a so-called package that is distributed and freely available online. In the following, we briefly explain what a function is and how we work with them and then we install for demonstrative and later purposes a package that has multiple helpful functions for working with data frames and doing data analysis more generally.
+Simple arithmetic operations are by no means the only possible operations in `R`.
+You already come across other operations in the form of *functions* such as `data.frame()` or `rep()`.
+Moreover, multiple operations can be combined and chained to achieve more complex computations.
+However, irrespective of the exact computation, the more often you need it, the less inclined you should be to write the code from scratch over and over and over again. 
+Copying and pasting the code can circumvent this problems, but it comes with its own pitfalls. 
+As a general rule of thumb for programming --- statistical or otherwise --- you want to reduce code duplications.  
 
+One way to reduce duplications in your `R` code is by working with functions.
+Functions reduce code duplications by encapsulating a particular set of commands that perform a computation and only extracting the parts out that are changing between runs. 
+To illustrate, consider you want to run the same set of operations on multiple variables.
+Although the only thing that changes between repeated runs is the variable, you always need to send the entire code to the console, which can easily make up several lines.
+Encapsulating a set of operations in a function allows you to reduce many lines to just a function name and some arguments (the independent, changing parts) which together usually make up no more than a line.
+This results in code and scripts that are much cleaner, easier to read, and ultimately less prone to errors. 
+
+In the following, we briefly consider how functions are build. 
 A function generally consists of three parts:
 
 1.  A function name.
-2.  Objects and other arguments that are the inputs to the function.
+2.  Objects and other arguments that are the inputs to the function (independent, changing parts).
 3.  The code body `{}` that specifies the code and turns inputs into outputs.
 
-To illustrate, consider the following code for a function `summing` that sums up all values in a vector `x`:
+To illustrate, consider the following code with which we define a function `summing()` that sums up all values of a vector:
 
 ```{r}
 summing <- # function name
@@ -355,24 +368,34 @@ summing <- # function name
 }
 ```
 
-At this point, we don't have to understand the whole code. The important take away is that we have now created a function `summing()` that can sum up all values within a numeric vector. Therefore, we just write the name of the function and place the vector in the bracket. The main idea is that the function takes the vector and puts it in the place of the `x` in the above code while executing it.
+At this point, we don't need to understand all particularities of the code. 
+The main idea is that we have now created a function `summing()` that sums up all values within numeric vectors. 
+Specifically, the function `summing()` takes as input a vector substitutes the placeholder `x` in the above code body with this vector, and then executes the code.
+To see the function in action, we just need to write the name of the function and place the vector of interest in the input bracket. 
 
-```{r eval=FALSE}
+```{r}
 x <- c(1,2,3)
 summing(x)
-summing(dat$Var_1)
 ```
 
-Of course, summing vectors is fairly common operation and there is already a function in place for it:
+Of course, computing the sum of a variable/vector is a common operation and there is already a function in place for it:
 
-```{r eval= FALSE}
+```{r}
 sum(x)
-sum(dat$Var_1)
 ```
 
-Thus, before repeatedly writing endless lines of code or racking your brains, search online whether there is already a function that does what you want. In some cases, you are required to install a new package that entails this function.
+Because many sets of operations are fairly common and useful to different projects, others might have already written a function for this operation. 
+Some of these functions might come with the initial `R` installation such as `data.frame()`, `rep()`, and `sum`, while others are obtained by installing additional *packages* that are distributed and freely available online. 
+Either way, the important takeaway is that before you start repeatedly writing endless lines of code or racking your brain to come up with a function, you should search online to see if there is already a function that does what you need.
 
-One last thing about R code and functions: You can combine multiple functions by placing one into the other. The way it works is by reading R code from the inside to the outside. Ultimately, a function returns an output. The output of the inner (or enclosed function) is then used as input of the outer function. To illustrate consider the following code that combines the `sum()` function and the `abs()` function that returns the non-negative absolute value. First, we do the operation one by one by saving the output of `sum()` in a new object that is then the input to `abs`. Thereafter, we do it all at once.
+One last thing about `R` code and functions: 
+You can combine the operations of multiple functions by placing functions into one another. 
+The way it works is by reading the `R` code from the inside to the outside. 
+More specifically, a function returns an output.
+The output of the inner (or enclosed) function is then used as input of the outer function.
+To illustrate consider the following example that combines the `sum()` function and the `abs()` function, which returns the non-negative absolute value of scalars. 
+First, we do the operation one by one by saving the output of `sum()` in a new object, which is then used as input to `abs()`. 
+Thereafter, we do it all at once.
 
 ```{r}
 x <- c(-1, -2, -3)
@@ -381,21 +404,24 @@ sum_x
 abs(sum_x)
 abs(sum(x))
 ```
-
 #### Packages
 
-R packages may entail functions, data, and documentation that are not provided with the standard installation of R. R packages are created and maintained by a community of developers and users who share their work with others. These packages can be downloaded from the internet and installed in R using the install.packages() function. Once installed, the functions and data in the package can be loaded into R using the library() function, making them available for use in your code.
+To conclude this primer on `R`, let's briefly elaborate a bit more on the idea of *packages*.
+`R` packages may entail functions, data, and documentation that are not provided with the standard installation of `R`. 
+`R` packages are created and maintained by a community of developers and users who share their work with others.
+These packages can be downloaded from the internet and installed in `R` using the function `install.packages()` function. 
+Once installed, the functions and data in the package can be made available in `R` by using the function `library()`. 
 
-There are thousands of R packages available for a wide range of tasks, from data manipulation and visualization to statistical modeling and machine learning. Using packages can save R users a lot of time and effort by providing pre-written code and functions for common tasks, allowing them to focus on their specific research questions or analysis goals.
-
-In the following, we will install the `tidyverse` package, which itself is a collection of other packages.
+In the following, we install the `tidyverse` package, which itself contains a collection of packages that offer a rich and powerful set of functions for working with data frames.
 
 ```{r eval = FALSE}
 install.packages("tidyverse")
 library("tidyverse")
 ```
 
-Now that we have learned the basics of `R`, we will continue with learning about Git and GitHub.
+Besides the `tidyverse`, there are thousands of other `R` packages available for a wide range of tasks, from data manipulation and visualization to statistical modeling and machine learning. 
+Using packages will save you a lot of time and effort, allowing you to focus on what you are here for: data analysis.
+Now that we have learned some basics of `R`, we will continue with learning Git and GitHub.
 
 # Hello `Git`
 
