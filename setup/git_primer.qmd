@@ -210,80 +210,122 @@ z
 x*z
 ```
 
-There will be a lot more to learn and do with vectors.
-However, for now, we turn again to a bit more complex data structure, one which entails multiple vectors.
+There is a lot more to learn and do with vectors.
+However, for now we turn to a bit more complex data structure, one which entails multiple vectors.
 
 #### Data Frames
 
-Being a set of values, vectors are ideally suited to represent variables (columns) in a data frame. Data frames are a data structure we will encounter very often. According to Hadley Wickham, tidy data frames all look alike and follow this set of rules:
+Being a collection of values, vectors are ideally suited to represent variables in a data frame. 
+Data frames are a data structures we will encounter in virtually every data analysis project.
+[According to Hadley Wickham](https://r4ds.had.co.nz/tidy-data.html), every messy data set is messy in its own way, but tidy data sets are all alike. 
+Specifically, tidy data sets follow a small set of simple rules:
 
 1.  Each variable must have its own column.
 2.  Each observation must have its own row.
 3.  Each value must have its own cell.
 
-To illustrate, consider the following code example, where we use the three vectors (variables) `Var_1`, `Var_2`, and `Var_3` and the function `data.frame()` to build data set.
+To put these rules in action, consider the following example, where we first create 3 individual vectors, `x`, `y`, `z`, and then represent them as different variables in a data frame object `dat`.
+For the latter operation, we use the function `data.frame()`.
+
+```{r}
+x <- c(1, 2, 3)
+y <- c(4, 5, 6)
+z <- c(7, 8, 9)
+dat <- data.frame(x, y, z)
+dat
+```
+
+Not all data sets in the wild will look this neat right from the start and usually they will be a lot bigger.
+However, irrespective of its initial form and size, in most data analysis projects you want to bring the data into this data frame format before you start analyzing it.
+
+One advantage becomes immediately clear: Row numbers indicate positions within the vectors that represent variables. 
+This applies to all variables (columns) in the data set without exception.
+To grasp the full advantage, assume that each row represents a single unit of analysis (e.g., countries, companies, individuals).
+This is what rows (should) usually do. 
+Now we can see that each value on each variable belongs to exactly one analysis unit, indicated by the row number.
+To make this clear, let's add an indicator variable `ID` to `dat`.
 
 ```{r}
 ID <- c("A", "B", "C")
-Var_1 <- c(1, 2, 3)
-Var_2 <- c(2, 4, 6)
-Var_3 <- c(4, 8, 12)
-dat <- data.frame(Var_1, Var_2, Var_3)
+dat <- data.frame(ID, dat)
 dat
 ```
 
-Of course, not all data sets outside of this course will look like this from the start, but there is a good reason to bring the data into this format before you start analyzing it. One advantage becomes immediately clear: The row number indicates the position within a variable vector (column). We can now make perfect use of the vectorized nature of R by applying the same operation on a variable to all rows at once. As data frames are one of the most common data structures, we need to learn a set of commands (functions) that help us to manipulate them and obtain the information we want. In the following, we will briefly go over some basic commands. Later we will introduce a number of functions from the `tidyverse` that make writing code and working with data frames particularly easy, even if the manipulations become more complex.
+Now we have three different analysis units, `A`, `B`, `C`, which could stand for individual countries, companies, people or the like, each of which has one value on each variable. 
+In many --- although not all --- cases we want to operate on variables across all analysis units (e.g., computing a variable mean, recoding variable values). 
+In this case, we can make perfect use of `R`'s vectorized nature and simply apply the same operation on a variable to all rows at once. 
+You'll soon appreciate both the format and the feature.
+
+As data frames are a very common data structure (object type), we need to learn a set of commands that help us to manipulate them and obtain the information we want. 
+We will now briefly go over some basic commands. 
+Throughout the course, we'll learn about a set of functions from the `tidyverse` package that makes writing code and working with data frames particularly easy, even if the manipulations are rather complex.
 
 As with vectors, we can apply the same operation to an entire data frame.
+Consider the following example, where each cell entry is multiplied by 2.
 
 ```{r}
+x <- c(1, 2, 3)
+y <- c(4, 5, 6)
+z <- c(7, 8, 9)
+dat <- data.frame(x, y, z)
 dat*2
 ```
 
-How does it work under the hood? R represents all cell entries in a vector, starting from the left and traversing the columns one by one from top to bottom. Rarely, this is what we need. Usually we only want to apply operation to specific columns or cells in a data frame. There are multiple ways to obtain a variable vector out of a data set.
+To multiply each single value (cell entry), `R` operates element-wise, starting from the left and traversing the columns one by one from top to bottom.
+This element-wise operation is implied by `R`'s vectorized nature:
+Implicitly, `R` represents all cell entries in a single vector and repeats the scalar 2 as often as there are cell entries. 
+Rarely, this is what we need and at times this behavior causes confusion.
+
+Instead, we usually want to apply operations to specific variables or cells in a data frame. 
+There are multiple ways to retrieve a variable from a data frame.
+In the following, you can see at least 3 ways that come with the standard installation of `R`.
 
 ```{r}
-dat$Var_1 # dollar notation
+dat$x # dollar notation with variable name
 dat[, 1] # matrix notation with column number
-dat[, "Var_1"] # matrix notation with column name
+dat[, "x"] # matrix notation with variable name
 ```
 
-In the matrix notation, values before the comma represent the row and values after the comma represent the column. The matrix notation has the advantage that we can refer to columns by both the column number and the variable name. Another advantage is that we can also obtain multiple columns or specific cell entries.
+In the *matrix notation*, values prior the comma represent rows and values after the comma represent columns.
+The matrix notation has two advantages over the dollar notation: 
+First, we can refer to columns both by column number and variable name. 
+Second, we can also obtain multiple variables (columns) at once or specific cell entries.
 
 ```{r}
-dat[, c(1,2)] # Variable/column 1 and 2
-dat[1,1] # cell entry in row 1, column 2 
+# multiple columns
+dat[, c(1,2)]
+dat[, c("x","y")]
+
+# specific cell entries
+dat[1,1] # cell entry row 1 and column 1
+dat[1, "x"]
 ```
 
-Knowing how to retrieve certain values from a data frame, we can now apply operations on them as before. The principles of vectorized operations remain the same.
+Knowing how to retrieve variables from a data frame, we can now apply operations on them as before. 
+The basic principles of vectorized operations remain the same.
+Consider the following 3 examples, where we multiply the variable `x` (column 1) with the scalar 2 and or the vector `a`.
 
 ```{r}
-dat[, 1]
 dat[, 1] * 2
-x <- c(1,2,3)
-dat[, 1] * x 
-dat$Var_1 * x
+a <- c(1,2,3)
+dat[, 1] * a 
+dat$x * a
 ```
 
-Importantly, the above code doesn't store the outputs in the data frame:
+Importantly, the above code doesn't change the object `dat` but only returns the output of the operation.
+To store the outputs in `dat`, we use the assignment operator `<-` and point it to the position in the `dat` where we want to store the outputs.
+For instance, we can create a new column `v` and attach it to the existing data frame:
 
 ```{r}
-dat[,1]
+dat[, "v"] <- dat[, 1] * a 
+dat
 ```
 
-To do so, we have to use the `<-` operator again and point it to the position in the data frame, we want it to be stored. If we operate on an entire column, we can either override an existing column (usually the one we operated on) or add a new column, depending on what our goal is:
+Or we can overwrite an existing column:
 
 ```{r}
 # overriding
-dat[, 1] <- dat[, 1] * x 
-dat
-dat$Var_2 <- dat$Var_2 * x
-dat
-
-# adding
-dat[, 4] <- dat[, 3] * x 
-dat
-dat$Var_5 <- dat[, 4] * x
+dat[, 4] <- dat[, 4] / a
 dat
 ```
 
@@ -315,7 +357,7 @@ summing <- # function name
 
 At this point, we don't have to understand the whole code. The important take away is that we have now created a function `summing()` that can sum up all values within a numeric vector. Therefore, we just write the name of the function and place the vector in the bracket. The main idea is that the function takes the vector and puts it in the place of the `x` in the above code while executing it.
 
-```{r}
+```{r eval=FALSE}
 x <- c(1,2,3)
 summing(x)
 summing(dat$Var_1)
@@ -323,7 +365,7 @@ summing(dat$Var_1)
 
 Of course, summing vectors is fairly common operation and there is already a function in place for it:
 
-```{r}
+```{r eval= FALSE}
 sum(x)
 sum(dat$Var_1)
 ```
