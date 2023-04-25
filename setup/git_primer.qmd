@@ -4,69 +4,73 @@ subtitle: "A Students Primer"
 format: html
 ---
 
-# Preface
-
-...
-
 # Prerequisites
 
-- [x] [R](https://cloud.r-project.org) installed
-- [x] [RStudio](https://posit.co/products/open-source/rstudio/) installed
-- [x] [Git](https://git-scm.com/downloads) installed
-- [x] [GitHub](https://github.com) account created
+-   [x] [R](https://cloud.r-project.org) installed
+-   [x] [RStudio](https://posit.co/products/open-source/rstudio/) installed
+-   [x] [Git](https://git-scm.com/downloads) installed
+-   [x] [GitHub](https://github.com) account created
 
 # Hello `R`
 
-## R code
+## What is R code and how does it work?
 
-`R` is an interpreted high-level programming language tailored to statistical computing. *High level* means that in order to get `R` going, we users don't really need to know anything about the computer architecture and machine code. `R` code abstracts from machine code, which is the only language your computer understands and executes. Instead, `R` code is much more readable and easier to write because it uses elements of natural language and programming concepts (e.g., loops and functions), data structures (e.g., data frames), and expressions (arithmetic, true/false) that are familiar or easy to learn. Because `R` code is not machine code, an *interpreter* reads your `R` code and translates each code line into machine code, hence an interpreted language. How this translation technically works, must not be your business. The only thing you need to learn is how to write some R code. R code is then essentially a set of written commands, that is read and executed by a command line interpreter. To write `R` code and access the interpreter, we use the `R` *console* as a command line interface:
+`R` is an *interpreted high-level* programming language specifically tailored to statistical computing. In fact, `R` can do more than statistical computing, but that's what it was designed for, that's what it's good at, and that's what we're primarily concerned with in this course.
 
-![](git_primer_files/R-console.PNG){fig-align="center" width="506"}
+*High level* refers to the fact that we as `R` users aren't required to know anything at all about the computers architecture and machine code. This doesn't mean that machine code isn't important. Machine code is the only language that your computer understands and executes. However, machine code is hard to write and understand and not a desirable to tool to actively work with in data analysis projects. `R` code makes our lives much easier: It is much more readable and straightforward to write because it relies on elements of natural language and programming concepts such as loops and functions, data structures like data frames, and expressions including arithmetic and true/false statements, which are either familiar and relatively easy to learn.
 
-In the console you can write code (e.g., `1+1`) and executed by pressing `enter`. Below the code, `R` returns the output.
+Because `R` code is not machine code and this is what is ultimately required to get your machine and code running, `R` code needs to be interpreted and translated to machine code. This is what a so-called *interpreter* does and this is what makes `R` an *interpreted* language. If you are just concerned with data analysis, it's not necessary to understand the technical aspects of this translation process. What you need to learn and practice is how write some `R` code.
 
-## R Studio
+`R` code consists of written commands that are read executed by a command-line interpreter. To access the interpreter and write `R` code, we take a brief look into the *console*, `R`'s command-line interface.
 
-One shortcoming of the console is that it does not save the code after the session ends. This is of course a problem, since we often work on an analysis project for days or even weeks or months and don't want to and can't start from scratch every time. The easy solution here is to write the code into a text file that can be saved and accessed whenever we want to. Text files that (only) entail code are generally referred to as a *script* and we can write such a script with `R` code by using the file extension '.R', rather than, e.g., '.docx' or '.text'.
+![](git_primer_files/R-console.PNG){fig-align="center"}
 
-Another shortcoming of the console is that it looks kind of old and boring and doesn't allow for much more than just writing the code.
-Thus, for our daily use, we will not directly write in the console but rely on RStudio. 
-RStudio is an *integrated development environment* (IDE) that provides a powerful and user-friendly interface for working with R.
+In the console you can write code (e.g., `1+1`) and execute it by pressing `Enter`. Below the code, `R` returns the so-called *output* (i.e., `2`). Every line of code needs to end up in the console in order to be executed and obtain its output.
 
-![](git_primer_files/RStudio.PNG){fig-align="center" width="506"}
+## Giving R a better look with RStudio
 
-RStudio is designed to improve the efficiency and ease of use of the R programming language, by providing a range of tools and features that streamline the coding and analysis process.
-One of the features is that it offers you more than one panel, through which you can access different types of information. 
-E.g., in the screenshot above, the upper left panel entails a R script, in which we can write our code. 
-Below, you see the familiar R console which remains the processing engine. 
-One big advantage of working with scripts in RStudio is that you can directly execute code from the script in the console by using the key combination `ctrl` + `enter` (Windows) or `cmd` + `enter` (Mac).
-You can store this script as any other file on your computer, ready to be executed at any time you want. 
-Some other advantages of using RStudio over using only the R Console include:
+The console has some shortcomings. For one, the console doesn't secure your code once you close it. Since data analysis projects can take days, months or even years, this is a problem: You won't and can't start from scratch every time. The simple solution is to write your code in a text file that can be saved on your machine. Text files that only contain code are referred to as *scripts* and usually have a file extension that indicates the language in which the code is written. `R` scripts have the extension '.R'.
 
-- Enhanced code editing: RStudio provides a range of code editing features such as syntax highlighting, code completion, and error checking that make it easier to write and debug R code.
+Another shortcoming of the console is that it looks old and doesn't allow for much more than just writing code. However, throughout this course you'll realize that a proper data analysis workflow requires much more than just writing code. Thus, we'll not directly work in console but rely on *RStudio*. RStudio is an *integrated development environment* (IDE) that provides a powerful and user-friendly graphical interface for working with R.
 
-- Integrated documentation: RStudio provides easy access to R's extensive documentation, making it easier to learn and use the language effectively.
+![](git_primer_files/RStudio.PNG){fig-align="center"}
 
-- Workspace management: RStudio provides a range of tools for managing R workspaces, including the ability to view, load, and save data, and to manage R packages.
+RStudio is designed to ease the use of `R` and improve your efficiency by offering a range of tools and features that streamline data management, coding and analysis. 
 
-- Integrated debugging: RStudio provides powerful debugging tools that help to identify and resolve errors in R code, including the ability to step through code line-by-line and to set breakpoints.
+One feature of RStudio is that it has more than one panel.
+Each panel provides access to different types of information. 
+E.g., the upper left panel in the above screenshot entails a script `script.R`, in which we can write and secure the code we previously entered in the console. 
+In the panel below, you see this console again. 
+Remember that the console remains the processing engine and that every line of code must be passed through it in order to be executed. 
+However, you don't have to copy-and-paste your code from the script to the console. 
+Instead, you can directly execute code from the script in the console by pressing the key combination `ctrl` + `enter` in Windows or `cmd` + `enter` in macOS. 
+You can store this script like any other file on your computer, ready to be executed at any time you want.
 
-- Integration with version control systems: RStudio integrates with popular version control systems such as Git, making it easier to manage and collaborate on R projects.
+You'll learn about the other panels throughout the course on the fly.
+At this point, let's just briefly consider other advantages of working in RStudio instead of just in the console.
 
-You will learn about these features and how to use them throughout this course. 
-The important take away for now is just that everything that can be done by only using the console can be done in RStudio too, but better.
-Therefore, from now we only access the console and write code in RStudio. 
+-   Enhanced code editing: RStudio provides a range of code editing features such as syntax highlighting, code completion, and error checking that make it easier to write and debug R code.
+
+-   Integrated documentation: RStudio provides easy access to R's extensive documentation, making it easier to learn and use the language effectively.
+
+-   Workspace management: RStudio provides a range of tools for managing R workspaces, including the ability to view, load, and save data, and to manage R packages.
+
+-   Integrated debugging: RStudio provides powerful debugging tools that help to identify and resolve errors in R code, including the ability to step through code line-by-line and to set breakpoints.
+
+-   Integration with version control systems: RStudio integrates with popular version control systems such as Git, making it easier to manage and collaborate on R projects.
+
+You'll learn about these features and how to integrate them in your workflow throughout this course. 
+The important takeaway for now is that everything that can be done using only the console can be done in RStudio too, but better.
+Thus, from now on, we will only access the console via RStudio.
 
 ## Basics in R
 
-Now that we've set up `R` and `RStudio`, we want to learn the basics of programming in `R`. 
-Many of the commands, functions, and concepts we need throughout this course will be learned on the fly once we need them. 
-Here, we only look at the most essential points, which are outlined in chapter 2 of the open access book [Hands-On Programming with R](https://rstudio-education.github.io/hopr/).
+Now that we've set up `R` and `RStudio`, we want to learn the basics of programming in `R`. Many of the commands, functions, and concepts we need throughout this course will be learned on the fly once we need them. Here, we only look at the most essential points, which are outlined in chapter 2 of the open access book [Hands-On Programming with R](https://rstudio-education.github.io/hopr/).
 
-### Arithmetic Expressions 
+### Arithmetic Expressions
 
-Arithmetic expressions or operations are mathematical operations performed on numerical data such as addition (`+`), subtraction (`-`) , multiplication (`*`) or division (`/`).   
-You write these expressions as on paper using the above symbols. 
+Arithmetic expressions or operations are mathematical operations performed on numerical data such as addition (`+`), subtraction (`-`) , multiplication (`*`) or division (`/`).\
+You write these expressions as on paper using the above symbols.
 
 ```{r}
 1+1 # addition
@@ -74,19 +78,14 @@ You write these expressions as on paper using the above symbols.
 3*3 # multiplication
 4/4 # division
 ```
+
 ### Objects
 
-`R` is am object oriented language because it allows to create and manipulate objects using arithmetic expressions and all sorts of function that you will learn about.
-Objects can be thought of as data storage, which we can assign names to.
-Specifically, objects entail data that is structured in some way. 
-We distinguish between different object types depending on what the data looks like and how it is structured.
-However, irrespective of the object type, we can name it however we want. 
-We now look at object types we will frequently encounter: 
+`R` is am object oriented language because it allows to create and manipulate objects using arithmetic expressions and all sorts of function that you will learn about. Objects can be thought of as data storage, which we can assign names to. Specifically, objects entail data that is structured in some way. We distinguish between different object types depending on what the data looks like and how it is structured. However, irrespective of the object type, we can name it however we want. We now look at object types we will frequently encounter:
 
-#### Scalars 
+#### Scalars
 
-Scalars are single values such as a number, a character (letter), a character string (word), or logical values (TRUE or FALSE).
-We assign names to scalars and objects in general using the operator `<-` (Shortcuts: `Alt` + `-`on Windows; `Option` + `-` on Mac).
+Scalars are single values such as a number, a character (letter), a character string (word), or logical values (TRUE or FALSE). We assign names to scalars and objects in general using the operator `<-` (Shortcuts: `Alt` + `-`on Windows; `Option` + `-` on Mac).
 
 ```{r}
 scalar_1 <- 1 # numeric
@@ -104,12 +103,13 @@ We can access (look into) the object by simply typing its name.
 scalar_1
 ```
 
-Having created the object, we can manipulate it just as it was a value: 
+Having created the object, we can manipulate it just as it was a value:
 
 ```{r}
 scalar_1 + 1 # addition
 scalar_1 * 10 # multiplication
 ```
+
 We can also create new objects from existing objects either by copying the existing object into an object of a different name or by manipulating the existing object and assigning the output of the operation a name.
 
 ```{r}
@@ -119,9 +119,7 @@ scalar_6 <- scalar_1 * 10 # new object
 scalar_6
 ```
 
-Occasionally, we will ask R to execute code that is actually not a valid operation.
-E.g., we can only multiple numerical values, but not letters. 
-In these cases, R will return an error message. 
+Occasionally, we will ask R to execute code that is actually not a valid operation. E.g., we can only multiple numerical values, but not letters. In these cases, R will return an error message.
 
 ```{r}
 scalar_2
@@ -131,53 +129,47 @@ scalar_2
 scalar_2 * 4
 ```
 
-<span style="color:red;">Error in scalar_2 * 4 : non-numeric argument to binary operator</span>
+[Error in scalar_2 \* 4 : non-numeric argument to binary operator]{style="color:red;"}
 
-The command `scalar_2 * 4` returns an error. 
-This is because the object `scalar_2` is the character `a` which cannot be multiplied. 
+The command `scalar_2 * 4` returns an error. This is because the object `scalar_2` is the character `a` which cannot be multiplied.
 
 #### Vectors
 
-Vectors are among the most common objects data structures we will encounter in R.
-Vectors are ordered collection of values of the same data type. 
-We can create a vector object using the familiar `<-` and the `c()` command. 
+Vectors are among the most common objects data structures we will encounter in R. Vectors are ordered collection of values of the same data type. We can create a vector object using the familiar `<-` and the `c()` command.
 
 ```{r}
 x <- c(1, 2, 3, 4) 
 x
 ```
-One of the prime features of R is that it is a "vectorized" language. 
-This means that you can perform the same operation on an entire vector of values at once.
-As with scalars, you can store the output of vectorized operations in a new object. 
+
+One of the prime features of R is that it is a "vectorized" language. This means that you can perform the same operation on an entire vector of values at once. As with scalars, you can store the output of vectorized operations in a new object.
 
 ```{r}
 y <- x*2
 y
 ```
-One powerful feature we have to take care of when working with vectors is that computations consider the position of elements (values) in a vector.
-That is, operations between vectors are performed such that the operation applies to elements at the same position in the vectors.
-Consider the output of multiplication of the two vectors `x = `r x`` and `y = `r y``. 
-Here, the first element of `x` is multiplied with the first element of `y` and so on. 
+
+One powerful feature we have to take care of when working with vectors is that computations consider the position of elements (values) in a vector. That is, operations between vectors are performed such that the operation applies to elements at the same position in the vectors. Consider the output of multiplication of the two vectors `x =`r x`` and `y = `r y ``. Here, the first element of `x` is multiplied with the first element of `y` and so on.
 
 ```{r}
 x*y
 ```
-Importantly, if the vectors have unequal lengths, the shorter vector is first repeated until it is as long as the longer vector, and then the operations are performed element wise.
-In the following, the vector `z` is repeated once such that it has the same length as `x`.
+
+Importantly, if the vectors have unequal lengths, the shorter vector is first repeated until it is as long as the longer vector, and then the operations are performed element wise. In the following, the vector `z` is repeated once such that it has the same length as `x`.
 
 ```{r}
 z <- c(1,2) 
 x*z
 ```
-If we think of scalars as vectors of length 1, we can now better understand the previous operation `x*2`. 
-I.e., `2` is repeated 4 times. 
+
+If we think of scalars as vectors of length 1, we can now better understand the previous operation `x*2`. I.e., `2` is repeated 4 times.
 
 ```{r}
 a <- 2 
 x*a
 ```
-Above, we only considered numerical vectors. 
-However, as scalars, vectors can be of different type
+
+Above, we only considered numerical vectors. However, as scalars, vectors can be of different type
 
 ```{r}
 vector_1 <- c(1,2,3) # numeric
@@ -187,17 +179,16 @@ vector_2
 vector_3 <- c(TRUE, FALSE, TRUE) # logical
 vector_3
 ```
+
 #### Data Frames
 
-Being a set of values, vectors are ideally suited to represent variables (columns) in a data frame.
-Data frames are a data structure we will encounter very often.
-According to Hadley Wickham, tidy data frames all look alike and follow this set of rules:
+Being a set of values, vectors are ideally suited to represent variables (columns) in a data frame. Data frames are a data structure we will encounter very often. According to Hadley Wickham, tidy data frames all look alike and follow this set of rules:
 
-1. Each variable must have its own column.
-2. Each observation must have its own row.
-3. Each value must have its own cell.
+1.  Each variable must have its own column.
+2.  Each observation must have its own row.
+3.  Each value must have its own cell.
 
-To illustrate, consider the following code example, where we use the three vectors (variables) `Var_1`, `Var_2`, and `Var_3` and the function `data.frame()` to build data set. 
+To illustrate, consider the following code example, where we use the three vectors (variables) `Var_1`, `Var_2`, and `Var_3` and the function `data.frame()` to build data set.
 
 ```{r}
 ID <- c("A", "B", "C")
@@ -208,40 +199,30 @@ dat <- data.frame(Var_1, Var_2, Var_3)
 dat
 ```
 
-Of course, not all data sets outside of this course will look like this from the start, but there is a good reason to bring the data into this format before you start analyzing it.
-One advantage becomes immediately clear: The row number indicates the position within a variable vector (column).
-We can now make perfect use of the vectorized nature of R by applying the same operation on a variable to all rows at once. 
-As data frames are one of the most common data structures, we need to learn a set of commands (functions) that help us to manipulate them and obtain the information we want. 
-In the following, we will briefly go over some basic commands. 
-Later we will introduce a number of functions from the `tidyverse` that make writing code and working with data frames particularly easy, even if the manipulations become more complex.
+Of course, not all data sets outside of this course will look like this from the start, but there is a good reason to bring the data into this format before you start analyzing it. One advantage becomes immediately clear: The row number indicates the position within a variable vector (column). We can now make perfect use of the vectorized nature of R by applying the same operation on a variable to all rows at once. As data frames are one of the most common data structures, we need to learn a set of commands (functions) that help us to manipulate them and obtain the information we want. In the following, we will briefly go over some basic commands. Later we will introduce a number of functions from the `tidyverse` that make writing code and working with data frames particularly easy, even if the manipulations become more complex.
 
-As with vectors, we can apply the same operation to an entire data frame. 
+As with vectors, we can apply the same operation to an entire data frame.
 
 ```{r}
 dat*2
 ```
 
-How does it work under the hood?
-R represents all cell entries in a vector, starting from the left and traversing the columns one by one from top to bottom.
-Rarely, this is what we need.
-Usually we only want to apply operation to specific columns or cells in a data frame.
-There are multiple ways to obtain a variable vector out of a data set. 
+How does it work under the hood? R represents all cell entries in a vector, starting from the left and traversing the columns one by one from top to bottom. Rarely, this is what we need. Usually we only want to apply operation to specific columns or cells in a data frame. There are multiple ways to obtain a variable vector out of a data set.
 
 ```{r}
 dat$Var_1 # dollar notation
 dat[, 1] # matrix notation with column number
 dat[, "Var_1"] # matrix notation with column name
 ```
-In the matrix notation, values before the comma represent the row and values after the comma represent the column. 
-The matrix notation has the advantage that we can refer to columns by both the column number and the variable name. 
-Another advantage is that we can also obtain multiple columns or specific cell entries.
+
+In the matrix notation, values before the comma represent the row and values after the comma represent the column. The matrix notation has the advantage that we can refer to columns by both the column number and the variable name. Another advantage is that we can also obtain multiple columns or specific cell entries.
 
 ```{r}
 dat[, c(1,2)] # Variable/column 1 and 2
 dat[1,1] # cell entry in row 1, column 2 
 ```
-Knowing how to retrieve certain values from a data frame, we can now apply operations on them as before. 
-The principles of vectorized operations remain the same. 
+
+Knowing how to retrieve certain values from a data frame, we can now apply operations on them as before. The principles of vectorized operations remain the same.
 
 ```{r}
 dat[, 1]
@@ -251,13 +232,13 @@ dat[, 1] * x
 dat$Var_1 * x
 ```
 
-Importantly, the above code doesn't store the outputs in the data frame: 
+Importantly, the above code doesn't store the outputs in the data frame:
 
 ```{r}
 dat[,1]
 ```
-To do so, we have to use the `<-` operator again and point it to the position in the data frame, we want it to be stored. 
-If we operate on an entire column, we can either override an existing column (usually the one we operated on) or add a new column, depending on what our goal is: 
+
+To do so, we have to use the `<-` operator again and point it to the position in the data frame, we want it to be stored. If we operate on an entire column, we can either override an existing column (usually the one we operated on) or add a new column, depending on what our goal is:
 
 ```{r}
 # overriding
@@ -275,19 +256,13 @@ dat
 
 #### Functions
 
-Simple arithmetic operations are by no means the only possible operations in R. 
-Moreover, multiple operations can be combined to longer or more complicated computation sequence. 
-Irrespective of the exact operation, the more often we rely on it, we should write a function for this operation instead of copy and pasting the code multiple times in order to apply it to different data.
-Because many operations are fairly common and useful to different projects, others might have already written a function for that operation. 
-Some might come with the initial R installation such as `data.frame()` and others are obtained by installing a so-called package that is distributed and freely available online.
-In the following, we briefly explain what a function is and how we work with them and then we install for demonstrative and later purposes a package that has multiple helpful functions for working with data frames and doing data analysis more generally.
+Simple arithmetic operations are by no means the only possible operations in R. Moreover, multiple operations can be combined to longer or more complicated computation sequence. Irrespective of the exact operation, the more often we rely on it, we should write a function for this operation instead of copy and pasting the code multiple times in order to apply it to different data. Because many operations are fairly common and useful to different projects, others might have already written a function for that operation. Some might come with the initial R installation such as `data.frame()` and others are obtained by installing a so-called package that is distributed and freely available online. In the following, we briefly explain what a function is and how we work with them and then we install for demonstrative and later purposes a package that has multiple helpful functions for working with data frames and doing data analysis more generally.
 
+A function generally consists of three parts:
 
-A function generally consists of three parts: 
-
-1. A function name.
-2. Objects and other arguments that are the inputs to the function.
-3. The code body `{}` that specifies the code and turns inputs into outputs. 
+1.  A function name.
+2.  Objects and other arguments that are the inputs to the function.
+3.  The code body `{}` that specifies the code and turns inputs into outputs.
 
 To illustrate, consider the following code for a function `summing` that sums up all values in a vector `x`:
 
@@ -304,32 +279,25 @@ summing <- # function name
     
 }
 ```
-At this point, we don't have to understand the whole code.
-The important take away is that we have now created a function `summing()` that can sum up all values within a numeric vector. 
-Therefore, we just write the name of the function and place the vector in the bracket.
-The main idea is that the function takes the vector and puts it in the place of the `x` in the above code while executing it. 
+
+At this point, we don't have to understand the whole code. The important take away is that we have now created a function `summing()` that can sum up all values within a numeric vector. Therefore, we just write the name of the function and place the vector in the bracket. The main idea is that the function takes the vector and puts it in the place of the `x` in the above code while executing it.
 
 ```{r}
 x <- c(1,2,3)
 summing(x)
 summing(dat$Var_1)
 ```
-Of course, summing vectors is fairly common operation and there is already a function in place for it: 
+
+Of course, summing vectors is fairly common operation and there is already a function in place for it:
 
 ```{r}
 sum(x)
 sum(dat$Var_1)
 ```
-Thus, before repeatedly writing endless lines of code or racking your brains, search online whether there is already a function that does what you want.
-In some cases, you are required to install a new package that entails this function. 
 
-One last thing about R code and functions: 
-You can combine multiple functions by placing one into the other. 
-The way it works is by reading R code from the inside to the outside.
-Ultimately, a function returns an output. 
-The output of the inner (or enclosed function) is then used as input of the outer function. To illustrate consider the following code that combines the `sum()` function and the `abs()` function that returns the non-negative absolute value.
-First, we do the operation one by one by saving the output of `sum()` in a new object that is then the input to `abs`.
-Thereafter, we do it all at once. 
+Thus, before repeatedly writing endless lines of code or racking your brains, search online whether there is already a function that does what you want. In some cases, you are required to install a new package that entails this function.
+
+One last thing about R code and functions: You can combine multiple functions by placing one into the other. The way it works is by reading R code from the inside to the outside. Ultimately, a function returns an output. The output of the inner (or enclosed function) is then used as input of the outer function. To illustrate consider the following code that combines the `sum()` function and the `abs()` function that returns the non-negative absolute value. First, we do the operation one by one by saving the output of `sum()` in a new object that is then the input to `abs`. Thereafter, we do it all at once.
 
 ```{r}
 x <- c(-1, -2, -3)
@@ -338,37 +306,34 @@ sum_x
 abs(sum_x)
 abs(sum(x))
 ```
+
 #### Packages
 
-R packages may entail functions, data, and documentation that are not provided with the standard installation of R. 
-R packages are created and maintained by a community of developers and users who share their work with others. 
-These packages can be downloaded from the internet and installed in R using the install.packages() function. Once installed, the functions and data in the package can be loaded into R using the library() function, making them available for use in your code.
+R packages may entail functions, data, and documentation that are not provided with the standard installation of R. R packages are created and maintained by a community of developers and users who share their work with others. These packages can be downloaded from the internet and installed in R using the install.packages() function. Once installed, the functions and data in the package can be loaded into R using the library() function, making them available for use in your code.
 
 There are thousands of R packages available for a wide range of tasks, from data manipulation and visualization to statistical modeling and machine learning. Using packages can save R users a lot of time and effort by providing pre-written code and functions for common tasks, allowing them to focus on their specific research questions or analysis goals.
 
-In the following, we will install the `tidyverse` package, which itself is a collection of other packages. 
+In the following, we will install the `tidyverse` package, which itself is a collection of other packages.
 
 ```{r eval = FALSE}
 install.packages("tidyverse")
 library("tidyverse")
 ```
 
-Now that we have learned the basics of `R`, we will continue with learning about Git and GitHub. 
+Now that we have learned the basics of `R`, we will continue with learning about Git and GitHub.
 
 # Hello `Git`
 
-- Check if Git is already installed. 
-- Open a shell/terminal on your machine and type:
+-   Check if Git is already installed.
+-   Open a shell/terminal on your machine and type:
 
 ``` bash
 git --version
 ```
 
-- If the command returns something along the lines `git version ...`, you are fine. 
-If the command returns `git: command not found`, Git is not installed yet. 
-Install Git from the [browser](https://git-scm.com/downloads) and repeat the above procedure.
+-   If the command returns something along the lines `git version ...`, you are fine. If the command returns `git: command not found`, Git is not installed yet. Install Git from the [browser](https://git-scm.com/downloads) and repeat the above procedure.
 
-- Introduce yourself to Git with a user name and the E-mail address you (will) use for the GitHub account.
+-   Introduce yourself to Git with a user name and the E-mail address you (will) use for the GitHub account.
 
 ``` bash
 git config --global user.name 'YOUR USERNAME'
@@ -381,25 +346,25 @@ git config --global user.email 'YOUR EMAIL ADDRESS'
 git config --global --list
 ```
 
-- Somewhere in the output, you should find a line that entails your username and a line that entails the e-mail address. 
-- Restart your machine.
+-   Somewhere in the output, you should find a line that entails your username and a line that entails the e-mail address.
+-   Restart your machine.
 
 # Hello GitHub
 
-- If not done yet, go to [GitHub](https://github.com) and create an account with the E-Mail address you introduced to Git before.
+-   If not done yet, go to [GitHub](https://github.com) and create an account with the E-Mail address you introduced to Git before.
 
 ## Personal Access Token
 
-- To allow Git to communicate with GitHub via the HTTPS protocol, we need to generate and store a [personal access token (PAT)](https://github.com/settings/tokens)
-- Use the following R shortcut that comes with a pre-selected scope.
+-   To allow Git to communicate with GitHub via the HTTPS protocol, we need to generate and store a [personal access token (PAT)](https://github.com/settings/tokens)
+-   Use the following R shortcut that comes with a pre-selected scope.
 
 ```{r eval = F}
 install.packages("usethis")
 usethis::create_github_token()
 ```
 
-- Give the PAT a clear name (e.g., my-private-machine), "Generate token", copy the PAT to the clipboard and paste it somewhere for short term storage (also, don't close the window yet).
-- Run the following lines of code to store the PAT by pasting it into the console:
+-   Give the PAT a clear name (e.g., my-private-machine), "Generate token", copy the PAT to the clipboard and paste it somewhere for short term storage (also, don't close the window yet).
+-   Run the following lines of code to store the PAT by pasting it into the console:
 
 ```{r eval = F}
 install.packages("gitcreds")
@@ -408,11 +373,11 @@ gitcreds::gitcreds_set()
 
 ## Create and Clone a Repository
 
-- Go to GitHub and create a [new repository](https://github.com/new).
-- Add a description and click "Add README file".
-- Create a repository.
-- Clone the repository to your computer via the green "\<\> Code" button. Click "HTTPS" and copy the address.
-- Go to R and open a new project with version control (Copy the remote address). 
+-   Go to GitHub and create a [new repository](https://github.com/new).
+-   Add a description and click "Add README file".
+-   Create a repository.
+-   Clone the repository to your computer via the green "\<\> Code" button. Click "HTTPS" and copy the address.
+-   Go to R and open a new project with version control (Copy the remote address).
 
 ## GitHub Fundamentals
 
@@ -439,37 +404,99 @@ git checkout main
 git merge branch-name
 ```
 
-## Pull requests. 
+## Pull requests.
 
-[...]
+\[...\]
 
-- Go to the Github Repository you want to commit changes to and create a fork. 
-- Clone the fork to your local machine as if it was a normal remote repository. 
-- Check your current remote repositories
+![Copyright Jenny Bryan](git_primer_files/remote-set-up.png){fig-align="center" width="408"}
+
+-   Go to the original GitHub repo (source repo) you want to commit changes to and create a fork (repository) to your own account:
+
+![](git_primer_files/fork.PNG){fig-align="center" width="1056"}
+
+-   Clone the fork to your local machine by creating a new R project.
+
+-   Using the command line, check the remote repository of your project (`origin` should be your fork).
 
 ``` bash
 git remote -v
 ```
 
-- Add the original repository as another remote repository. 
-This repository is usually referred to as `upstream`:
+-   Before you start suggesting changes to the source repository, you want to make sure to commit to the most recent version of the source. Therefore, you have to set the source repository as another remote repository. As a convention the source repository is called `upstream`.
 
 ``` bash
 git remote upstream url-of-original-repository.
-
 ```
 
-- Check the remote repositories again `git remote -v`
-- Create a branch, make changes, commit 
-- push changes to a new remote branch of the fork
+-   Check the remote repositories again.
+
+-   Now you also want to see the source repository as `source`.
+
+`git remote -v`
+
+-   One important thing to notice is that you are not allowed to push directly to the source from your fork, but you are able to pull directly from the source into the fork. The only thing you can do is requesting to commit changes to the source. Therefore, you proceed as follows:
+
+1.  In your local fork, create a branch with a meaningful name
+2.  Make changes on that branch and commit them.
+3.  Push the changes to a new remote branch in your fork (`origin`).
 
 ``` bash
 git push origin branch-name
-
 ```
 
-- Go to GitHub to create a pull request
+4.  Visit your fork on GitHub. You will find a panel that suggests making a pull request.
 
+![](git_primer_files/pull-request.PNG){fig-align="center"}
+
+5.  Open the pull request, add a comment and create it. The owner of the source will be notified and can review the request. Done.
+
+##### How to continue
+
+-   If the owner accepts your changes, they will be committed to the source and you will appear as contributor. In this case, you can either delete the fork entirely or leave it to come back at a later point.
+
+-   When you come back at a later point, you probably want to pick up with the most recent version of the source. To obtain the most recent changes and get your fork in sync, you have 2 options.
+
+A)  
+
+    1.  Sync remote fork in GitHub, pull from remote fork into local repo
+
+B)  
+
+    1.  Pull from source into local repo, push to remote fork
+
+-   You are now set to make another pull request. For the new pull request, you should create a new branch and not take the old one. Old branches can be deleted using the command line:
+
+``` bash
+git branch -d branch-name #local
+git push origin -d branch-name #remote
+```
+
+#### Issues
+
+On GitHub, you can also create issues to track bugs, request features, point to other problems or list remaining to dos.
+
+#### Opening an issue
+
+-   In a Github repo, go to the issues page and click on "New Issue"
+
+![](git_primer_files/issues.PNG){fig-align="center"}
+
+-   Give the issue a name and, optionally, add a comment for more context.
+
+#### Closing an issue
+
+There are multiple options to close an issue.
+
+-   If the issue is resolved, you can manually close the issue on GitHub via the issue page.
+
+-   In your local repo, make a commit and and close the issue with a commit message. The commit message must entail the following string `KEYWORD ISSUE`. The issues is indicated by a `#` and a number. Keywords that work are: `close`, `closes`, `closed`, `fix`, `fixes`, `fixed`, `resolve`, `resolves`, `resolved`. E.g., close an Issue #5, you can write the following commit message
+
+``` bash
+define new variable; closes #5
+```
+
+-   If you push the commit to GitHub, the issue will automatically be closed.
+-   You can also link pull requests to existing issues. Just add the string `KEYWORD ISSUE` to the commit of the pull request. If the pull request is approved and merged, the issue will get closed.
 
 # Resources
 
