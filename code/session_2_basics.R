@@ -4,11 +4,17 @@
 1-1 # subtraction
 1*1 # multiplication
 1/1 # division
+2+2
 
 ## expressions where order of operations matter
 
 1+1/2 #  division prior addition
 (1+1)/2 # brackets prior the rest
+
+
+## Exercise 1 solution
+
+(((10 + 2) * 3) - 6) / 3
 
 
 # R 2.2. Scalars
@@ -19,6 +25,7 @@ scal_num <- 1 # <- is the assignment operator
 scal_chr <- "a"
 scal_str <- "word"
 scal_log <- TRUE # logical/Boolean
+scal_num
 
 ## operating on scalar objects
 
@@ -29,6 +36,7 @@ scal_num + scal_num / 2
 
 ## creating new from existing objects
 
+scal_num
 scal_num <- scal_num + 1  # overwriting
 scal_num
 scal_num2 <- scal_num + 1 # creating
@@ -38,6 +46,20 @@ scal_num2
 
 scal_chr * 4 # check and try to understand error message
 
+## Exercise 2 solution
+
+o1 <- 10
+o2 <- o1 + 2
+o3 <- o2 * 3
+o4 <- o3 - 6
+o5 <- o4 / 3
+
+o5*3 == o4
+o4 + 6 == o3
+o3 / 3 == o2
+o2 - 2 == o1
+
+
 # R 2.3. Vectors
 
 x <- c(1, 2, 3, 4) # create a vector object x, c() combines inputs to vector
@@ -46,18 +68,24 @@ x <- c(1, 2, 3, 4) # create a vector object x, c() combines inputs to vector
 
 x*2 
 
-### Operating with multiple operators
+## Operating with multiple operators
 
 x <- c(1, 2, 3, 4) # vector x
 y <- c(1, 2, 3, 4) # vector y
 x*y # element-wise operation: R applies a given operation to elements that occupy the same position in their vectors
 
 z <- c(1,2) 
+z
 x*z # R repeates the shorter vector until it matches the length of the longer vector and then operates element-wise
 
 z <- rep(z, 2) # replicates and overwrite z
 z
 x*z
+
+## Exercise 3 solution
+
+x <- 1:5
+(((x + 2) * 3) - 6) / 3
 
 # R 2.4. Data Frames
 
@@ -116,7 +144,7 @@ summing <- # function name
     return(total)
     
   }
-summing(x)
+summing(y)
 sum(x)
 
 ## combining operations of multiple functions
@@ -126,10 +154,10 @@ x <- c(-1, -2, -3)
 sum_x <- sum(x)
 sum_x
 abs(sum_x)
+abs()
 
 ### at once 
 abs(sum(x))
-
 
 # 2.6 Tidyverse
 
@@ -143,3 +171,4 @@ usethis::create_github_token()
 
 install.packages("gitcreds")
 gitcreds::gitcreds_set()
+
