@@ -44,7 +44,7 @@ Questions of general interest can be posted and discussed in the Moodle forums [
 +-----------+----------------------------------------------------------+------------------------------------------------------+--------------------+
 | 03 May    | Scientific inference and Bayesian updating               | -   Read @kruschkeBayesianDataAnalysis2018           | Assignment 1       |
 |           |                                                          | -   Solve sheet: `session_2_exercise.Rmd`            |                    |
-|           |                                                          | -   Create new `GitHub` repo and synch with RStudio  |                    |
+|           |                                                          | -   Create new `GitHub` repo and sync with RStudio  |                    |
 +-----------+----------------------------------------------------------+------------------------------------------------------+--------------------+
 | 10 May    | Workflow for Bayesian parameter estimation               |                                                      |                    |
 +-----------+----------------------------------------------------------+------------------------------------------------------+--------------------+
