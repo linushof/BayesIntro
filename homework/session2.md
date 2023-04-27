@@ -74,6 +74,8 @@ range.
            y = "Counts") + 
       theme_minimal()
 
+![](session2_files/figure-markdown_strict/unnamed-chunk-4-1.png)
+
 1.  From what you know or assume about how income is distributed in a
     population, do you think the simulated data is realistic? Change the
     scale and shape parameters in the function `rbeta` to simulate new
@@ -113,10 +115,10 @@ range.
     income_summary
 
     ##       group boundary means
-    ## 1  Lower 1%      625   401
-    ## 2 Lower 50%     1901  1102
-    ## 3   Top 10%     4015  4988
-    ## 4    Top 1%     6160  6874
+    ## 1  Lower 1%      618   398
+    ## 2 Lower 50%     1865  1073
+    ## 3   Top 10%     4014  4979
+    ## 4    Top 1%     6125  6737
 
 1.  Considering the above summary table and what you know or assume
     about how income is distributed in a population, do you still think
