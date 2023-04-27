@@ -1,9 +1,7 @@
 ---
 title: "Introduction to Bayesian Data Analysis"
 subtitle: "Syllabus"
-format:
-  html: 
-    keep-md: true
+format: gfm
   
 bibliography: literature.bib
 editor: 
