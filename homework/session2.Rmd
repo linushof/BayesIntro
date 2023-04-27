@@ -1,9 +1,8 @@
 ---
-title: "Introduction to Bayesian Data Analysis"
-subtitle: "Exercise Sheet Session 2" 
+title: "Untitled"
 author: "Linus Hof"
-date: "2023-04-25"
-output: gfm
+date: "2023-04-27"
+output: md_document
 ---
 
 # Resources
@@ -64,7 +63,7 @@ The following lines of code plot a histogram, which displays the counts of peopl
 library(ggplot2) # only load (run) once
 ```
 
-```{r}
+```{r eval=FALSE}
 # Plot the resulting curve
 ggplot(data.frame(x = income), aes(x=x)) +
   geom_histogram(color = "#0065BD", fill = "#0065BD", alpha=0.5, bins = 100) +
