@@ -1,9 +1,7 @@
 ---
 title: "Git, GitHub & R"
 subtitle: "A Students Primer"
-format: 
-  html:
-    keep-md: true
+format: gfm
 ---
 
 # Prerequisites
