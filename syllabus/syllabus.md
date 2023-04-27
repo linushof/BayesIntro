@@ -224,6 +224,8 @@ learning takes time and requires to overcome challenge by challenge.
 Take this course as an opportunity to stay persistent and to learn in a
 structured and collaborative manner.
 
+### Resources
+
 <div id="refs" class="references csl-bib-body hanging-indent">
 
 <div id="ref-bryanExcuseMeYou2018" class="csl-entry">

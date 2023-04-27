@@ -85,3 +85,5 @@ I'm not a big fan of graded assignments because they suggest that a learning pro
 ### Attendance
 
 You won't be forced to attend the classes - ultimately, it's your decision to be here. Also, life can be difficult at times and there is a chance that you won't manage to attend all sessions for good reasons. Don't worry about that: You can check the slides, examine the code, talk to the other students, ask questions, and be certain that core ideas will be reiterated in the next session. That said, I strongly recommend to come to the class whenever you can. The slides and scripts won't be comprehensive summaries of the sessions and the hands-on exercises are considered an integral part of this course. In the end, sustainable learning takes time and requires to overcome challenge by challenge. Take this course as an opportunity to stay persistent and to learn in a structured and collaborative manner.
+
+### Resources
