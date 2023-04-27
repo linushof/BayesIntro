@@ -16,14 +16,11 @@ bibliography: literature.bib
 
 *E-Mail*: [linus.hof\@tum.de](mailto:linus.hof@tum.de)
 
-*General announcements*: Will be made [here](https://www.moodle.tum.de/mod/forum/view.php?id=2429843).
-(*Make sure to turn on the Moodle notifications.*)
+*General announcements*: Will be made [here](https://www.moodle.tum.de/mod/forum/view.php?id=2429843). (*Make sure to turn on the Moodle notifications.*)
 
 *Materials*: Can be found [here](https://github.com/linushof/BayesIntro).
 
-*Communication*: In class and written communication, just call me Linus.
-For data protection reasons, please use your TUM E-Mail when writing me.
-Questions of general interest can be posted and discussed in the Moodle forums [*Contents*](https://www.moodle.tum.de/mod/forum/view.php?id=2569419) and [*Organization*](https://www.moodle.tum.de/mod/forum/view.php?id=2569420).
+*Communication*: In class and written communication, just call me Linus. For data protection reasons, please use your TUM E-Mail when writing me. Questions of general interest can be posted and discussed in the Moodle forums [*Contents*](https://www.moodle.tum.de/mod/forum/view.php?id=2569419) and [*Organization*](https://www.moodle.tum.de/mod/forum/view.php?id=2569420).
 
 # Schedule
 
@@ -44,7 +41,7 @@ Questions of general interest can be posted and discussed in the Moodle forums [
 +-----------+----------------------------------------------------------+------------------------------------------------------+--------------------+
 | 03 May    | Scientific inference and Bayesian updating               | -   Read @kruschkeBayesianDataAnalysis2018           | Assignment 1       |
 |           |                                                          | -   Solve sheet: `session_2_exercise.Rmd`            |                    |
-|           |                                                          | -   Create new `GitHub` repo and sync with RStudio  |                    |
+|           |                                                          | -   Create new `GitHub` repo and sync with RStudio   |                    |
 +-----------+----------------------------------------------------------+------------------------------------------------------+--------------------+
 | 10 May    | Workflow for Bayesian parameter estimation               |                                                      |                    |
 +-----------+----------------------------------------------------------+------------------------------------------------------+--------------------+
@@ -77,38 +74,14 @@ Questions of general interest can be posted and discussed in the Moodle forums [
 
 ### Homework
 
-I'm a fan of homework because it helps you learn.
-Learning comes from *repetition* and *exercise*.
-Chances are high that you forget at least some of the things we cover and practice in class if you don't review and practice them.
-Since we'll continuously be progressing, forgetting is undesirable at this point.
-One purpose of the homework is therefore repetition by exercise.
-Actively engaging in the exercises also allows you to track and celebrate the progress you made so far and to uncover remaining problems.
-Not everything will be clear right away - use the problems during exercise to figure out where you should take a step back and reiterate.
+I'm a fan of homework because it helps you learn. Learning comes from *repetition* and *exercise*. Chances are high that you forget at least some of the things we cover and practice in class if you don't review and practice them. Since we'll continuously be progressing, forgetting is undesirable at this point. One purpose of the homework is therefore repetition by exercise. Actively engaging in the exercises also allows you to track and celebrate the progress you made so far and to uncover remaining problems. Not everything will be clear right away - use the problems during exercise to figure out where you should take a step back and reiterate.
 
-Another purpose of homework is *preparation*.
-Learning is most effective when done without distractions.
-Distractions like missing software keep you busy while causing you to lose focus on what you are here for in the first place - the analysis part.
-Therefore, you'll occasionally be asked to set up your software environment in advance to be prepared for the next analysis steps.
-Lastly, when learning something completely new, it can sometimes be a lot at once.
-To reduce the bulk of new information that comes at a time, you'll sometimes be asked to read a short paper that teases some new ideas we'll cover in the upcoming session(s).
-This gives you some edge and the opportunity to form an expectation that helps you navigate more easily through the sessions.
+Another purpose of homework is *preparation*. Learning is most effective when done without distractions. Distractions like missing software keep you busy while causing you to lose focus on what you are here for in the first place - the analysis part. Therefore, you'll occasionally be asked to set up your software environment in advance to be prepared for the next analysis steps. Lastly, when learning something completely new, it can sometimes be a lot at once. To reduce the bulk of new information that comes at a time, you'll sometimes be asked to read a short paper that teases some new ideas we'll cover in the upcoming session(s). This gives you some edge and the opportunity to form an expectation that helps you navigate more easily through the sessions.
 
 ### Assignments and Grade
 
-I'm not a big fan of graded assignments because they suggest that a learning process is finished and can be captured in just a number.
-This is almost never the case.
-However, grades can be informative and rewarding to some extent.
-Here, assignments will be naturally integrated in the course as small milestones down the road.
-They will look a lot like the homework in that they take the form of little coding and analysis exercises.
-Specifically, assignments consists of a Multiple Choice questionnaire alongside a submitted analysis script (e.g., `script.R`) that produced the answers.
-We will have $5$ assignments, where each grade $g$ is weighted equally to obtain the overall course grade, $G = 1/5\sum_i^5 g_i$.
+I'm not a big fan of graded assignments because they suggest that a learning process is finished and can be captured in just a number. This is almost never the case. However, grades can be informative and rewarding to some extent. Here, assignments will be naturally integrated in the course as small milestones down the road. They will look a lot like the homework in that they take the form of little coding and analysis exercises. Specifically, assignments consists of a Multiple Choice questionnaire alongside a submitted analysis script (e.g., `script.R`) that produced the answers. We will have $5$ assignments, where each grade $g$ is weighted equally to obtain the overall course grade, $G = 1/5\sum_i^5 g_i$.
 
 ### Attendance
 
-You won't be forced to attend the classes - ultimately, it's your decision to be here.
-Also, life can be difficult at times and there is a chance that you won't manage to attend all sessions for good reasons.
-Don't worry about that: You can check the slides, examine the code, talk to the other students, ask questions, and be certain that core ideas will be reiterated in the next session.
-That said, I strongly recommend to come to the class whenever you can.
-The slides and scripts won't be comprehensive summaries of the sessions and the hands-on exercises are considered an integral part of this course.
-In the end, sustainable learning takes time and requires to overcome challenge by challenge.
-Take this course as an opportunity to stay persistent and to learn in a structured and collaborative manner.
+You won't be forced to attend the classes - ultimately, it's your decision to be here. Also, life can be difficult at times and there is a chance that you won't manage to attend all sessions for good reasons. Don't worry about that: You can check the slides, examine the code, talk to the other students, ask questions, and be certain that core ideas will be reiterated in the next session. That said, I strongly recommend to come to the class whenever you can. The slides and scripts won't be comprehensive summaries of the sessions and the hands-on exercises are considered an integral part of this course. In the end, sustainable learning takes time and requires to overcome challenge by challenge. Take this course as an opportunity to stay persistent and to learn in a structured and collaborative manner.

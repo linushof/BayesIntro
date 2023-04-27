@@ -70,13 +70,14 @@ data-cites="bryanExcuseMeYou2018">Bryan (2018)</span></p></li>
 <tr class="even">
 <td>03 May</td>
 <td>Scientific inference and Bayesian updating</td>
-<td colspan="2"><ul>
+<td><ul>
 <li>Read <span class="citation"
 data-cites="kruschkeBayesianDataAnalysis2018">Kruschke and Liddell
-(2018)</span> | Assignment 1</li>
-<li>Solve sheet: <code>session_2_exercise.Rmd</code> |</li>
-<li>Create new <code>GitHub</code> repo and sync with RStudio | |</li>
+(2018)</span></li>
+<li>Solve sheet: <code>session_2_exercise.Rmd</code></li>
+<li>Create new <code>GitHub</code> repo and sync with RStudio</li>
 </ul></td>
+<td>Assignment 1</td>
 </tr>
 <tr class="odd">
 <td>10 May</td>
