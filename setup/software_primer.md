@@ -6,6 +6,8 @@ format:
     keep-md: true
 ---
 
+
+
 # Prerequisites
 
 -   [x] [R](https://cloud.r-project.org) installed
@@ -94,16 +96,71 @@ At this point, we will focus only on the most essential points to give you an id
 
 *Arithmetic expressions* trigger mathematical operations on numerical data. In `R`, these expressions follow the same order of operations as in standard mathematics, even if some of the mathematical *operators* may look a bit different from the ones on paper or in the calculator.
 
-```{r}
-1+1 # addition
-1-1 # subtraction
-1*1 # multiplication
-1/1 # division
 
+::: {.cell}
+
+```{.r .cell-code}
+1+1 # addition
+```
+
+::: {.cell-output .cell-output-stdout}
+```
+[1] 2
+```
+:::
+
+```{.r .cell-code}
+1-1 # subtraction
+```
+
+::: {.cell-output .cell-output-stdout}
+```
+[1] 0
+```
+:::
+
+```{.r .cell-code}
+1*1 # multiplication
+```
+
+::: {.cell-output .cell-output-stdout}
+```
+[1] 1
+```
+:::
+
+```{.r .cell-code}
+1/1 # division
+```
+
+::: {.cell-output .cell-output-stdout}
+```
+[1] 1
+```
+:::
+
+```{.r .cell-code}
 # expressions where order of operations matter
 1+1/2 #  division prior addition
+```
+
+::: {.cell-output .cell-output-stdout}
+```
+[1] 1.5
+```
+:::
+
+```{.r .cell-code}
 (1+1)/2 # brackets prior the rest
 ```
+
+::: {.cell-output .cell-output-stdout}
+```
+[1] 1
+```
+:::
+:::
+
 
 ### Objects
 
@@ -129,28 +186,82 @@ They can take on different data types, such as numerical, character, string, or 
 
 We assign names to scalars --- and all other objects by using the operator `<-` (Windows: `Alt` + `-`; macOS: `Option` + `-`).
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 scal_num <- 1
 scal_chr <- "a"
 scal_str <- "word"
 scal_log <- TRUE # logical/Boolean
 ```
+:::
+
 
 We can access (look into) the object by typing its name and sending the line to the console.
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 scal_num
 ```
+
+::: {.cell-output .cell-output-stdout}
+```
+[1] 1
+```
+:::
+:::
+
 
 Having created scalar objects and knowing what they are, we can continue operating on them. 
 Let's again run some arithmetic expressions.
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 scal_num + 1
+```
+
+::: {.cell-output .cell-output-stdout}
+```
+[1] 2
+```
+:::
+
+```{.r .cell-code}
 scal_num + scal_num
+```
+
+::: {.cell-output .cell-output-stdout}
+```
+[1] 2
+```
+:::
+
+```{.r .cell-code}
 scal_num + scal_num / 2
+```
+
+::: {.cell-output .cell-output-stdout}
+```
+[1] 1.5
+```
+:::
+
+```{.r .cell-code}
 (scal_num + scal_num) / 2
 ```
+
+::: {.cell-output .cell-output-stdout}
+```
+[1] 1
+```
+:::
+:::
+
 
 The above examples gives us an idea of what `R` is doing when it is supplied with an object that we previously created: 
 It takes the data that is stored inside them and runs the operation on the data. 
@@ -158,20 +269,45 @@ Storing data in objects becomes particularly helpful if the data is not just a s
 
 Before we turn to more complex object types, let's briefly consider how we can overwrite existing objects or create new objects by running operations on existing ones.
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 scal_num <- scal_num + 1  # overwriting
 scal_num
+```
+
+::: {.cell-output .cell-output-stdout}
+```
+[1] 2
+```
+:::
+
+```{.r .cell-code}
 scal_num2 <- scal_num + 1 # creating
 scal_num2
 ```
+
+::: {.cell-output .cell-output-stdout}
+```
+[1] 3
+```
+:::
+:::
+
 
 Occasionally, we will write code that represents an invalid operation. 
 In these cases, R will return an error message. 
 E.g., we can multiply numerical values, but not characters.
 
-```{r eval=FALSE}
+
+::: {.cell}
+
+```{.r .cell-code}
 scal_chr * 4
 ```
+:::
+
 
 [Error in scal_chr \* 4 : non-numeric argument to binary operator]{style="color:red;"}
 
@@ -185,17 +321,39 @@ A vector is an ordered collection of single values.
 Although not mandatory, values of a vector often belong to the same data type (e.g., numeric or character or logical).
 We can produce a vector object using the now familiar `<-` assignment operator and the `c()` command, which "chains" the values into a vector.
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 x <- c(1, 2, 3, 4) # create a vector object x
 x
 ```
 
+::: {.cell-output .cell-output-stdout}
+```
+[1] 1 2 3 4
+```
+:::
+:::
+
+
 One of `R`'s prime features is it's *vectorized* nature. 
 This means that `R` performs the same operation on an entire vector --- i.e., on each value within a vector --- at once.
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 x*2
 ```
+
+::: {.cell-output .cell-output-stdout}
+```
+[1] 2 4 6 8
+```
+:::
+:::
+
 
 When manipulating vectors in `R`, the position of each value within the vector is taken into account. 
 Specifically, operations between vectors are performed in a way that applies a given operation to elements that occupy the same position in their vectors. 
@@ -203,19 +361,41 @@ To illustrate this, let us take the example of multiplying two vectors `x` and `
 The multiplication operation will be applied to the first value of x and the first value of y, the second value of x and the second value of y, and so on. 
 The resulting output will be a vector of the same length as x and y.
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 x <- c(1, 2, 3, 4) # vector x
 y <- c(1, 2, 3, 4) # vector y
 x*y
 ```
 
+::: {.cell-output .cell-output-stdout}
+```
+[1]  1  4  9 16
+```
+:::
+:::
+
+
 `R`s vectorized nature is a bit more tricky to deal with if vectors don't have the same length. 
 Consider the following example where the `x` from above is multiplied with a shorter vector `z`.
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 z <- c(1,2) # vector z
 x*z
 ```
+
+::: {.cell-output .cell-output-stdout}
+```
+[1] 1 4 3 8
+```
+:::
+:::
+
 
 What is going on here? 
 When two vectors don't have the same length, the shorter vector is implicitly repeated until there are as many values as in the longer vector. 
@@ -223,11 +403,31 @@ In the above case, `z` is implicitly translated from `c(1,2)` into `c(1,2,1,2)`,
 Then, as previously, the operations are performed element wise. 
 We can check this behavior by replicating the vector `z` manually.
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 z <- rep(z, 2) # replicates and overwrite z
 z
+```
+
+::: {.cell-output .cell-output-stdout}
+```
+[1] 1 2 1 2
+```
+:::
+
+```{.r .cell-code}
 x*z
 ```
+
+::: {.cell-output .cell-output-stdout}
+```
+[1] 1 4 3 8
+```
+:::
+:::
+
 
 There is a lot more to learn and do with vectors. 
 However, for now we turn to a bit more complex data structure, one which entails multiple vectors.
@@ -246,13 +446,27 @@ Specifically, tidy data sets follow a small set of simple rules:
 To put these rules in action, consider the following example, where we first create 3 individual vectors, `x`, `y`, `z`, and then represent them as different variables in a data frame object `dat`. 
 For the latter operation, we use the function `data.frame()`.
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 x <- c(1, 2, 3)
 y <- c(4, 5, 6)
 z <- c(7, 8, 9)
 dat <- data.frame(x, y, z)
 dat
 ```
+
+::: {.cell-output .cell-output-stdout}
+```
+  x y z
+1 1 4 7
+2 2 5 8
+3 3 6 9
+```
+:::
+:::
+
 
 Not all data sets in the wild will look this neat right from the start and usually they will be a lot bigger. 
 However, irrespective of its initial form and size, in most data analysis projects you want to bring the data into this format before you start analyzing it.
@@ -263,11 +477,25 @@ To grasp the full advantage, assume that each row represents a single unit of an
 Now we can see that each value on each variable belongs to exactly one unit, each indicated by the row number. 
 To make this clear, let's add an indicator variable `ID` to `dat`.
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 ID <- c("A", "B", "C")
 dat <- data.frame(ID, dat)
 dat
 ```
+
+::: {.cell-output .cell-output-stdout}
+```
+  ID x y z
+1  A 1 4 7
+2  B 2 5 8
+3  C 3 6 9
+```
+:::
+:::
+
 
 Now we have three different analysis units, `A`, `B`, `C`, which could stand for individual countries, companies, people or the like, each of which has one value on each variable. 
 In many --- although not all --- cases we want to operate on variables across all analysis units (e.g., computing a variable mean, recoding variable values). 
@@ -280,13 +508,27 @@ Throughout the course, we'll also learn about a set of functions from the `tidyv
 
 As with vectors, we can apply the same operation to an entire data frame. Consider the following example, where each cell entry is multiplied by 2.
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 x <- c(1, 2, 3)
 y <- c(4, 5, 6)
 z <- c(7, 8, 9)
 dat <- data.frame(x, y, z)
 dat*2
 ```
+
+::: {.cell-output .cell-output-stdout}
+```
+  x  y  z
+1 2  8 14
+2 4 10 16
+3 6 12 18
+```
+:::
+:::
+
 
 To multiply each single value (cell entry), `R` operates element-wise again, starting from the left and traversing the columns one by one from top to bottom. 
 This element-wise operation is implied by `R`'s vectorized nature.
@@ -297,11 +539,40 @@ Instead, we usually want to apply operations to specific variables, rows, or cel
 There are multiple ways to retrieve a variable from a data frame. 
 In the following, you can see at least 3 ways that come with the standard installation of `R`.
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 dat$x # dollar notation with variable name
+```
+
+::: {.cell-output .cell-output-stdout}
+```
+[1] 1 2 3
+```
+:::
+
+```{.r .cell-code}
 dat[, 1] # matrix notation with column number
+```
+
+::: {.cell-output .cell-output-stdout}
+```
+[1] 1 2 3
+```
+:::
+
+```{.r .cell-code}
 dat[, "x"] # matrix notation with variable name
 ```
+
+::: {.cell-output .cell-output-stdout}
+```
+[1] 1 2 3
+```
+:::
+:::
+
 
 In the *matrix notation*, values prior the comma represent rows and values after the comma represent columns.
 The matrix notation has two advantages over the dollar notation: 
@@ -309,42 +580,133 @@ First, we can refer to columns both by column number and variable name.
 Second, we can also obtain multiple variables (columns) and rows at once or specific cell entries.
 This makes subsetting data frames relatively straightforward.
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 # multiple columns
 dat[, c(1,2)]
-dat[, c("x","y")]
+```
 
+::: {.cell-output .cell-output-stdout}
+```
+  x y
+1 1 4
+2 2 5
+3 3 6
+```
+:::
+
+```{.r .cell-code}
+dat[, c("x","y")]
+```
+
+::: {.cell-output .cell-output-stdout}
+```
+  x y
+1 1 4
+2 2 5
+3 3 6
+```
+:::
+
+```{.r .cell-code}
 # specific cell entries
 dat[1,1] # cell entry row 1 and column 1
+```
+
+::: {.cell-output .cell-output-stdout}
+```
+[1] 1
+```
+:::
+
+```{.r .cell-code}
 dat[1, "x"]
 ```
+
+::: {.cell-output .cell-output-stdout}
+```
+[1] 1
+```
+:::
+:::
+
 
 Knowing how to retrieve variables from a data frame, we can now apply operations on them. 
 The basic principles of vectorized operations remain the same. 
 Consider the following 3 examples, where we multiply the variable `x` from `dat` (column 1) with the vector `a`.
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 a <- c(1,2,3)
 dat[, 1] * a 
+```
+
+::: {.cell-output .cell-output-stdout}
+```
+[1] 1 4 9
+```
+:::
+
+```{.r .cell-code}
 dat$x * a
 ```
+
+::: {.cell-output .cell-output-stdout}
+```
+[1] 1 4 9
+```
+:::
+:::
+
 
 Importantly, the above code doesn't change the object `dat` but only returns the output of the operation. 
 To store the outputs in `dat`, we use the assignment operator `<-` again and point it to the position in `dat` where we want to store the outputs.
 For instance, we can create a new column `v` and attach it to the existing data frame.
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 dat[, "v"] <- dat[, "x"] * a 
 dat
 ```
 
+::: {.cell-output .cell-output-stdout}
+```
+  x y z v
+1 1 4 7 1
+2 2 5 8 4
+3 3 6 9 9
+```
+:::
+:::
+
+
 Or we can overwrite an existing column:
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 # overriding
 dat[, "v"] <- dat[, "v"] / a
 dat
 ```
+
+::: {.cell-output .cell-output-stdout}
+```
+  x y z v
+1 1 4 7 1
+2 2 5 8 2
+3 3 6 9 3
+```
+:::
+:::
+
 
 #### Functions
 
@@ -370,7 +732,10 @@ In the following, we briefly consider how functions are build. A function genera
 
 To illustrate, consider the following code with which we define a function `summing()` that sums up all values of a vector:
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 summing <- # function name
   function(x){ # inputs 
     
@@ -383,21 +748,45 @@ summing <- # function name
     
 }
 ```
+:::
+
 
 At this point, we don't need to understand all particularities of the code. The main idea is that we have now created a function `summing()` that sums up all values within numeric vectors. 
 Specifically, the function `summing()` takes as input a vector, substitutes the placeholder `x` in the above code with this vector, and then executes the code. 
 To see the function in action, we just need to write the name of the function and place the vector of interest in the input bracket.
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 x <- c(1,2,3)
 summing(x)
 ```
 
+::: {.cell-output .cell-output-stdout}
+```
+[1] 6
+```
+:::
+:::
+
+
 Of course, computing the sum of a vector is a common operation and there is already a function in place for that:
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 sum(x)
 ```
+
+::: {.cell-output .cell-output-stdout}
+```
+[1] 6
+```
+:::
+:::
+
 
 In general, because many sets of operations are fairly common and useful to different projects, others might have already written a function for this operation. 
 Some of these functions might come with the initial `R` installation such as `data.frame()`, `rep()`, and `sum()`, while others are obtained by installing additional *packages* that are distributed and freely available online. 
@@ -412,13 +801,42 @@ To illustrate consider the following example that combines the `sum()` function 
 First, we run the operations one by one by saving the output of `sum()` in a new object, which is then used as input for `abs()`. 
 Thereafter, we do it at once.
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 x <- c(-1, -2, -3)
 sum_x <- sum(x)
 sum_x
+```
+
+::: {.cell-output .cell-output-stdout}
+```
+[1] -6
+```
+:::
+
+```{.r .cell-code}
 abs(sum_x)
+```
+
+::: {.cell-output .cell-output-stdout}
+```
+[1] 6
+```
+:::
+
+```{.r .cell-code}
 abs(sum(x))
 ```
+
+::: {.cell-output .cell-output-stdout}
+```
+[1] 6
+```
+:::
+:::
+
 
 #### Packages
 
@@ -432,10 +850,15 @@ However, update them from time to time.)
 
 In the following, we install the `tidyverse` package, which itself contains a collection of packages that offer a rich and powerful set of functions for working with data frames and analysing data.
 
-```{r eval = FALSE}
+
+::: {.cell}
+
+```{.r .cell-code}
 install.packages("tidyverse")
 library("tidyverse")
 ```
+:::
+
 
 Besides the `tidyverse`, there are thousands of other `R` packages available for a wide range of tasks, from data manipulation and visualization to statistical modeling and machine learning. 
 Using packages will save you a lot of time and effort, allowing you to focus on what you are here for: data analysis. 
@@ -486,10 +909,15 @@ git config --global --list
 
 3.   Use the following `R` shortcut which opens your browser and comes with some useful pre-selected PAT settings.
 
-```{r eval = F}
+
+::: {.cell}
+
+```{.r .cell-code}
 install.packages("usethis")
 usethis::create_github_token()
 ```
+:::
+
 
 4.   In the browser that was opened, give the PAT a clear name (e.g., my-private-machine), using the *Note* field.
 
@@ -501,10 +929,15 @@ Don't close the window!
 
 5.   Return to `R` and run the following lines of code:
 
-```{r eval = F}
+
+::: {.cell}
+
+```{.r .cell-code}
 install.packages("gitcreds")
 gitcreds::gitcreds_set()
 ```
+:::
+
 
 6.   If you don't have a PAT stored already, there will be a message in the console that prompts you to enter your PAT. 
 Go to the browser, copy the PAT to your clipboard, and paste it to the console. 
