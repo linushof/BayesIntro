@@ -1,17 +1,16 @@
 ---
 title: "Introduction to Bayesian Data Analysis"
 subtitle: "Syllabus"
-format: gfm
+format:
+  html: 
+    keep-md: true
   
 bibliography: literature.bib
-editor: 
-  markdown: 
-    wrap: sentence
 ---
 
 
 
-*Last update*: 2023-04-26
+*Last update*: 2023-04-27
 
 # General Information
 
@@ -117,5 +116,3 @@ That said, I strongly recommend to come to the class whenever you can.
 The slides and scripts won't be comprehensive summaries of the sessions and the hands-on exercises are considered an integral part of this course.
 In the end, sustainable learning takes time and requires to overcome challenge by challenge.
 Take this course as an opportunity to stay persistent and to learn in a structured and collaborative manner.
-
-# References
