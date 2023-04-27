@@ -1,7 +1,9 @@
 ---
 title: "Git, GitHub & R"
 subtitle: "A Students Primer"
-format: html
+format: 
+  html:
+    keep-md: true
 ---
 
 # Prerequisites
@@ -379,7 +381,7 @@ gitcreds::gitcreds_set()
 
 -   If you don't have a PAT stored already, it will prompt you to enter your PAT. Go to the browser, copy the PAT to your clipboard and paste it to the console. Done.
 
-## Creating and cloning a repository
+# Creating and cloning repositories
 
 -   Go to GitHub and create a [new repository](https://github.com/new) (repo).
 
@@ -405,11 +407,10 @@ gitcreds::gitcreds_set()
 
 ![](git_primer_files/R-project-git.PNG){fig-align="center"}
 
-## GitHub Fundamentals
-
-### Commit, Push, Pull
+# Git fundamentals: Commits, Pushing, and Pulling
 
 -   In the following, you want to exercise some commands fundamental to the work with `Git`: `pull`, `push`, `commit`.
+
 
 -   `commit` allows you to save the latest changes in your repository (e.g., if you added some new lines of code)
 
@@ -417,7 +418,7 @@ gitcreds::gitcreds_set()
 
 -   It is a good practice to first pull from the remote repository before you push back to GitHub. To practice, do some changes on GitHub, commit, and pull them to the local repository. Then do some changes in the local repository, commit, and push them. Repeat to gain some practice.
 
-## Branching
+# Branches
 
 -   With `Git`, you can create branches besides the main branch. Such feature branches allow you to let the main branch as it is and test new things on them. Later, you can merge changes on the feature branch into the main branch.
 
@@ -430,7 +431,7 @@ git checkout main
 git merge branch-name
 ```
 
-## Pull requests.
+# Pull requests
 
 \[...\]
 
@@ -497,7 +498,7 @@ git branch -d branch-name #local
 git push origin -d branch-name #remote
 ```
 
-#### Issues
+## Issues
 
 On GitHub, you can also create issues to track bugs, request features, point to other problems or list remaining to dos.
 
@@ -525,5 +526,3 @@ define new variable; closes #5
 -   You can also link pull requests to existing issues. Just add the string `KEYWORD ISSUE` to the commit of the pull request. If the pull request is approved and merged, the issue will get closed.
 
 # Resources
-
-[Happy Git](Happy%20Git%20and%20GitHub%20for%20the%20useR)
