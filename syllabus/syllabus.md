@@ -1,7 +1,7 @@
 Introduction to Bayesian Data Analysis
 ================
 
-*Last update*: 2023-04-27
+*Last update*: 2023-05-02
 
 # General Information
 
@@ -34,10 +34,10 @@ and
 
 <table style="width:99%;">
 <colgroup>
-<col style="width: 8%" />
-<col style="width: 39%" />
+<col style="width: 9%" />
+<col style="width: 38%" />
 <col style="width: 36%" />
-<col style="width: 14%" />
+<col style="width: 13%" />
 </colgroup>
 <tbody>
 <tr class="odd">
@@ -69,6 +69,12 @@ data-cites="bryanExcuseMeYou2018">Bryan (2018)</span></p></li>
 </tr>
 <tr class="even">
 <td>03 May</td>
+<td>Cancelled</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>10 May</td>
 <td>Scientific inference and Bayesian updating</td>
 <td><ul>
 <li>Read <span class="citation"
@@ -79,26 +85,30 @@ data-cites="kruschkeBayesianDataAnalysis2018">Kruschke and Liddell
 </ul></td>
 <td>Assignment 1</td>
 </tr>
-<tr class="odd">
-<td>10 May</td>
-<td>Workflow for Bayesian parameter estimation</td>
-<td></td>
-<td></td>
-</tr>
 <tr class="even">
 <td>17 May</td>
-<td>Linear models</td>
+<td>Workflow for Bayesian parameter estimation</td>
+<td><ul>
+<li>Read <span class="citation"
+data-cites="gabryVisualizationBayesianWorkflow2019">Gabry et al.
+(2019)</span></li>
+</ul></td>
 <td></td>
-<td>Assignment 2</td>
 </tr>
 <tr class="odd">
 <td>24 May</td>
 <td>Linear models</td>
 <td></td>
-<td></td>
+<td>Assignment 2</td>
 </tr>
 <tr class="even">
 <td>31 May</td>
+<td>Linear models</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>07 June</td>
 <td>Markov Chain Monte Carlo Methods</td>
 <td><ul>
 <li>Read <span class="citation"
@@ -107,38 +117,32 @@ Cassey, and Brown (2018)</span></li>
 </ul></td>
 <td>Assignment 3</td>
 </tr>
-<tr class="odd">
-<td>07 June</td>
-<td>Multilevel modeling</td>
-<td></td>
-<td></td>
-</tr>
 <tr class="even">
 <td>14 June</td>
 <td>Multilevel modeling</td>
 <td></td>
-<td>Assignment 4</td>
+<td></td>
 </tr>
 <tr class="odd">
 <td>21 June</td>
+<td>Multilevel modeling</td>
+<td></td>
+<td>Assignment 4</td>
+</tr>
+<tr class="even">
+<td>28 June</td>
+<td>No session</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>05 July</td>
 <td>Model comparison</td>
 <td><ul>
 <li>Read <span class="citation"
 data-cites="navarroDevilDeepBlue2019">Navarro (2019)</span></li>
 </ul></td>
 <td>Assignment 5</td>
-</tr>
-<tr class="even">
-<td>28 June</td>
-<td>Probably no session</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>05 July</td>
-<td>tba</td>
-<td></td>
-<td></td>
 </tr>
 <tr class="even">
 <td>12 July</td>
@@ -233,6 +237,15 @@ structured and collaborative manner.
 Bryan, Jennifer. 2018. “Excuse Me, Do You Have a Moment to Talk about
 Version Control?” *The American Statistician* 72 (1): 20–27.
 <https://doi.org/10.1080/00031305.2017.1399928>.
+
+</div>
+
+<div id="ref-gabryVisualizationBayesianWorkflow2019" class="csl-entry">
+
+Gabry, Jonah, Daniel Simpson, Aki Vehtari, Michael Betancourt, and
+Andrew Gelman. 2019. “Visualization in Bayesian Workflow.” *Journal of
+the Royal Statistical Society Series A: Statistics in Society* 182 (2):
+389–402. <https://doi.org/10.1111/rssa.12378>.
 
 </div>
 
