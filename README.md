@@ -15,9 +15,9 @@ More information can be found in the
 
 <table style="width:99%;">
 <colgroup>
-<col style="width: 7%" />
-<col style="width: 32%" />
-<col style="width: 59%" />
+<col style="width: 6%" />
+<col style="width: 31%" />
+<col style="width: 61%" />
 </colgroup>
 <tbody>
 <tr class="odd">
@@ -45,7 +45,8 @@ href="https://www.moodle.tum.de/pluginfile.php/4527976/mod_resource/content/1/se
 <tr class="odd">
 <td>10 May</td>
 <td>Scientific inference and Bayesian updating</td>
-<td></td>
+<td><a
+href="https://www.moodle.tum.de/pluginfile.php/4546200/mod_resource/content/1/session_3_bayesian_updating.pdf">Slides</a></td>
 </tr>
 <tr class="even">
 <td>17 May</td>
