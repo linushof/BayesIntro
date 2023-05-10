@@ -10,24 +10,13 @@ sim_rides <- function(N, p){
 }
 
 
-## Exercise
-## test the generative model via simulation
-## change values of N and p and check (relative) number of delays
-## check under extreme settings (e.g., p = 0, p = 1, N = 10000)
-
-N <- 10
-p <- .5
-obs <- sim_rides(N, p = p)
-sum(obs=="L") # absolute number of delays
-sum(obs=="L")/N # relative number
-
 
 # R 3.2.2 Statistical model (estimator)
 compute_post <- function(obs, poss){ 
   
   L <- sum(obs=="L") # data
   O <- sum(obs=="O")
-  ways <- sapply( poss , function(q) (q*4)^L * ((1-q)*4)^O ) # number of ways the data could've been produced by poss
+  ways <- sapply( poss , function(q) (q*4)^L * ((1-q)*4)^O ) 
   post <- ways/sum(ways) # relative number
   data.frame(poss, ways, post=round(post,3)) # summary
   
@@ -36,21 +25,12 @@ data <- c("L", "O", "L")
 compute_post(obs = data, poss=seq(0,1,.25))
 
 
-### Exercise
-## test estimator
-data <- sim_rides(N = 10, p = .5)
-sum(data=="L") # absolute number of delays
-compute_post(obs = data, poss=seq(0,1,.25))
-
-
 # R 3.2.3 Integrate prior knowledge
-
-ways <- c(0, 3,16,27,0)
-round(ways/sum(ways), 2)
-
-old <- c(0, .15, .4, .45, 0)
-new <- c(0, .1, .2, .3, .4)
-round(old*new/sum(old*new),2)
+data <- c("L", "O", "L")
+prior <- compute_post(obs = data, poss=seq(0,1,.25))
+new <- compute_post(obs = "O", poss=seq(0,1,.25))
+prior$ways * new$ways # absolute ways
+round((prior$post * new$post)/sum(prior$post * new$post), 2) # relative 
 
 
 # R 3.2.4 Bayesian updating with grid approximation
@@ -58,7 +38,6 @@ round(old*new/sum(old*new),2)
 # define prior 
 poss <- tibble(theta = seq(0,1,.05), 
                prior = rep(1/length(theta),length(theta)))
-
 
 
 # statistical model
@@ -81,7 +60,7 @@ estimation
 estimation %>% 
   pivot_longer(cols = c(prior,post), names_to = "type", values_to = "probability") %>% 
   ggplot(aes(x=theta, y = probability, color = type, linetype = type)) + 
-  geom_line(size = 1, alpha = .5) + 
+  geom_line(size = 1) + 
   theme_minimal() + 
   labs(x = "Theta", 
        y = "Probability", 
@@ -94,7 +73,7 @@ estimation %>%
 
 compute_post <- function(obs, poss){ 
   L <- sum(obs=="L")
-  likelihood <- dbinom(L, 1, prob = poss$theta) # likelihood = probability of the data given the model
+  likelihood <- dbinom(L, 1, prob = poss$theta)
   posterior <- likelihood*poss$prior
   posterior_norm <- posterior/sum(posterior)
   tibble(poss,lh=round(likelihood, 3), post=round(posterior_norm,3))
