@@ -2,7 +2,7 @@
 # Introduction to Bayesian Data Analysis
 
 <img src="code/title/title_shaq.png" data-fig-align="left"
-width="537" />
+width="597" />
 
 ### **Welcome!**
 
