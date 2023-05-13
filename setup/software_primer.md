@@ -43,7 +43,7 @@ need to learn and practice is how write some `R` code.
 command-line interpreter. To access the interpreter and write `R` code,
 we take a brief look into the *R console*, `R`’s command-line interface.
 
-<img src="screenshots/console.PNG" data-fig-align="center" />
+<img src="screenshots/console.png" data-fig-align="center" />
 
 In the console you can write code (e.g., `1+1`) and execute it by
 pressing `Enter`. Below the code, `R` returns the *output* (i.e., `2`).
@@ -69,7 +69,7 @@ but rely on *RStudio*. RStudio is an *integrated development
 environment* (IDE) that provides a powerful and user-friendly interface
 for working with `R`.
 
-<img src="screenshots/RStudio.PNG" data-fig-align="center" />
+<img src="screenshots/RStudio.png" data-fig-align="center" />
 
 RStudio is designed to ease the use of `R` and improve your efficiency
 by offering a range of tools and features that streamline data
@@ -734,7 +734,7 @@ useR](https://happygitwithr.com/index.html)
     system for a *Shell* or *Terminal*, open it and type
     `git --version`:
 
-<img src="screenshots/shell.PNG" data-fig-align="center" />
+<img src="screenshots/shell.png" data-fig-align="center" />
 
 2.  If the command returns something along the lines `git version ...`,
     you’re good to continue. If the command returns something along the
@@ -782,7 +782,7 @@ usethis::create_github_token()
 4.  In the browser that was opened, give the PAT a clear name (e.g.,
     my-private-machine), using the *Note* field.
 
-<img src="screenshots/PAT-name.PNG" data-fig-align="center" />
+<img src="screenshots/PAT-name.png" data-fig-align="center" />
 
 - At the bottom of the page, click *Generate token*. A new window with a
   newly generated PAT will occur. Don’t close the window!
@@ -807,7 +807,7 @@ gitcreds::gitcreds_set()
 
 2.  Give the repo a clear name:
 
-<img src="screenshots/repo-name.PNG" data-fig-align="center" />
+<img src="screenshots/repo-name.png" data-fig-align="center" />
 
 3.  Click *Public*.
 
@@ -818,7 +818,7 @@ gitcreds::gitcreds_set()
 6.  Clone the *remote* repo to your computer via the green “\<\> Code”
     button. Click *HTTPS* and copy the URL address to your clipboard.
 
-<img src="screenshots/repo-url.PNG" data-fig-align="center" />
+<img src="screenshots/repo-url.png" data-fig-align="center" />
 
 7.  Go to *RStudio* and create a new project: *File* \> *New Project …*
     \> *Version Control* \> *Git*.
@@ -828,7 +828,7 @@ gitcreds::gitcreds_set()
     to store the project. Use a folder that is not synchronized with a
     Cloud or Drive or the like.
 
-<img src="screenshots/R-project-git.PNG" data-fig-align="center" />
+<img src="screenshots/R-project-git.png" data-fig-align="center" />
 
 9.  Click “Create project”.
 
@@ -863,26 +863,26 @@ make commits remotely on `Github` and pull them to your machine.
 
 1.  Take a look at your *GitHub* repo.
 
-<img src="screenshots/github-readme.PNG" data-fig-align="center" />
+<img src="screenshots/github-readme.png" data-fig-align="center" />
 
 2.  Take a look in *RStudio* and visit the *File* and *Git* pane.
 
-<img src="screenshots/RStudio-project.PNG" data-fig-align="center" />
+<img src="screenshots/RStudio-project.png" data-fig-align="center" />
 
 3.  In *RStudio*, ppen the `README.md` file, write a new line, save it,
     look at the changes in the Git pane.
 
-<img src="screenshots/readme-new-line.PNG" data-fig-align="center" />
+<img src="screenshots/readme-new-line.png" data-fig-align="center" />
 
 4.  Commit the change by *staging* the file and clicking the *Commit*
     button.
 
-<img src="screenshots/git-staging.PNG" data-fig-align="center" />
+<img src="screenshots/git-staging.png" data-fig-align="center" />
 
 5.  Review the changes and write a short but meaningful *commit
     message*.
 
-<img src="screenshots/git-commit-message.PNG" data-fig-align="center" />
+<img src="screenshots/git-commit-message.png" data-fig-align="center" />
 
 6.  Click *Commit* and hang on.
 
@@ -916,7 +916,7 @@ is, *Git* should [ignore](https://git-scm.com/docs/gitignore) them.
 
 ## Branching
 
-- With `Git`, you can create fature branches besides the main branch.
+- With `Git`, you can create feature branches besides the main branch.
   Such feature branches allow you to let the main branch as it is and
   test new things on them. Later, you can merge changes on the feature
   branch into the main branch.
@@ -962,7 +962,7 @@ To create a pull request, proceed as follows:
 1.  Go to the original *GitHub* repo (source repo) you want to commit
     changes to and create a fork to your own *GitHub* account.
 
-<img src="screenshots/git-fork.PNG" data-fig-align="center" />
+<img src="screenshots/git-fork.png" data-fig-align="center" />
 
 2.  Clone the fork to your local machine by creating a new R project
     with version control.
@@ -983,7 +983,7 @@ That is, you want to be able to pull directly from the original repo.
     below. As a convention the source repository is called `upstream`.
 
 ``` bash
-git remote upstream url-original-repository
+git remote add upstream url-original-repository
 ```
 
 4.  Check the remote repositories again. Now you also want to see the
@@ -1024,8 +1024,8 @@ recent changes and get your fork in sync, you have 2 options.
 1)  Sync the remote fork in *GitHub* with the original repo, then pull
     from remote fork into the local fork.
 
-2)  Pull from the original repo into your local fork, then push to the
-    remote fork.
+2)  Pull from the original repo into your local fork by
+    `git pull upstream main`, then push to the remote fork.
 
 You are now set to make another pull request. For the new pull request,
 you should create a new branch and not take the old one. Old branches
