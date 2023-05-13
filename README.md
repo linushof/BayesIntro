@@ -1,7 +1,8 @@
 
 # Introduction to Bayesian Data Analysis
 
-<img src="code/title/title_shaq.png" data-fig-align="center" />
+<img src="code/title/title_shaq.png" data-fig-align="left"
+width="504" />
 
 ## **Welcome!**
 

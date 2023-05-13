@@ -4,7 +4,7 @@ format: md
 
 # Introduction to Bayesian Data Analysis
 
-![](code/title/title_shaq.png){fig-align="center"}
+![](code/title/title_shaq.png){fig-align="left" width="504"}
 
 ## **Welcome!**
 
