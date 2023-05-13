@@ -1,9 +1,8 @@
 # load packages 
-pacman::p_load(tidyverse, rethinking, ggpubr)
+pacman::p_load(tidyverse, rethinking, ggpubr, patchwork)
 
 # Load Shaquille O’Neal game data
 shaq <- read_csv("data/shaq.csv")
-
 
 # plot distribution of points per game 
 maxPTS <- max(shaq$PTS)
@@ -45,8 +44,9 @@ p2 <- shaq10 %>%
   ggplot(aes(x=FGA, y=PTS)) + 
   geom_jitter(color = "#552583", fill = "#552583",  size = 3) + 
   geom_abline(data = post_shaq10, aes(intercept = a, slope = b), color = "#FDB927", linewidth = .1) + # plotting posterior lines 
-  theme_minimal()
-
+  ggtitle(paste("N =", N)) + 
+  theme_minimal() +
+  theme(plot.title = element_text(vjust = -11, hjust = 0.15)) 
 
 # fit entire model
 N <- 82
@@ -68,10 +68,13 @@ p3 <- shaq82 %>%
   ggplot(aes(x=FGA, y=PTS)) + 
   geom_jitter(color = "#552583", fill = "#552583", alpha = .5, size = 3) + 
   geom_abline(data = post_shaq82, aes(intercept = a, slope = b), color = "#FDB927", linewidth = .1) + # plotting posterior lines 
-  theme_minimal()
+  ggtitle(paste("N =", N)) + 
+  theme_minimal() + 
+  theme(plot.title = element_text(vjust = -11, hjust = 0.15)) 
 
 
 ## whole model
+N <- nrow(shaq)
 m3_shaq <- quap(
   alist(
     PTS ~ dnorm(mu, sd), # likelihood
@@ -89,8 +92,20 @@ p4 <- shaq %>%
   ggplot(aes(x=FGA, y=PTS)) + 
   geom_jitter(color = "#552583", fill = "#552583", alpha = .5, size = 3) + 
   geom_abline(data = post_shaq, aes(intercept = a, slope = b), color = "#FDB927", size = .1) + # plotting posterior lines 
-  theme_minimal()
+  ggtitle(paste("N =", N)) + 
+  theme_minimal() + 
+  theme(plot.title = element_text(vjust = -11, hjust = 0.15)) 
 
-ggarrange(p1, p2, p3, p4)
+# combine plots
+
+theme_border <- theme_gray() + 
+  theme(plot.background = element_rect(fill = NA, colour = '#552583', size = 2))
+p1 + p2 + p3 + p4 + 
+  plot_layout(ncol = 2) + 
+  plot_annotation(title = 'Scoring Record of Shaquille O’Neal',
+                  tag_levels = "A",
+                  caption = "Plots B-D: Samples from the posterior of the model PTS ~ FGA for an increasing number of NBA games.",
+                  theme = theme_border) 
+
 ggsave(file = "plots/title_shaq.png", width = 10, height = 7)
 ggsave(file = "code/title/title_shaq.png", width = 10, height = 7)

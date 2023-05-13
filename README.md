@@ -1,12 +1,14 @@
 
 # Introduction to Bayesian Data Analysis
 
-Welcome!
+<img src="code/title/title_shaq.png" data-fig-align="center" />
+
+## **Welcome!**
 
 This is the accompanying GitHub repository for the course “Introduction
 to Bayesian Data Analysis” at the TUM School of Management.
 
-# Schedule
+## Schedule
 
 *Check regularly for updates!*
 
