@@ -1,5 +1,5 @@
 # install and load packages
-pacman::p_load(tidyverse)
+pacman::p_load(tidyverse, HDInterval, rethinking)
 
 
 # R 3.2 Probability of delay
@@ -122,3 +122,86 @@ plot + geom_text(
   hjust   = -1,
   vjust   = -11
 )
+
+
+
+# Posterior intervals
+data <- results[[4]] 
+post_samples <- sample(poss$theta, prob = data$post, size = 1e4, replace = TRUE) 
+post_samples
+
+# posterior 
+p <- data %>%
+  ggplot(aes(x=theta, y = post)) + 
+  geom_line(linetype = "dashed", color = "#F8766D", size = 1) + 
+  theme_minimal() + 
+  labs(x = "Theta", 
+       y = "Probability")
+p
+
+# area under the curve
+p + geom_area(fill = "#F8766D", alpha = 0.4)
+
+# percentile and density intervals
+
+library(rethinking)
+
+# percentile interval (middle 50%)
+PI_lower <- PI(post_samples, p = .5)[1]
+PI_upper <- PI(post_samples, p = .5)[2]
+
+data %>%
+  ggplot(aes(x=theta, y = post)) + 
+  geom_line(linetype = "dashed", color = "#F8766D", size = 1) + 
+  geom_ribbon(data = subset(data, theta >= PI_lower & theta <= PI_upper),
+              aes(ymin = 0, ymax = post),
+              fill = "#F8766D",
+              alpha = 0.4) +
+  theme_minimal() + 
+  labs(x = "Theta", 
+       y = "Probability")
+
+PI_lower <- PI(post_samples, p = .8)[1]
+PI_upper <- PI(post_samples, p = .8)[2]
+
+data %>%
+  ggplot(aes(x=theta, y = post)) + 
+  geom_line(linetype = "dashed", color = "#F8766D", size = 1) + 
+  geom_ribbon(data = subset(data, theta >= PI_lower & theta <= PI_upper),
+              aes(ymin = 0, ymax = post),
+              fill = "#F8766D",
+              alpha = 0.4) +
+  theme_minimal() + 
+  labs(x = "Theta", 
+       y = "Probability")
+
+# highest posterior density interval | 50 % 
+HPDI_lower <- HPDI(post_samples, p = .50)[1]
+HPDI_upper <- HPDI(post_samples, p = .50)[2]
+
+data %>%
+  ggplot(aes(x=theta, y = post)) + 
+  geom_line(linetype = "dashed", color = "#F8766D", size = 1) + 
+  geom_ribbon(data = subset(data, theta >= HPDI_lower & theta <= HPDI_upper),
+              aes(ymin = 0, ymax = post),
+              fill = "#F8766D",
+              alpha = 0.4) +
+  theme_minimal() + 
+  labs(x = "Theta", 
+       y = "Probability")
+
+
+# highest posterior density interval | 50 % 
+HPDI_lower <- HPDI(post_samples, p = .80)[1]
+HPDI_upper <- HPDI(post_samples, p = .80)[2]
+
+data %>%
+  ggplot(aes(x=theta, y = post)) + 
+  geom_line(linetype = "dashed", color = "#F8766D", size = 1) + 
+  geom_ribbon(data = subset(data, theta >= HPDI_lower & theta <= HPDI_upper),
+              aes(ymin = 0, ymax = post),
+              fill = "#F8766D",
+              alpha = 0.4) +
+  theme_minimal() + 
+  labs(x = "Theta", 
+       y = "Probability")
