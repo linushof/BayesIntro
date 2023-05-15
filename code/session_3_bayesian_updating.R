@@ -9,7 +9,8 @@ sim_rides <- function(N, p){
   sample(c("L", "O"), size=N, replace=TRUE, prob=c(p, 1-p)) 
 }
 
-
+obs <- sim_rides(1000, 0)
+sum(obs == "L")
 
 # R 3.2.2 Statistical model (estimator)
 compute_post <- function(obs, poss){ 
@@ -24,6 +25,9 @@ compute_post <- function(obs, poss){
 data <- c("L", "O", "L")
 compute_post(obs = data, poss=seq(0,1,.25))
 
+data <- sim_rides(100, .1)
+sum(data=="L")
+compute_post(obs = data, poss=seq(0,1,.25))
 
 # R 3.2.3 Integrate prior knowledge
 data <- c("L", "O", "L")
@@ -51,14 +55,15 @@ compute_post <- function(obs, poss){
 
 # estimation 
 N <- 9
+set.seed(1671)
 obs <- sim_rides(N, p = .5)
 estimation <- compute_post(obs, poss)
-
+estimation
 
 # Check results
 estimation
 estimation %>% 
-  pivot_longer(cols = c(prior,post), names_to = "type", values_to = "probability") %>% 
+  pivot_longer(cols = c(prior,post), names_to = "type", values_to = "probability") %>% # transform tata
   ggplot(aes(x=theta, y = probability, color = type, linetype = type)) + 
   geom_line(size = 1) + 
   theme_minimal() + 
@@ -66,7 +71,6 @@ estimation %>%
        y = "Probability", 
        color = "Probability",
        linetype = "Probability")
-
 
 
 # Step-wise updating and the value of more data 
@@ -79,6 +83,7 @@ compute_post <- function(obs, poss){
   tibble(poss,lh=round(likelihood, 3), post=round(posterior_norm,3))
 }
 
+set.seed(1671)
 N <- 9
 p <- .5
 samples <- vector("numeric", N)
@@ -96,7 +101,6 @@ for (i in seq_along(1:N)){
   poss$prior <- estimation$post
   
 }
-
 
 # examine updating process
 label <- tibble(N = 1:N,  samples)
