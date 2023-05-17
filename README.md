@@ -54,7 +54,8 @@ href="https://www.moodle.tum.de/pluginfile.php/4546200/mod_resource/content/1/se
 <tr class="even">
 <td>17 May</td>
 <td>Workflow for Bayesian parameter estimation</td>
-<td></td>
+<td><a
+href="https://www.moodle.tum.de/pluginfile.php/4554319/mod_resource/content/1/session_4_workflow.pdf">Slides</a></td>
 </tr>
 <tr class="odd">
 <td>24 May</td>

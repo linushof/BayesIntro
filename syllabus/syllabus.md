@@ -1,7 +1,7 @@
 Introduction to Bayesian Data Analysis
 ================
 
-*Last update*: 2023-05-02
+*Last update*: 2023-05-17
 
 # General Information
 
@@ -34,10 +34,10 @@ and
 
 <table style="width:99%;">
 <colgroup>
-<col style="width: 9%" />
-<col style="width: 38%" />
-<col style="width: 36%" />
-<col style="width: 13%" />
+<col style="width: 7%" />
+<col style="width: 35%" />
+<col style="width: 42%" />
+<col style="width: 12%" />
 </colgroup>
 <tbody>
 <tr class="odd">
@@ -98,7 +98,16 @@ data-cites="gabryVisualizationBayesianWorkflow2019">Gabry et al.
 <tr class="odd">
 <td>24 May</td>
 <td>Linear models</td>
-<td></td>
+<td><ul>
+<li><p>Install <code>RStan</code> and the <code>rethinking</code>
+package</p>
+<p><a
+href="https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started"
+class="uri">https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started</a></p>
+<p><a href="https://github.com/rmcelreath/rethinking"
+class="uri">https://github.com/rmcelreath/rethinking</a></p></li>
+<li><p>Install <code>JASP</code></p></li>
+</ul></td>
 <td>Assignment 2</td>
 </tr>
 <tr class="even">
