@@ -104,8 +104,10 @@ set.seed(312)
 prior_smp <- data.frame(smp = rbeta(no, a, b))
 
 ggplot(summary) +
-  geom_line(size = 1, linetype = "dashed", aes(x = theta, y = d)) +
-  geom_density(data = prior_smp, aes(x = smp), color = "#F8766D", size = 1) + 
+  geom_line(size = 1, linetype = "dashed", 
+            aes(x = theta, y = d)) +
+  geom_density(data = prior_smp, aes(x = smp), 
+               color = "#F8766D", size = 1) + 
   labs(x = expression(theta), 
        y = "Density") +
   theme_minimal()
@@ -121,9 +123,10 @@ for (i in seq_along(prior_smp$smp)){
 }
 
 preds %>% ggplot(aes(x=L)) + 
-  geom_histogram(fill = "#F8766D", color = "#F8766D", alpha = .5, bins = 100) + 
+  geom_histogram(fill = "#F8766D", color = "#F8766D", 
+                 alpha = .5, bins = 100) + 
   scale_x_continuous(limits = c(0,N), breaks = seq(0,N,100)) + 
-  labs(x = "Number of Simulated L out of 100",
+  labs(x = "Number of Simulated L out of 1000",
        y = "Simulated Frequency") + 
   theme_minimal()
 
@@ -134,7 +137,6 @@ preds %>% ggplot(aes(x=L)) +
 summary$prior <- (summary$d)/sum(summary$d)
 upper <- seq((1/1e3), 1, length.out = 1e3)
 lower <- seq(0, (999/1e3), length.out = 1e3)
-
 summary$prior <- pbeta(upper, 5, 2) - pbeta(lower,5,2)
 
 ggplot(summary, aes(x = theta, y = prior)) +
@@ -153,6 +155,7 @@ set.seed(12385)
 obs <- sim_rides(N, p = .5)
 
 # grid approximation of posterior
+
 compute_post <- function(obs, summary){ 
   L <- sum(obs=="L")
   likelihood <- dbinom(L, N, prob = summary$theta)
@@ -164,7 +167,9 @@ estimation <- compute_post(obs, summary)
 
 # Check results
 estimation %>% 
-  pivot_longer(cols = c(prior,post), names_to = "type", values_to = "probability") %>% # transform tata
+  pivot_longer(cols = c(prior,post), 
+               names_to = "type", 
+               values_to = "probability") %>% 
   ggplot(aes(x=theta, y = probability, color = type, linetype = type)) + 
   geom_line(size = 1) + 
   theme_minimal() + 
@@ -204,6 +209,6 @@ for (i in seq_along(prior_smp$smp)){
 post_preds %>% ggplot(aes(x=L)) + 
   geom_histogram(fill = "#F8766D", color = "#F8766D", alpha = .5, bins = 100) + 
   scale_x_continuous(limits = c(0,N), breaks = seq(0,N,100)) + 
-  labs(x = "Number of Simulated L",
+  labs(x = "Number of Simulated L out of 1000",
        y = "Simulated Frequency") + 
   theme_minimal()

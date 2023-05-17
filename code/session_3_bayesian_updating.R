@@ -1,5 +1,5 @@
 # install and load packages
-pacman::p_load(tidyverse, HDInterval, rethinking)
+pacman::p_load(tidyverse, HDInterval)
 
 
 # R 3.2 Probability of delay
@@ -144,6 +144,7 @@ p + geom_area(fill = "#F8766D", alpha = 0.4)
 
 # percentile and density intervals
 
+# install.packages("rethinking")
 library(rethinking)
 
 # percentile interval (middle 50%)
