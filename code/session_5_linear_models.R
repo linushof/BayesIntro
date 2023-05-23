@@ -10,57 +10,93 @@ hist(rbinom(1000, 1000, .5))
 hist(replicate(1000, sum(rnorm(1000, 20,5))))
 hist(replicate(1000, sum(rbeta(100, 2,2))))
 
-# Gaussian model ----------------------------------------------------------
+# Gaussian model of Shaq's NBA points ----------------------------------------------------------
 
+# Generative model
 
-# shaq's scoring record 
+## Static model: Gaussian variation in points resulting from fluctuations over career history
+N_games <- 1e3
+sim_pts_static <- function(N_games, mu, sd){
 
-## load data
-shaq <- read_csv("data/shaq.csv")
-names(shaq)
-shaq %>% ggplot(aes(x=PTS)) + 
-  facet_wrap(~Season) + 
-  geom_histogram(fill = "#552583", alpha = .5, color = "#552583", bins = 20) + 
+  round(rnorm(N, mu, sd), 0)
+  
+}
+
+pts_static <- tibble(pts = sim_pts_static(N_games, 20, 5))
+ggplot(pts_static, aes(x = pts)) + 
+  geom_histogram(fill = "#552583", alpha = .5, color = "#552583", bins = 30) + 
+  labs(x = "PTS", 
+       y = "Frequency") + 
   theme_minimal()
 
 
-
-## generative model
-
-## Gaussian variation in points from career history
-PTS_static <- tibble(PTS = round(rnorm(1000, 25, 10), 0))
-data %>% ggplot(aes(x = PTS)) + 
-  geom_histogram(fill = "#552583", alpha = .5, color = "#552583", bins = 40) + 
-  scale_x_continuous(limits = c(0, 70), breaks = seq(0,70,10))
-
-## Dynamic: 
-
-shot_perc <- shaq %>% 
-  select(FGA, `3PA`, FTA) %>% 
-  mutate(shots = FGA + `3PA` + FTA,
-         FGA_rel = FGA/shots, 
-         PT3_rel = `3PA`/shots, 
-         FTA_rel = FTA/shots) %>% 
-  summarise(FGA_mean = mean(FGA_rel, na.rm = TRUE), 
-            PT3_mean = mean(PT3_rel, na.rm = TRUE), 
-            FTA_mean = mean(FTA_rel, na.rm = TRUE))
-
-
-PTS_dynamic <- function(N_games, N_shots, p1, p2, p3){ 
+## Dynamic model: PTS as function of attempted field goals, free throws, and 3-pointer + hit rates; Gaussian variations resulting from summed fluctuations
+sim_pts_dynamic <- function(N_games, N_shots, pFGA, pFTA, p3PA, hFG, hFT, h3P){ 
+  
+  # FTA
+  FT <- rbinom(N_games, round(pFTA * N_shots, 0), prob = hFT)
   
   # 2PA  
-  p2 <- rbinom(N_games, round(.65 * N_shots, 0), prob = p2)*2
+  FG <- rbinom(N_games, round(pFGA * N_shots, 0), prob = hFG)*2
   
   # 3PA  
-  p3 <- rbinom(N_games, round(0 * N_shots, 0), prob = p3)*3
-
-  # FTA
-  p1 <- rbinom(N_games, round(.35 * N_shots, 0), prob = p1)
+  TP <- rbinom(N_games, round(p3PA * N_shots, 0), prob = h3P)*3
   
-  tibble(PTS = p1 +  p2 +  p3)
+  FT + FG + TP
   
-}      
+}     
 
+pts_dynamic <- tibble(pts = sim_pts_dynamic(N_games = 1e3, N_shots = 30, pFGA = .65, pFTA = .35, p3PA = 0, hFG = .7, hFT = .2, h3P = .2))
+ggplot(pts_dynamic, aes(x = pts)) + 
+  geom_histogram(fill = "#552583", alpha = .5, color = "#552583", bins = 20) + 
+  labs(x = "PTS", 
+       y = "Frequency") + 
+  theme_minimal()
+
+# Statistical model: y ~ Normal(mu, sigma) 
+
+##  Priors on mu and sigma
+
+### mu
+range <- seq(-10, 60, length.out = 100) # range
+d <- dnorm(range, mean = 20, sd = 8) # densities
+mu <- data.frame(range, d)
+ggplot(mu, aes(x = range, y = d)) +
+  geom_line(size = 1, color = "#552583") +
+  scale_x_continuous(limits = c(-10,60), breaks = seq(-10,60, 5)) + 
+  labs(x = expression(mu), 
+       y = "Density") +
+  theme_minimal()
+curve( dnorm( x , 20 , 5) , from=- 10, to=50 )
+
+### sigma
+range <- seq(-1, 11, length.out = 100) # sample space
+d <- dunif(range, min = 0, max = 10) # densities
+sigma <- data.frame(range, d)
+ggplot(sigma, aes(x = range, y = d)) +
+  geom_line(size = 1, color = "#552583") +
+  scale_x_continuous(limits = c(-1,11), breaks = seq(-1,11, 1)) + 
+  labs(x = expression(sigma), 
+       y = "Density") +
+  theme_minimal()
+curve( dunif( x , 0 , 10 ) , from=-1 , to=11 )
+
+### prior predictive check
+mu_samples <- rnorm(1e4, 20, 8)
+sigma_samples <- runif(1e4, 0, 10)
+
+prior_pred <- tibble(pts = rnorm(1e4, mu_samples, sd_samples))
+prior_pred %>% ggplot(aes(x = pts)) + 
+  geom_histogram(fill = "#552583", alpha = .5, color = "#552583", bins = 20) + 
+  labs(x = "PTS", 
+       y = "Frequency") + 
+  theme_minimal()
+
+# Test model 
+
+## Simulate data
+N_games <- 1e3
+pts_static <- tibble(pts = sim_pts_static(N_games, 30, 10))
 
 PTS_sim <- PTS_dynamic(N_games = 1e4, N_shots = 30, p1 = .5, p2 = .6, p3 = .1)
 
@@ -71,124 +107,176 @@ PTS_sim <- PTS_dynamic(N_games = 1e4, N_shots = 30, p1 = .5, p2 = .6, p3 = .1)
 (.65*25*.6*2) + (.35*25*.5) # 28.65
 ( (.65*30*.6*2) * (1-.6) ) + ( (.35*30*.5) * (1-.5) ) # 11.985
 
-PTS_sim %>% ggplot(aes(x = PTS)) + 
-  geom_histogram(fill = "#552583", alpha = .5, color = "#552583", bins = 40) + 
-  scale_x_continuous(limits = c(0, 70), breaks = seq(0,70,10))
-PTS_sim
-(.65*40*.6*2) + (.35*40*.5)
+## Fit model on simulated data
+m_sim <- quap(
+  alist(pts ~ dnorm( mu , sigma ),
+        mu ~ dnorm( 20 , 8 ) ,
+        sigma ~ dunif( 0 , 10 )) ,
+  data = pts_static)
+precis(m_sim)
 
-## statistical model 
+# Use model to analyze data
 
-round(0.35*23 , 0)
-round(0.65*23 , 0)
+## load data
+shaq <- read_csv("data/shaq.csv")
 
-### prior predictive check 
+## fit model
+m_shaq <- quap(
+  alist(PTS ~ dnorm( mu , sigma ),
+        mu ~ dnorm( 20 , 8 ) ,
+        sigma ~ dunif( 0 , 10 )) ,
+  data = shaq)
+precis(m_shaq)
 
-mu_samples <- rnorm(1e4, 25, 5)
-sd_samples <- runif(1e4, 0, 10)
-
-
-data <- tibble(PTS = rnorm(1e4, mu_samples, sd_samples))
-data %>% ggplot(aes(x = PTS)) + 
-  geom_histogram(fill = "#552583", alpha = .5, color = "#552583", bins = 40) + 
-  scale_x_continuous(limits = c(0, 70), breaks = seq(0,70,10))
-
-
-## test the model 
-
-#### grid_approximation 
-  
-mu.list <- seq( from=150, to=160 , length.out=100 ) 
-sigma.list <- seq( from=7 , to=9 , length.out=100 )
-post <- expand.grid( mu=mu.list , sigma=sigma.list )
-post$LL <- sapply( 1:nrow(post) , function(i) sum(
-  dnorm( d2$height , post$mu[i] , post$sigma[i] , log=TRUE ) ) )
-post$prod <- post$LL + dnorm( post$mu , 178 , 20 , TRUE ) +
-  dunif( post$sigma , 0 , 50 , TRUE )
-post$prob <- exp( post$prod - max(post$prod) )
+shaq %>% ggplot(aes(x=PTS)) + 
+  geom_histogram(fill = "#552583", alpha = .5, color = "#552583", bins = 30) + 
+  theme_minimal()
 
 
-# quadratic approximation 
+# Evaluate the model 
 
-gmodel <- alist(PTS ~ dnorm( mu , sigma ) ,
-                mu ~ dnorm( 25 , 5 ) ,
-                sigma ~ dunif( 0 , 10 )
-)
-model.fit.sim <- quap( gmodel , data=PTS_sim )
-precis(model.fit)
-model.fit <- quap( gmodel , data=shaq )
-precis(model.fit)
+m_shaq_smp <- extract.samples(m_shaq, n = 1e3)
 
+## Posterior intervals 
+PI(m_shaq_smp$mu)
+PI(m_shaq_smp$sigma)
+HPDI(m_shaq_smp$mu)
+HPDI(m_shaq_smp$sigma)
 
+## Posterior predictive checks 
 
-# posterior predictive check 
+## densities
+range <- seq(-10, 60, length.out = 100) # range
+smp_dens <- m_shaq_smp %>% 
+  mutate(smp = row_number()) %>% 
+  expand_grid(range) %>% 
+  mutate(d = dnorm(range, mu, sigma))
 
-vcov(model.fit)
-post <- extract.samples(model.fit, 1e4)
-precis(post)
-plot(post)
+ggplot(smp_dens, aes(x = range, y = d, group = smp)) +
+  geom_line(color = "#552583", size = .5, alpha = .1) +
+  scale_x_continuous(limits = c(-10,60), breaks = seq(-10,60, 5)) + 
+  labs(x = expression(mu), 
+       y = "Density") +
+  theme_minimal()
 
-data <- tibble(PTS = rnorm(1e4, post$mu, post$sigma))
-data %>% ggplot(aes(x = PTS)) + 
-  geom_histogram(fill = "#552583", alpha = .5, color = "#552583", bins = 40) + 
-  scale_x_continuous(limits = c(0, 70), breaks = seq(0,70,10))
+## posterior predictions
+pts_sim_post <- tibble(pts = round(rnorm(nrow(m_shaq_smp), mean = m_shaq_smp$mu, sd = m_shaq_smp$sigma), 0))
+ggplot(pts_sim_post, aes(x = pts)) + 
+  geom_histogram(data = shaq, aes(x = PTS), alpha = .5, bins = 40) + 
+  geom_histogram(fill = "#552583", alpha = .5, color = "#552583", bins = 40) +
+  labs(x = "PTS", 
+       y = "Frequency") +
+  theme_minimal()
 
 
 
 # Linear model ------------------------------------------------------------
 
+# Generative model
 
-# linear regression 
-
-# generative model 
-
-sim_pts <- function(FGA, b, sd){ 
+## Static: Changes in FGA result in proportional changes in PTS
+sim_pts_static <- function(FGA, b, sd){ 
   
   u <- rnorm(length(FGA), 0, sd)
-  pts <- round(b*FGA + u,0)
+  pts <- round(b*FGA + u, 0)
   
   }
 
-#simulate data
+
 FGA <- round(rnorm(1e3, 30, 10), 0)
-FGA
-data <- sim_pts(FGA, 2, 5)
+pts_static <- tibble(pts = sim_pts_static(FGA, 1, 8))
+ggplot(pts_static, aes(x = pts)) + 
+  geom_histogram(fill = "#552583", alpha = .5, color = "#552583", bins = 30) + 
+  labs(x = "PTS", 
+       y = "Frequency") + 
+  theme_minimal()
 
 
-# statistical model / priors
-n <- 1e3
-priors
-test <- tibble(a = rnorm(n, mean = 0, sd = .5), 
-               b = rnorm(n, mean = 2, sd = .5))
+# Statistical model: y ~ Normal(mu, sigma), mu = a + b*FGA
+
+##  Priors on a, b, and sigma
 
 
-test %>% ggplot(aes(x = seq(0,30,1))) + 
+### a
+range <- seq(-1, 16, length.out = 100) # sample space
+d <- dunif(range, min = 0, max = 15) # densities
+alpha <- data.frame(range, d)
+ggplot(alpha, aes(x = range, y = d)) +
+  geom_line(size = 1, color = "#552583") +
+  scale_x_continuous(limits = c(-1,16), breaks = seq(-1,16, 1)) + 
+  labs(x = expression(beta), 
+       y = "Density") +
+  theme_minimal()
+
+### b
+range <- seq(-1, 4, length.out = 100) # sample space
+d <- dunif(range, min = 0, max = 3) # densities
+beta <- data.frame(range, d)
+ggplot(beta, aes(x = range, y = d)) +
+  geom_line(size = 1, color = "#552583") +
+  scale_x_continuous(limits = c(-1,4), breaks = seq(-1,4, 1)) + 
+  labs(x = expression(beta), 
+       y = "Density") +
+  theme_minimal()
+
+### sigma
+range <- seq(-1, 11, length.out = 100) # sample space
+d <- dunif(range, min = 0, max = 10) # densities
+sigma <- data.frame(range, d)
+ggplot(sigma, aes(x = range, y = d)) +
+  geom_line(size = 1, color = "#552583") +
+  scale_x_continuous(limits = c(-1,11), breaks = seq(-1,11, 1)) + 
+  labs(x = expression(sigma), 
+       y = "Density") +
+  theme_minimal()
+
+### prior predictive check
+alpha_samples <- runif(1e3, 0, 10)
+beta_samples <- runif(1e3, 0, 3)
+sigma_samples <- runif(1e3, 0, 10)
+
+prior_pred_1 <- tibble(alpha_samples, beta_samples)
+
+ggplot(prior_pred_1, aes(x = seq(0,30,1))) + 
   scale_x_continuous(limits = c(0,40), breaks = seq(0,40,10)) + 
   scale_y_continuous(limits = c(0,80), breaks = seq(0,80,10)) + 
   labs(x = "FGA",
        y = "Points") + 
-  geom_abline(aes(intercept = a, slope = b), color = "#FDB927", size = .1) + 
+  geom_abline(aes(intercept = alpha_samples, slope = beta_samples), color = "#FDB927", size = .1, alpha = .1) + 
   theme_minimal()
 
-
+FGA <-  round(rnorm(1e3, 20, 10), 0)
+mu_samples <- alpha_samples + beta_samples*FGA
+prior_pred_2 <- tibble(pts = rnorm(1e3, mu_samples, sigma_samples))
+prior_pred_2 %>% ggplot(aes(x = pts)) + 
+  geom_histogram(fill = "#552583", alpha = .5, color = "#552583", bins = 30) + 
+  labs(x = "PTS", 
+       y = "Frequency") + 
+  theme_minimal()
 
 # testing
 
+# simulate data
+set.seed(11562)
+FGA <- round(rnorm(1e3, 30, 10), 0)
+pts_static <- tibble(FGA = FGA, 
+                     pts = sim_pts_static(FGA, 1.2, 3))
 
 # fitting
+m2_sim <- quap(
+  alist(
+    pts ~ dnorm(mu, sd), # likelihood
+    mu <- a + b * FGA, # linear model
+    a ~ dunif(0,10), # prior intercept
+    b ~ dunif(0,3), # prior rate of change (slope)
+    sd ~ dunif(0,10) # prior sd
+  ),
+  data = pts_static)
+precis(m2_sim)
 
-p3 <- shaq82 %>% 
-  ggplot(aes(x=FGA, y=PTS)) + 
-  geom_jitter(color = "#552583", fill = "#552583", alpha = .5, size = 3) + 
-  geom_abline(data = post_shaq82, aes(intercept = a, slope = b), color = "#FDB927", linewidth = .1) + # plotting posterior lines 
-  ggtitle(paste("N =", N)) + 
-  theme_minimal() + 
-  theme(plot.title = element_text(vjust = -11, hjust = 0.15)) 
+# analyze real data 
 
-
-### week prior
-
-m_shaq <- quap(
+m2_shaq <- quap(
   alist(
     PTS ~ dnorm(mu, sd), # likelihood
     mu <- a + b * FGA, # linear model
@@ -196,26 +284,12 @@ m_shaq <- quap(
     b ~ dunif(0,3), # prior rate of change (slope)
     sd ~ dunif(0,10) # prior sd
   ),
-  data = shaq
-)
-precis(m_shaq)
+  data = shaq)
+precis(m2_shaq)
 
-m_shaq <- quap(
-  alist(
-    PTS ~ dnorm(mu, sd), # likelihood
-    mu <- a + b * FGA, # linear model
-    a ~ dunif(0,10), # prior intercept
-    b ~ dunif(0,3), # prior rate of change (slope)
-    sd ~ dunif(0,10) # prior sd
-  ),
-  data = shaq
-)
-precis(m_shaq)
-
-
-# centering
-FGA_bar <- round(mean(shaq$FGA),0)
-m_shaq_center <- quap(
+# with mean centering
+FGA_bar <-round(mean(shaq$FGA),0)
+m3_shaq <- quap(
   alist(
     PTS ~ dnorm(mu, sd), # likelihood
     mu <- a + b * (FGA-FGA_bar), # linear model
@@ -223,72 +297,46 @@ m_shaq_center <- quap(
     b ~ dunif(0,3), # prior rate of change (slope)
     sd ~ dunif(0,10) # prior sd
   ),
-  data = shaq
-)
+  data = shaq)
 
-precis(m_shaq_center)
+# evaluate 
 
+## Posterior intervals 
+PI(m_shaq_smp$mu)
+PI(m_shaq_smp$sigma)
+HPDI(m_shaq_smp$mu)
+HPDI(m_shaq_smp$sigma)
 
+## Posterior predictive checks 
 
+m3_shaq_smp <- extract.samples(m3_shaq, n = 1e3)
 
-m_shaq_center <- quap(
-  alist(
-    PTS ~ dnorm(mu, sd), # likelihood
-    mu <- a + b * (FGA-FGA_bar), # linear model
-    a ~ dnorm(20,5), # prior intercept
-    b ~ dnorm(1,.2), # prior rate of change (slope)
-    sd ~ dunif(0,10) # prior sd
-  ),
-  data = shaq
-)
-precis(m_shaq_center)
-
-
-
-
+ggplot(m3_shaq_smp, aes(x = seq(0,30,1))) + 
+  scale_x_continuous(limits = c(0,40), breaks = seq(0,40,10)) + 
+  scale_y_continuous(limits = c(0,80), breaks = seq(0,80,10)) + 
+  labs(x = "FGA",
+       y = "Points") + 
+  geom_abline(aes(intercept = a, slope = b), color = "#FDB927", size = .1, alpha = .1) + 
+  theme_minimal()
 
 
+ggplot(shaq, aes(x = FGA-FGA_bar, y = PTS)) +
+  geom_jitter(color = "#552583", fill = "#552583", alpha = .2, size = 2) +
+  labs(x = "FGA",
+       y = "Points") + 
+  geom_abline(data = m3_shaq_smp, aes(intercept = a, slope = b), color = "#FDB927", linewidth = .1, alpha = .1) +
+  theme_minimal()
 
 
+## posterior predictions
+pts_sim_post <- tibble(pts = round(rnorm(nrow(m_shaq_smp), mean = m_shaq_smp$mu, sd = m_shaq_smp$sigma), 0))
+ggplot(pts_sim_post, aes(x = pts)) + 
+  geom_histogram(data = shaq, aes(x = PTS), alpha = .5, bins = 40) + 
+  geom_histogram(fill = "#552583", alpha = .5, color = "#552583", bins = 40) +
+  labs(x = "PTS", 
+       y = "Frequency") +
+  theme_minimal()
 
-#### Field goal percentages
-
-
-PTS_dynamic <- function(N_games, N_shots, p1, p2, p3){ 
-  
-  # 2PA  
-  p2 <- rbinom(N_games, round(.65 * N_shots, 0), prob = p2)*2
-  
-  # 3PA  
-  p3 <- rbinom(N_games, round(0 * N_shots, 0), prob = p3)*3
-  
-  # FTA
-  p1 <- rbinom(N_games, round(.35 * N_shots, 0), prob = p1)
-  
-  tibble(PTS = p1 +  p2 +  p3)
-  
-}  
-
-FGA_bar <- round(mean(shaq$FGA),0)
-FTA_bar <- round(mean(shaq$FTA),0)
-FTA_bar
-m_shaq_center <- quap(
-  alist(
-    PTS ~ dnorm(mu, sd), # likelihood
-    mu <- a + b * (FGA-FGA_bar) * 2 + c * (FTA - FTA_bar), # linear model
-    a ~ dnorm(20,5), # prior intercept
-    b ~ dunif(0,3), # prior rate of change (slope)
-    c ~ dunif(0,3), 
-    sd ~ dunif(0,10) # prior sd
-  ),
-  data = shaq
-)
-precis(m_shaq_center)
-
-mean(shaq$`FG%`, na.rm = TRUE)
-
-# posterior predictive checks
-
-
+ 
 
 
