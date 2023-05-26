@@ -53,7 +53,7 @@ The following code draws 10,000 random values from a beta distribution with the 
 ```{r}
 n <- 1e4
 scale <- 1.5e4
-income <- round( rbeta(n=n, shape1=2, shape2=12) * scale, 2)
+income <- round( rbeta(n=n, shape1=4, shape2=4) * scale, 2)
 ```
 
 Let's assume these simulated values represent the gross income in US$ of 10,000 people. 

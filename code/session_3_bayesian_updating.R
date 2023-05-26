@@ -27,7 +27,7 @@ compute_post(obs = data, poss=seq(0,1,.25))
 
 data <- sim_rides(100, .1)
 sum(data=="L")
-compute_post(obs = data, poss=seq(0,1,.25))
+compute_post(obs = data, poss=seq(0,1,.1))
 
 # R 3.2.3 Integrate prior knowledge
 data <- c("L", "O", "L")
@@ -40,7 +40,7 @@ round((prior$post * new$post)/sum(prior$post * new$post), 2) # relative
 # R 3.2.4 Bayesian updating with grid approximation
 
 # define prior 
-poss <- tibble(theta = seq(0,1,.05), 
+poss <- tibble(theta = seq(0,1,.1), 
                prior = rep(1/length(theta),length(theta)))
 
 

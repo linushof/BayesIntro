@@ -10,7 +10,7 @@ x_max <- 1
 range <- seq(x_min, x_max, length.out = 100) # sample space
 d <- dunif(range, min = x_min, max = x_max) # densities
 UNI <- data.frame(range, d)
-
+UNI
 # Plot
 ggplot(UNI, aes(x = range, y = d)) +
   geom_line(size = 2) +
@@ -39,8 +39,8 @@ ggplot(NORM, aes(x = range, y = d)) +
 ## beta distribution
 
 # create density distributions
-range <- seq(0, 1, length.out = 100)
-d <- dbeta(range, shape1 = 3, shape2 = 2)
+range <- seq(.4, .6, length.out = 100)
+d <- dbeta(range, shape1 = 2, shape2 = 2)
 BETA <- data.frame(range, d)
 
 # plot
@@ -100,8 +100,8 @@ ggplot(summary, aes(x = theta, y = d)) +
   theme_minimal()
 
 no <- 1e3
-set.seed(312)
 prior_smp <- data.frame(smp = rbeta(no, a, b))
+prior_smp
 
 ggplot(summary) +
   geom_line(size = 1, linetype = "dashed", 
@@ -150,9 +150,9 @@ sim_rides <- function(N, p){
   sample(c("L", "O"), size=N, replace=TRUE, prob=c(p, 1-p)) 
 }
 
-N <- 1e3
+N <- 1e2
 set.seed(12385)
-obs <- sim_rides(N, p = .5)
+obs <- sim_rides(N, p = .1)
 
 # grid approximation of posterior
 

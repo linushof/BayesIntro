@@ -85,7 +85,7 @@ m3_shaq <- quap(
   ),
   data = shaq
 )
-
+m3_shaq
 post_shaq <- extract.samples(m3_shaq, smp)
 
 p4 <- shaq %>% 
@@ -95,7 +95,8 @@ p4 <- shaq %>%
   ggtitle(paste("N =", N)) + 
   theme_minimal() + 
   theme(plot.title = element_text(vjust = -11, hjust = 0.15)) 
-
+p4
+post_shaq
 # combine plots
 
 theme_border <- theme_gray() + 
