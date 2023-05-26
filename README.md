@@ -19,7 +19,7 @@ More information can be found in the
 <table style="width:99%;">
 <colgroup>
 <col style="width: 6%" />
-<col style="width: 31%" />
+<col style="width: 30%" />
 <col style="width: 61%" />
 </colgroup>
 <tbody>
@@ -60,7 +60,8 @@ href="https://www.moodle.tum.de/pluginfile.php/4554319/mod_resource/content/1/se
 <tr class="odd">
 <td>24 May</td>
 <td>Linear models</td>
-<td></td>
+<td><a
+href="https://www.moodle.tum.de/pluginfile.php/4560435/mod_resource/content/1/session_5_linear_models_part_1.pdf">Slides</a></td>
 </tr>
 <tr class="even">
 <td>31 May</td>
