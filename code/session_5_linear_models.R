@@ -158,7 +158,7 @@ HPDI(m_shaq_smp$sigma)
 ## densities
 range <- seq(-10, 60, length.out = 100) # range
 smp_dens <- m_shaq_smp %>% 
-  mutate(smp = row_number()) %>% View()
+  mutate(smp = row_number()) %>%
   expand_grid(range) %>% 
   mutate(d = dnorm(range, mu, sigma))
 
