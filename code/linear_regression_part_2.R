@@ -2,6 +2,58 @@
 
 pacman::p_load(tidyverse, rethinking)
 
+# introductory example 
+
+data(WaffleDivorce)
+d <- WaffleDivorce
+
+d$D <- standardize(d$Divorce)
+d$M <- standardize(d$Marriage)
+d$A <- standardize(d$MedianAgeMarriage)
+
+ggplot(d, aes(x = M, y = D)) + 
+  geom_point(size = 3, color = "#0065BD") + 
+  geom_smooth(method = "lm") +
+  labs(x = "Marriage Rate", 
+       y = "Divorce Rate") + 
+  theme_minimal()
+View(d)
+
+m1_intro <- quap(
+  alist( D ~ dnorm(mu, sigma), 
+         mu ~ a + bM * M, 
+         a ~ dnorm(0, .2), 
+         bM ~ dnorm(0, .5), 
+         sigma ~ dexp(1)), 
+  data = d
+)
+precis(m1_intro)
+
+ggplot(d, aes(x = A, y = M)) + 
+  geom_point(size = 3, color = "#0065BD") + 
+  geom_smooth(method = "lm") +
+  labs(y = "Marriage Rate", 
+       x = "Median Age Marriage") + 
+  theme_minimal()
+
+ggplot(d, aes(x = A, y = D)) + 
+  geom_point(size = 3, color = "#0065BD") + 
+  geom_smooth(method = "lm") +
+  labs(y = "Divorce Rate", 
+       x = "Median Age Marriage") + 
+  theme_minimal()
+
+m2_intro <- quap(
+  alist( D ~ dnorm(mu, sigma), 
+         mu ~ a + bM * M + bA * A, 
+         a ~ dnorm(0, .2), 
+         bM ~ dnorm(0, .5),
+         bA ~ dnorm(0, .5), 
+         sigma ~ dexp(1)), 
+  data = d
+)
+precis(m2_intro)
+
 # load and prepare data 
 
 shaq <- read_csv("data/shaq.csv")
@@ -24,6 +76,33 @@ m1_shaq <- quap(
 precis(m1_shaq)
 
 # multiple regression
+
+## generative simulation 
+
+sim_pts_dynamic <- function(N_games, FGA, FTA, hFG, hFT){ 
+  
+  # FTA
+  FT <- rbinom(N_games, FTA, prob = hFT)
+  
+  # 2PA  
+  FG <- rbinom(N_games, FGA, prob = hFG)*2
+  
+  FT + FG
+  
+}     
+
+pts_dynamic <- tibble(pts = sim_pts_dynamic(N_games = 1e3, 
+                                            FGA = 20, 
+                                            FTA = 7, 
+                                            hFG = .5, 
+                                            hFT = .83))
+
+
+ggplot(pts_dynamic, aes(x = pts)) + 
+  geom_histogram(fill = "#552583", alpha = .5, color = "#552583", bins = 30) + 
+  labs(x = "PTS", 
+       y = "Frequency") + 
+  theme_minimal()
 
 m2_shaq <- quap(
   alist(
@@ -54,11 +133,6 @@ m3_shaq <- quap(
   data = dat)
 precis(m3_shaq)
 
-## mean-centering
-
-FGA_bar <- round(mean(dat$FGA),0)
-FTA_bar <- round(mean(dat$FTA),0)
-
 m4_shaq <- quap(
   alist(
     PTS ~ dnorm(mu, sd),
@@ -74,6 +148,14 @@ precis(m4_shaq)
 # mediation / pipe
 
 # without mediator
+
+ggplot(shaq, aes(x = Minutes, y = PTS)) + 
+  geom_point(size = 3, color =  "#552583", alpha = .2) +
+  geom_smooth(method = "lm", color = "#FDB927") +
+  labs(x = "Minutes", 
+       y = "Points") + 
+  theme_minimal()
+
 Min_bar <- round(mean(dat$Min),0)
 m5_shaq <- quap(
   alist(
@@ -102,16 +184,16 @@ m6_shaq <- quap(
 precis(m6_shaq)
 
 # Fork
-
-ggplot(diamonds, aes(y = price, x = clarity)) + 
+library(tidyverse)
+ggplot(diamonds, aes(y = price, x = clarity, color = clarity)) + 
   geom_boxplot() +
   theme_minimal()
 
-ggplot(diamonds, aes(y = price, x = cut)) + 
+ggplot(diamonds, aes(y = price, x = cut, color = cut)) + 
   geom_boxplot() +
   theme_minimal()
 
-ggplot(diamonds, aes(y = price, x = color)) + 
+ggplot(diamonds, aes(y = price, x = color, color = color)) + 
   geom_boxplot() +
   theme_minimal()
 
@@ -145,6 +227,10 @@ m1 <- quap(
   data = dat)
 precis(m1)
 
+ggplot(diamonds, aes(y = price, x = carat, color = clarity)) + 
+  geom_point(alpha = .5) +
+  theme_minimal()
+
 m2 <- quap(
   alist(
     p ~ dnorm(mu, sd),
@@ -156,16 +242,30 @@ m2 <- quap(
   data = dat)
 precis(m2)
 
+
+ggplot(diamonds, aes(y = carat, x = clarity, color = clarity)) + 
+  geom_boxplot() +
+  theme_minimal()
+
+ggplot(diamonds, aes(y = carat, x = cut, color = cut)) + 
+  geom_boxplot() +
+  theme_minimal()
+
+ggplot(diamonds, aes(y = carat, x = color, color = color)) + 
+  geom_boxplot() +
+  theme_minimal()
+
+
 m3 <- quap(
   alist(
     cl ~ dnorm(mu, sd),
     mu <- a + b * ca,
     a ~ dnorm(0, .1), 
     b ~ dnorm(0, .5), 
-    sd ~ dexp(1) 
-  ),
+    sd ~ dexp(1)),
   data = dat)
 precis(m3)
+
 
 m4 <- quap(
   alist(
