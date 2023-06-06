@@ -3,7 +3,10 @@ pacman::p_load(tidyverse,
                rstan, 
                rethinking)
 
-# King Markov
+
+# MCMC --------------------------------------------------------------------
+
+## Metropolis Sampling Algorithm 
 
 num_weeks <- 1e5 
 positions <- rep(0,num_weeks)
@@ -22,37 +25,86 @@ for ( i in 1:num_weeks ) {
 }
 
 
-### pure Stan
-# options(mc.cores = parallel::detectCores())
+## Translation to Stan
 
+
+# options(mc.cores = parallel::detectCores())
+# set_cmdstan_path("C:/Users/ge84jux/cmdstan-2.30.1")
 
 # load data
 shaq <- read_csv("data/shaq.csv")
 
-names(shaq)
-dat <- list(
+
+# step 1: prepare data 
+dat <- list( # Stan requires a list of the data (tip: only use the data you want to model)
   N = nrow(shaq) , 
-  min = shaq$Minutes ,
   pts = shaq$PTS ,
+  min = shaq$Minutes ,
   fga = shaq$FGA , 
-  fta = shaq$FTA
+  fta = shaq$FTA , 
+  min_bar = round(mean(shaq$Minutes), 2) , 
+  fga_bar = round(mean(shaq$FGA), 2) ,
+  fta_bar = round(mean(shaq$FTA), 2)
   )
 
-# Fit the model
+## Gaussian Basis
+
+# step 2: specify Stan model 
+
+# step 3: Fit the model
+m1shaq <- stan("code/Stan/session_7_mshaq1.stan", data=dat, chains = 4, cores = 4)
+
+# step 4: inspect and evaluate the model
+m1shaq
+plot(m1shaq)
+pairs(m1shaq, pars = c("mu", "sigma"))
+traceplot(m1shaq)
+
+stancode(m2shaq)
+
+# compare to quap 
+m2shaq <- ulam(
+  alist(pts ~ dnorm( mu , sigma ),
+        mu ~ dnorm( 20 , 8 ) ,
+        sigma ~ dunif( 0 , 10 )) ,
+  data = dat)
+precis(m2shaq)
+# stancode(m2shaq)
+
+
+# step 3: Fit the model
 fit_mshaq1 <- stan("code/Stan/session_7_mshaq1.stan", data=dat, chains = 4, cores = 4)
 
-# inspect model
-
-print(fit_mshaq1)
+# step 4: inspect and evaluate the model
+fit_mshaq1
 plot(fit_mshaq1)
 pairs(fit_mshaq1, pars = c("mu", "sigma", "lp__"))
 traceplot(fit_mshaq1)
 
 
+
+
+
+
+
+m6_shaq <- quap(
+  alist(
+    pts ~ dnorm(mu, sd), 
+    mu <- a + b_1 * (min - min_bar) + b_2 * (fga - fga_bar) + b_3 * (fta - fta_bar),
+    a ~ dnorm(20, 8),
+    b_1 ~ dnorm(0, 2), 
+    b_2 ~ dunif(0, 2), 
+    b_3 ~ dunif(0, 1), 
+    sd ~ dunif(0,10)
+  ),
+  data = dat)
+precis(m6_shaq)
+
+
+
+
 ### rethinking 
 
-
-library(rethinking)
 data(rugged)
 d <- rugged
 d$log_gdp <- log(d$rgdppc_2000)
@@ -186,4 +238,4 @@ trankplot(mQOJ)
 precis(mQOJ, depth = 2)
 plot(precis(mQOJ, depth = 2))
 
-
+rethinking::stancode(mQOJ)
