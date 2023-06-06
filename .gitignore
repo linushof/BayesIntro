@@ -4,6 +4,7 @@
 .Ruserdata
 *.html
 *.pptx
+*.exe
 notes/
 memes/
 plots/
