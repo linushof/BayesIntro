@@ -63,44 +63,37 @@ traceplot(m1shaq)
 stancode(m2shaq)
 
 # compare to quap 
-m2shaq <- ulam(
+m1shaq_quap <- quap(
   alist(pts ~ dnorm( mu , sigma ),
         mu ~ dnorm( 20 , 8 ) ,
         sigma ~ dunif( 0 , 10 )) ,
   data = dat)
-precis(m2shaq)
-# stancode(m2shaq)
+precis(m1shaq_quap)
 
+# Mediation / Pipe example
 
 # step 3: Fit the model
-fit_mshaq1 <- stan("code/Stan/session_7_mshaq1.stan", data=dat, chains = 4, cores = 4)
+m2shaq <- stan("code/Stan/session_7_m2shaq.stan", data=dat, chains = 4, cores = 4)
 
 # step 4: inspect and evaluate the model
-fit_mshaq1
-plot(fit_mshaq1)
-pairs(fit_mshaq1, pars = c("mu", "sigma", "lp__"))
-traceplot(fit_mshaq1)
+m2shaq
+plot(m2shaq)
+pairs(m2shaq, pars = c("a", "b1", "b2", "b3", "sigma"))
+traceplot(m2shaq)
 
-
-
-
-
-
-
-m6_shaq <- quap(
+# compare to quap
+m4shaq <- quap(
   alist(
-    pts ~ dnorm(mu, sd), 
-    mu <- a + b_1 * (min - min_bar) + b_2 * (fga - fga_bar) + b_3 * (fta - fta_bar),
+    pts ~ dnorm(mu, sigma), 
+    mu <- a + b_1 * (min - min_bar) + b_2 * (fga - fga_bar) * 2 + b_3 * (fta - fta_bar),
     a ~ dnorm(20, 8),
     b_1 ~ dnorm(0, 2), 
     b_2 ~ dunif(0, 2), 
     b_3 ~ dunif(0, 1), 
-    sd ~ dunif(0,10)
+    sigma ~ dunif(0,10)
   ),
   data = dat)
-precis(m6_shaq)
-
-
+precis(m4shaq)
 
 
 ### rethinking 
