@@ -52,15 +52,17 @@ dat <- list( # Stan requires a list of the data (tip: only use the data you want
 # step 2: specify Stan model 
 
 # step 3: Fit the model
-m1shaq <- stan("code/Stan/session_7_mshaq1.stan", data=dat, chains = 4, cores = 4)
+m1shaq <- stan("code/Stan/session_7_m1shaq.stan", data=dat, chains = 4, cores = 4)
 
 # step 4: inspect and evaluate the model
-m1shaq
+stan_dens(m2shaq, separate_chains = T)
 plot(m1shaq)
 pairs(m1shaq, pars = c("mu", "sigma"))
 traceplot(m1shaq)
 
-stancode(m2shaq)
+posterior <- extract(m1shaq)
+str(posterior)
+
 
 # compare to quap 
 m1shaq_quap <- quap(
@@ -80,7 +82,6 @@ m2shaq
 plot(m2shaq)
 pairs(m2shaq, pars = c("a", "b1", "b2", "b3", "sigma"))
 traceplot(m2shaq)
-
 
 # compare to quap
 m4shaq <- quap(
