@@ -81,6 +81,7 @@ plot(m2shaq)
 pairs(m2shaq, pars = c("a", "b1", "b2", "b3", "sigma"))
 traceplot(m2shaq)
 
+
 # compare to quap
 m4shaq <- quap(
   alist(
