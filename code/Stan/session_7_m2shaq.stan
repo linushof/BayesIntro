@@ -1,5 +1,5 @@
 
-// The input data is a vector 'y' of length 'N'.
+// data block
 data {
   int<lower=0> N ;
   vector[N] pts ;
@@ -11,8 +11,7 @@ data {
   real fta_bar ;
 }
 
-// The parameters accepted by the model. Our model
-// accepts two parameters 'mu' and 'sigma'.
+// parameter block
 parameters {
   real a ;
   real b1 ;
@@ -21,9 +20,7 @@ parameters {
   real<lower=0,upper=10> sigma ;
 }
 
-// The model to be estimated. We model the output
-// 'y' to be normally distributed with mean 'mu'
-// and standard deviation 'sigma'.
+// model block
 model {
   a ~  normal( 20 , 8 ) ; 
   b1 ~ normal( 0 , 2 ) ;
