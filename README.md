@@ -82,7 +82,7 @@ href="https://www.moodle.tum.de/pluginfile.php/4573610/mod_resource/content/1/se
 </tr>
 <tr class="odd">
 <td>21 June</td>
-<td>Multilevel modeling Part 2</td>
+<td>Multilevel models Part 2</td>
 <td></td>
 </tr>
 <tr class="even">
