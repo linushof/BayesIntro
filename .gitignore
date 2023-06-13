@@ -2,9 +2,9 @@
 .Rhistory
 .RData
 .Ruserdata
+*.exe
 *.html
 *.pptx
-*.exe
 notes/
 memes/
 plots/
