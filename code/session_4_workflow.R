@@ -39,8 +39,8 @@ ggplot(NORM, aes(x = range, y = d)) +
 ## beta distribution
 
 # create density distributions
-range <- seq(.4, .6, length.out = 100)
-d <- dbeta(range, shape1 = 2, shape2 = 2)
+range <- seq(0, 1, length.out = 100)
+d <- dbeta(range, shape1 = 4, shape2 = 2)
 BETA <- data.frame(range, d)
 
 # plot
