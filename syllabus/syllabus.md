@@ -1,7 +1,7 @@
 Introduction to Bayesian Data Analysis
 ================
 
-*Last update*: 2023-05-17
+*Last update*: 2023-06-13
 
 # General Information
 
@@ -35,7 +35,7 @@ and
 <table style="width:99%;">
 <colgroup>
 <col style="width: 7%" />
-<col style="width: 35%" />
+<col style="width: 36%" />
 <col style="width: 42%" />
 <col style="width: 12%" />
 </colgroup>
@@ -97,7 +97,7 @@ data-cites="gabryVisualizationBayesianWorkflow2019">Gabry et al.
 </tr>
 <tr class="odd">
 <td>24 May</td>
-<td>Linear models</td>
+<td>Linear models Part 1</td>
 <td><ul>
 <li><p>Install <code>RStan</code> and the <code>rethinking</code>
 package</p>
@@ -112,7 +112,7 @@ class="uri">https://github.com/rmcelreath/rethinking</a></p></li>
 </tr>
 <tr class="even">
 <td>31 May</td>
-<td>Linear models</td>
+<td>Linear models Part 2</td>
 <td></td>
 <td></td>
 </tr>
@@ -128,13 +128,13 @@ Cassey, and Brown (2018)</span></li>
 </tr>
 <tr class="even">
 <td>14 June</td>
-<td>Multilevel modeling</td>
+<td>Multilevel models Part 1</td>
 <td></td>
 <td></td>
 </tr>
 <tr class="odd">
 <td>21 June</td>
-<td>Multilevel modeling</td>
+<td>Multilevel models Part 2</td>
 <td></td>
 <td>Assignment 4</td>
 </tr>
@@ -146,17 +146,17 @@ Cassey, and Brown (2018)</span></li>
 </tr>
 <tr class="odd">
 <td>05 July</td>
+<td>Generalized linear models</td>
+<td></td>
+<td>Assignment 5</td>
+</tr>
+<tr class="even">
+<td>12 July</td>
 <td>Model comparison</td>
 <td><ul>
 <li>Read <span class="citation"
 data-cites="navarroDevilDeepBlue2019">Navarro (2019)</span></li>
 </ul></td>
-<td>Assignment 5</td>
-</tr>
-<tr class="even">
-<td>12 July</td>
-<td>tba</td>
-<td></td>
 <td></td>
 </tr>
 <tr class="odd">

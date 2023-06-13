@@ -59,28 +59,30 @@ href="https://www.moodle.tum.de/pluginfile.php/4554319/mod_resource/content/1/se
 </tr>
 <tr class="odd">
 <td>24 May</td>
-<td>Linear models</td>
+<td>Linear models Part 1</td>
 <td><a
 href="https://www.moodle.tum.de/pluginfile.php/4560435/mod_resource/content/1/session_5_linear_models_part_1.pdf">Slides</a></td>
 </tr>
 <tr class="even">
 <td>31 May</td>
-<td>Linear models</td>
-<td></td>
+<td>Linear models Part 2</td>
+<td><a
+href="https://www.moodle.tum.de/pluginfile.php/4565128/mod_resource/content/1/session_6_linear_models_part_2.pdf">Slides</a></td>
 </tr>
 <tr class="odd">
 <td>07 June</td>
 <td>Markov Chain Monte Carlo Methods</td>
-<td></td>
+<td><a
+href="https://www.moodle.tum.de/pluginfile.php/4573610/mod_resource/content/1/session_7_MCMC.pdf">Slides</a></td>
 </tr>
 <tr class="even">
 <td>14 June</td>
-<td>Multilevel modeling</td>
+<td>Multilevel models Part 1</td>
 <td></td>
 </tr>
 <tr class="odd">
 <td>21 June</td>
-<td>Multilevel modeling</td>
+<td>Multilevel modeling Part 2</td>
 <td></td>
 </tr>
 <tr class="even">
@@ -90,12 +92,12 @@ href="https://www.moodle.tum.de/pluginfile.php/4560435/mod_resource/content/1/se
 </tr>
 <tr class="odd">
 <td>05 July</td>
-<td>Model comparison</td>
+<td>Generalized linear models</td>
 <td></td>
 </tr>
 <tr class="even">
 <td>12 July</td>
-<td>tba</td>
+<td>Model comparison</td>
 <td></td>
 </tr>
 <tr class="odd">
