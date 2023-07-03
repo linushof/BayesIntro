@@ -20,7 +20,7 @@ More information can be found in the
 <colgroup>
 <col style="width: 6%" />
 <col style="width: 30%" />
-<col style="width: 61%" />
+<col style="width: 62%" />
 </colgroup>
 <tbody>
 <tr class="odd">
@@ -78,12 +78,14 @@ href="https://www.moodle.tum.de/pluginfile.php/4573610/mod_resource/content/1/se
 <tr class="even">
 <td>14 June</td>
 <td>Multilevel models Part 1</td>
-<td></td>
+<td><a
+href="https://www.moodle.tum.de/pluginfile.php/4579322/mod_resource/content/1/session_8_multilevel_models_part_1.pdf">Slides</a></td>
 </tr>
 <tr class="odd">
 <td>21 June</td>
 <td>Multilevel models Part 2</td>
-<td></td>
+<td><a
+href="https://www.moodle.tum.de/pluginfile.php/4585938/mod_resource/content/1/session_9_multilevel_models_part_2.pdf">Slides</a></td>
 </tr>
 <tr class="even">
 <td>28 June</td>
