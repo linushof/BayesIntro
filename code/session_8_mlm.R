@@ -15,7 +15,7 @@ sim_HW <- function(S, b, a) {
 S <- as.factor(sample(c("m", "f"), 100, replace = T))
 d <- sim_HW(S, b = c(.5, .6), a = c(0 ,0))
 
-head(d, 5)
+tail(d, 10)
 
 
 # modeling the synthetic data 
@@ -36,10 +36,9 @@ m1 <- ulam(
     a ~ dnorm(60, 10) , 
     b ~ dnorm(0, 5) , 
     sigma ~ dunif(0,10) 
-  ), data = dat_indicator, chains = 4, cores = 4
-)
+  ), data = dat_indicator, chains = 4, cores = 4, iter = 2000)
 precis(m1)
-
+traceplot(m1)
 
 # using index variables 
 dat_index <- list(
@@ -85,13 +84,18 @@ m3 <- ulam(
 
 precis(m3, depth = 2)
 post <- extract.samples(m3)
+head(post,10)
 
 ### posterior means
 m_1 <- tibble(S = "1" , W = post$a[,1]) 
 m_2 <- tibble(S = "2" , W = post$a[,2]) 
+tail(m_2)
+
 post_m <- bind_rows(m_1, m_2)
-ggplot(post_m, aes(x = W, fill = S)) + 
-  geom_density(alpha = .5) + 
+post_m
+names(d_adult)
+ggplot(d_adult, aes(x = weight, y = height, color = male)) + 
+  geom_point(alpha = .5) + 
   theme_minimal()
 
 ### posterior predictions
@@ -143,7 +147,6 @@ traceplot_ulam(m2)
 
 data("Wines2012")
 d <- Wines2012
-
 dat <- list(
   S = standardize(d$score) , 
   J = as.numeric(d$judge) , 
@@ -193,5 +196,3 @@ mQOJ <- ulam(
 )
 precis(mQOJ, depth = 3) 
 plot( precis(mQOJ, depth = 2) )  
-
-

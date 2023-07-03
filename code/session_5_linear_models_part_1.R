@@ -262,6 +262,7 @@ prior_pred_2 %>% ggplot(aes(x = pts)) +
        y = "Frequency") + 
   theme_minimal()
 
+
 # testing
 
 # simulate data

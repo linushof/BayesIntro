@@ -31,9 +31,24 @@ NORM <- data.frame(range, d)
 # plot 
 ggplot(NORM, aes(x = range, y = d)) +
   geom_line(size = 2) +
-  labs(x = "x", 
+  labs(x = expression(mu_j),
        y = "Density") +
   theme_minimal()
+
+
+x_min <- -5
+x_max <- 5
+range <- seq(x_min, x_max, length.out = 100) # range
+d <- dnorm(range, mean = 0, sd = 5) # densities
+NORM <- data.frame(range, d)
+
+# plot 
+ggplot(NORM, aes(x = range, y = d)) +
+  geom_line(size = 2) +
+  labs(x = expression(mu_j),
+       y = "Density") +
+  theme_minimal()
+
 
 
 ## beta distribution
@@ -56,7 +71,7 @@ ggplot(BETA, aes(x = range, y = d)) +
 x_min <- 0
 x_max <- 10 
 range <- seq(x_min, x_max, length.out = 100)
-d <- dexp(range, rate = 1)
+d <- dexp(range, rate = 100)
 EXP <- data.frame(range, d)
 
 # plot

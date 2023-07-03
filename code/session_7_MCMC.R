@@ -103,6 +103,7 @@ m2shaq
 plot(m2shaq)
 pairs(m2shaq, pars = c("a", "b1", "b2", "b3", "sigma"))
 traceplot(m2shaq)
+stan_dens(m2shaq, separate_chains = TRUE)
 
 
 # Rethinking --------------------------------------------------------------
