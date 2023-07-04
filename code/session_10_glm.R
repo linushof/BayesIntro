@@ -132,8 +132,33 @@ plot(NULL, xlim = c(-.2, .3),
      ylab="Density")
 for(i in 1:6) dens(diff_prob_D[, i], lwd = 4, col = 1+i, add = TRUE)
 
+### post stratification ###
+
+### post stratification ###
+
+
 ## Aging Data Set 
+head(data)
+data <- read.csv2("data/Burnout.csv")
+dat <- list( 
+  burnout = ifelse(data$BurnOut == "Burnt Out", 1, 0) , 
+  research = standardize(as.numeric(data$stressResearch)) , 
+  teach = standardize(as.numeric(data$stressTeaching)) , 
+  pastoral = standardize(as.numeric(data$stressPastoral))
+)
+dat
 
+mburn1 <- ulam(
+  alist(
+    burnout ~ bernoulli(p) , 
+    logit(p) <- a + bT * teach + bR * research + bP * pastoral, 
+    a ~ normal(0, .1), 
+    bT ~ normal(0, .1), 
+    bR ~ normal(0, .1),
+    bP ~ normal(0, .1) ), data = dat, chains = 4, cores = 4, iter = 1000 
+  )
+traceplot(mburn1)
+precis(mburn1)
+inv_logit(coef(mburn1))
 
-
-
+inv_logit(-.54+.22+.16)
