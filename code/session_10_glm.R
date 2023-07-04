@@ -162,3 +162,28 @@ precis(mburn1)
 inv_logit(coef(mburn1))
 
 inv_logit(-.54+.22+.16)
+
+# risky choice
+risky <- read.csv2("data/RiskyChoice.csv")
+risky <- na.omit(risky)
+names(risky)
+dat3 <- list( 
+ AG = ifelse(risky$AgeGroup == "younger", 1, 0) , 
+ choice = risky$CorrectChoice , 
+ naffect = standardize(as.numeric(risky$NegativeAffect)) , 
+ numeracy = standardize(as.numeric(risky$Numeracy))
+  )
+dat3
+
+
+mrisky1 <- ulam(
+  alist(
+    choice ~ bernoulli(p) , 
+    logit(p) <- a + bN * numeracy, 
+    a ~ normal(0, .1), 
+    bN ~ normal(0, .1) ), data = dat3, chains = 4, cores = 4, iter = 1000 
+)
+traceplot(mrisky1)
+precis(mrisky1)
+inv_logit(sum(coef(mrisky1)))
+
