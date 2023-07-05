@@ -19,8 +19,8 @@ More information can be found in the
 <table style="width:99%;">
 <colgroup>
 <col style="width: 6%" />
-<col style="width: 30%" />
-<col style="width: 62%" />
+<col style="width: 29%" />
+<col style="width: 63%" />
 </colgroup>
 <tbody>
 <tr class="odd">
@@ -95,7 +95,8 @@ href="https://www.moodle.tum.de/pluginfile.php/4585938/mod_resource/content/1/se
 <tr class="odd">
 <td>05 July</td>
 <td>Generalized linear models</td>
-<td></td>
+<td><a
+href="https://www.moodle.tum.de/pluginfile.php/4598586/mod_resource/content/2/session_10_generalized_linear_models.pdf">Slides</a></td>
 </tr>
 <tr class="even">
 <td>12 July</td>
