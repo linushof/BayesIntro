@@ -1,88 +1,131 @@
-## Admissions rates 
+pacman::p_load(rethinking)
 
-# generative model of admission rates
+# admission rates UBC Berkeley: Part 1
 
-library(rethinking)
+data("UCBadmit")
+d <- UCBadmit
+rates <- d %>% 
+  group_by(applicant.gender) %>% 
+  summarise(admitted = sum(admit) , 
+            applied = sum(applications) ,
+            rate = round(admitted/applied , 2))
+print(rates)
 
-N <- 1000 # number of applicants 
-G <- sample(1:2, size = N, replace = TRUE) # even gender distribution 
-D <- rbern(N, ifelse(G==1, .3, .8)) + 1 #  gender 1 tends to apply to department 1, 2 to 2
-accept_rate <- matrix( c(.1, .3, .1, .3), nrow = 2) # no direct discrimination
-accept_rate
-A <- rbern(N, accept_rate[D, G])
-table(G,D)
-table(G,A)
-
-View(accept_rate[D,G])
-
-N <- 1000 # number of applicants 
-G <- sample(1:2, size = N, replace = TRUE) # even gender distribution 
-D <- rbern(N, ifelse(G==1, .3, .8)) + 1 #  gender 1 tends to apply to department 1, 2 to 2
-accept_rate <- matrix( c(.05, .2, .1, .3), nrow = 2) # direct discrimination
-accept_rate
-A <- rbern(N, accept_rate[D, G])
-table(G,D)
-table(G,A)
+aging <- read_csv("data/Aging.csv")
+kable(head(aging))
+kable(head(risky))
 
 
-# prior predictives 
+## Logit link
 
-a <- rnorm(1e4, 0, 10)
-b <- rnorm(1e4, 0, 10)
+## Interpretation
+logit_p <- seq(-6,6, length.out = 100)
+logistic_x <- inv_logit(logit_p)
+plot(logit_p, logistic_x, type = "l")
+
+
+## Prior for logistic regression
+
+### a
+
+x1 <- rnorm(1e4, 0,5)
+y1 <- inv_logit(x1)
+x2 <- rnorm(1e4, 0,1)
+y2 <- inv_logit(x2)
+x3 <- rnorm(1e4, 0,.1)
+y3 <- inv_logit(x3)
+
+par(mfrow=c(3,2))
+dens(x1)
+dens(y1)
+dens(x2)
+dens(y2)
+dens(x3)
+dens(y3)
+
+
+### a + b
+
+par(mfrow=c(1,2))
+
+#### wide
+
+a <- rnorm(1e4, 0, 5)
+b <- rnorm(1e4, 0, 5)
 xseq <- seq(-3,3, len=100)
 p <- sapply(xseq, function(x) inv_logit(a+b*x)) 
-p
-
 plot(NULL, xlim= c(-2.5,2.5), ylim=c(0,1), xlab = "x value", ylab = "probability")
 for(i in 1:10){ 
   lines(xseq, p[i,])
-  }
+}
 
-
-a <- rnorm(1e4, 0, 1.5)
-b <- rnorm(1e4, 0, 0.5)
+#### narrow
+a <- rnorm(1e4, 0, .5)
+b <- rnorm(1e4, 0, .5)
 xseq <- seq(-3,3, len=100)
 p <- sapply(xseq, function(x) inv_logit(a+b*x)) 
-p
-
 plot(NULL, xlim= c(-2.5,2.5), ylim=c(0,1), xlab = "x value", ylab = "probability")
 for(i in 1:10){ 
   lines(xseq, p[i,])
 }
 
 
-# statistical model
+# admission rates UBC Berkeley: Part 2
 
-# total effect of G
+## generative simulation
 
-dat_sim <- list(A=A, D=D, G=G)
-dat_sim
+### without direct discrimination but structural effect
+N <- 1000 # number of applicants 
+G <- sample(1:2, size = N, replace = TRUE)
+D1 <- rbern(N, ifelse(G==1, .3, .8)) + 1 
+accept_rate <- matrix( c(.1, .3, .1, .3), nrow = 2) 
+A1 <- rbern(N, accept_rate[D1, G])
+dat_sim1 <- list(A=A1, D=D1, G=G)
 
+table(G,D1)
+table(G,A1)
+
+### with direct discrimination and structural effect
+N <- 1000 # number of applicants 
+G <- sample(1:2, size = N, replace = TRUE)
+D2 <- rbern(N, ifelse(G==1, .3, .8)) + 1 
+accept_rate <- matrix( c(.05, .2, .1, .3), nrow = 2) 
+A2 <- rbern(N, accept_rate[D2, G])
+dat_sim2 <- list(A=A2, D=D2, G=G)
+
+table(G,D2)
+table(G,A2)
+
+## test model
+
+### total effect of G
 m1 <- ulam(
   alist(
     A ~ bernoulli(p) , 
     logit(p) <- a[G] , 
     a[G] ~ normal(0,1) 
-    ) , data = dat_sim, chains = 4, cores = 4
+    ) , data = dat_sim2, chains = 4, cores = 4
   )
 precis(m1, depth = 2) # coefficients on log odds scale
-traceplot(m1)
 inv_logit(coef(m1)) # interpret as probability 
+traceplot(m1)
 
-# direct effect of G, stratified by Department
 
+### direct effect of G
 m2 <- ulam(
     alist(
       A ~ bernoulli(p) , 
       logit(p) <- a[G, D] , 
       matrix[G, D]:a ~ normal(0,1) 
-    ) , data = dat_sim, chains = 4, cores = 4
+    ) , data = dat_sim2, chains = 4, cores = 4
   )
+
 precis(m2, depth = 3)  
-  
-data("UCBadmit")
-d <- UCBadmit
-d
+inv_logit(coef(m2))
+traceplot(m2)
+
+## analyze real data
+
 dat <- list(
   A = d$admit , 
   N = d$applications , 
@@ -90,7 +133,7 @@ dat <- list(
   D = as.integer(d$dept)
   )
 
-# total effect gender
+### total effect
 m3 <- ulam(
   alist(
     A ~ binomial(N, p) ,
@@ -98,17 +141,18 @@ m3 <- ulam(
     a[G] ~ normal(0,1) 
   ) , data = dat, chains = 4, cores = 4
 )
-traceplot(m3)
 precis(m3, depth = 2)
 inv_logit(coef(m3))
+traceplot(m3)
 
+#### posterior distribution of differences
 post1 <- extract.samples(m3)
 PrA_G1 <- inv_logit(post1$a[,1])
 PrA_G2 <- inv_logit(post1$a[,2])
 diff_prob <- PrA_G1 - PrA_G2
 dens(diff_prob, lwd=4, col =2)
 
-# direct effect gender 
+### direct effect 
 m4 <- ulam(
   alist(
     A ~ binomial(N, p) ,
@@ -116,10 +160,12 @@ m4 <- ulam(
     matrix[G, D]:a ~ normal(0,1) 
   ) , data = dat, chains = 4, cores = 4
 )
-traceplot(m4)
+
 precis(m4, depth = 3)
 inv_logit(coef(m4))
+traceplot(m4)
 
+#### posterior distribution of differences
 post2 <- extract.samples(m4)
 PrA <- inv_logit(post2$a)
 post2
@@ -131,59 +177,3 @@ plot(NULL, xlim = c(-.2, .3),
      xlab = "Gender contrast (probability)" , 
      ylab="Density")
 for(i in 1:6) dens(diff_prob_D[, i], lwd = 4, col = 1+i, add = TRUE)
-
-### post stratification ###
-
-### post stratification ###
-
-
-## Aging Data Set 
-head(data)
-data <- read.csv2("data/Burnout.csv")
-dat <- list( 
-  burnout = ifelse(data$BurnOut == "Burnt Out", 1, 0) , 
-  research = standardize(as.numeric(data$stressResearch)) , 
-  teach = standardize(as.numeric(data$stressTeaching)) , 
-  pastoral = standardize(as.numeric(data$stressPastoral))
-)
-dat
-
-mburn1 <- ulam(
-  alist(
-    burnout ~ bernoulli(p) , 
-    logit(p) <- a + bT * teach + bR * research + bP * pastoral, 
-    a ~ normal(0, .1), 
-    bT ~ normal(0, .1), 
-    bR ~ normal(0, .1),
-    bP ~ normal(0, .1) ), data = dat, chains = 4, cores = 4, iter = 1000 
-  )
-traceplot(mburn1)
-precis(mburn1)
-inv_logit(coef(mburn1))
-
-inv_logit(-.54+.22+.16)
-
-# risky choice
-risky <- read.csv2("data/RiskyChoice.csv")
-risky <- na.omit(risky)
-names(risky)
-dat3 <- list( 
- AG = ifelse(risky$AgeGroup == "younger", 1, 0) , 
- choice = risky$CorrectChoice , 
- naffect = standardize(as.numeric(risky$NegativeAffect)) , 
- numeracy = standardize(as.numeric(risky$Numeracy))
-  )
-dat3
-
-
-mrisky1 <- ulam(
-  alist(
-    choice ~ bernoulli(p) , 
-    logit(p) <- a + bN * numeracy, 
-    a ~ normal(0, .1), 
-    bN ~ normal(0, .1) ), data = dat3, chains = 4, cores = 4, iter = 1000 
-)
-traceplot(mrisky1)
-precis(mrisky1)
-inv_logit(sum(coef(mrisky1)))
-
