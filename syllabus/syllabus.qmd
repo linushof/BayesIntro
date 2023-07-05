@@ -61,11 +61,11 @@ bibliography: literature.bib
 +-----------+----------------------------------------------------------+--------------------------------------------------------------------+--------------------+
 | 14 June   | Multilevel models Part 1                                 |                                                                    |                    |
 +-----------+----------------------------------------------------------+--------------------------------------------------------------------+--------------------+
-| 21 June   | Multilevel models Part 2                                 |                                                                    | Assignment 4       |
+| 21 June   | Multilevel models Part 2                                 |                                                                    |                    |
 +-----------+----------------------------------------------------------+--------------------------------------------------------------------+--------------------+
 | 28 June   | No session                                               |                                                                    |                    |
 +-----------+----------------------------------------------------------+--------------------------------------------------------------------+--------------------+
-| 05 July   | Generalized linear models                                |                                                                    | Assignment 5       |
+| 05 July   | Generalized linear models                                |                                                                    | Assignment 4       |
 +-----------+----------------------------------------------------------+--------------------------------------------------------------------+--------------------+
 | 12 July   | Model comparison                                         | -   Read @navarroDevilDeepBlue2019                                 |                    |
 +-----------+----------------------------------------------------------+--------------------------------------------------------------------+--------------------+
@@ -86,7 +86,7 @@ Another purpose of homework is *preparation*. Learning is most effective when do
 
 ### Assignments and Grade
 
-I'm not a big fan of graded assignments because they suggest that a learning process is finished and can be captured in just a number. This is almost never the case. However, grades can be informative and rewarding to some extent. Here, assignments will be naturally integrated in the course as small milestones down the road. They will look a lot like the homework in that they take the form of little coding and analysis exercises. Specifically, assignments consists of a Multiple Choice questionnaire alongside a submitted analysis script (e.g., `script.R`) that produced the answers. We will have $5$ assignments, where each grade $g$ is weighted equally to obtain the overall course grade, $G = 1/5\sum_i^5 g_i$.
+I'm not a big fan of graded assignments because they suggest that a learning process is finished and can be captured in just a number. This is almost never the case. However, grades can be informative and rewarding to some extent. Here, assignments will be naturally integrated in the course as small milestones down the road. They will look a lot like the homework in that they take the form of little coding and analysis exercises. Specifically, assignments consists of a questionnaire alongside a submitted analysis script (e.g., `script.R`) that produced the answers. We will have 4 assignments, where the 3 best assignments are weighted equally to obtain the overall course grade.
 
 ### Attendance
 

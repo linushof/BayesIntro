@@ -1,7 +1,7 @@
 Introduction to Bayesian Data Analysis
 ================
 
-*Last update*: 2023-06-13
+*Last update*: 2023-07-05
 
 # General Information
 
@@ -136,7 +136,7 @@ Cassey, and Brown (2018)</span></li>
 <td>21 June</td>
 <td>Multilevel models Part 2</td>
 <td></td>
-<td>Assignment 4</td>
+<td></td>
 </tr>
 <tr class="even">
 <td>28 June</td>
@@ -148,7 +148,7 @@ Cassey, and Brown (2018)</span></li>
 <td>05 July</td>
 <td>Generalized linear models</td>
 <td></td>
-<td>Assignment 5</td>
+<td>Assignment 4</td>
 </tr>
 <tr class="even">
 <td>12 July</td>
@@ -216,11 +216,10 @@ is almost never the case. However, grades can be informative and
 rewarding to some extent. Here, assignments will be naturally integrated
 in the course as small milestones down the road. They will look a lot
 like the homework in that they take the form of little coding and
-analysis exercises. Specifically, assignments consists of a Multiple
-Choice questionnaire alongside a submitted analysis script (e.g.,
-`script.R`) that produced the answers. We will have $5$ assignments,
-where each grade $g$ is weighted equally to obtain the overall course
-grade, $G = 1/5\sum_i^5 g_i$.
+analysis exercises. Specifically, assignments consists of a
+questionnaire alongside a submitted analysis script (e.g., `script.R`)
+that produced the answers. We will have 4 assignments, where the 3 best
+assignments are weighted equally to obtain the overall course grade.
 
 ### Attendance
 
