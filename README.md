@@ -101,7 +101,8 @@ href="https://www.moodle.tum.de/pluginfile.php/4598586/mod_resource/content/2/se
 <tr class="even">
 <td>12 July</td>
 <td>Model comparison</td>
-<td></td>
+<td><a
+href="https://www.moodle.tum.de/pluginfile.php/4605090/mod_resource/content/1/session_11_model_comparisons.pdf">Slides</a></td>
 </tr>
 <tr class="odd">
 <td>19 July</td>
